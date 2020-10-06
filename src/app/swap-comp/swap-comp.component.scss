@@ -1,0 +1,365 @@
+@import '../global.scss';
+
+@media screen and (min-width: 768px) {
+    .swap-pc {
+        background-color: #fff;
+        height: auto;
+        width: 100%;
+        position: relative;
+    }
+    
+     .swap-pc .main {
+        width: 100%;
+        height: 290px;
+        border-radius: 12px;
+        border: 1px solid #E1E5EA;
+        padding-top: 5px;
+    }
+    
+     .swap-pc .main .el-checkbox-group {
+        height: 56px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox {
+        width: 49%;
+        padding: 14px;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox input {
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        border: 1px solid #E1E5EA;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox img {
+        width: 30px;
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+    
+     .swap-pc .main .el-checkbox-group .border_let {
+        border-left: #E1E5EA 1px solid;
+    }
+    
+     .swap-pc .main .enterDiv {
+        width: 95%;
+        height: 32%;
+        margin: 10px auto 0px;
+        border-top: 1px solid #E1E5EA;
+        position: relative;
+    }
+    
+     .swap-pc .main .enterDiv img {
+        width: 55px;
+        position: absolute;
+        top: -30px;
+        left: 43%;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv {
+        height: 44px;
+        padding-top: 14px;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv .blance {
+        float: left;
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #000000;
+        line-height: 28px;
+        margin-right: 10px;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv p {
+        float: left;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #999999;
+        line-height: 28px;
+        margin: 0px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv {
+        height: 50px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div {
+        float: left;
+        width: 50%;
+        height: 50px;
+        position: relative;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div input {
+        background: #FAFAFA;
+        padding: 0px 13px;
+        height: 40px;
+        width: 98%;
+        margin: 0 auto;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div span {
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #2480FF;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .minInput {
+        background: #FAFAFA;
+        padding: 0px 13px;
+        height: 40px;
+        width: 58%;
+        margin: 0 auto;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-right: 3px;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .approve { 
+        // display: none;  /*隐藏按钮*/
+        background: #2480FF;
+        border-radius: 12px;
+        width: 60px;
+        font-size: 12px;
+        line-height: 40px;
+        height: 40px;
+        color: #ffffff;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .noApprove { 
+        // display: none;  /*隐藏按钮*/
+        background: #D4DDE9;
+        border-radius: 12px;
+        width: 60px;
+        font-size: 12px;
+        line-height: 40px;
+        height: 40px;
+        color: #ffffff;
+    }
+    
+    
+     .swap-pc .butDiv {
+        width: 100%;
+        height: 100px;
+    }
+    
+     .swap-pc .butDiv div {
+        height: 50px;
+        line-height: 50px;
+    }
+    
+     .swap-pc .butDiv div span {
+        font-size: 10px;
+        float: right;
+    }
+    
+     .swap-pc .butDiv div img {
+        width: 5%;
+        float: right;
+        display: block;
+        margin: 18px 5px;
+    }
+    
+     .swap-pc .butDiv button {
+        width: 90%;
+        margin: 0px auto;
+        height: 50px;
+        // background: #2480FF;
+        border-radius: 16px;
+        color: #fff;
+        font-size: 16px;
+        display: block;
+    }
+
+}
+ @media screen and (max-width: 768px){
+    .swap-pc {
+        background-color: #fff;
+        height: auto;
+        width: 100%;
+        position: relative;
+    }
+    
+     .swap-pc .main {
+        width: 100%;
+        height: 290px;
+        border-radius: 12px;
+        border: 1px solid #E1E5EA;
+        padding-top: 5px;
+    }
+    
+     .swap-pc .main .el-checkbox-group {
+        height: 56px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox {
+        width: 49%;
+        padding: 14px;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox input {
+        width: 16px;
+        height: 16px;
+        border-radius: 10px;
+        border: 1px solid #E1E5EA;
+    }
+    
+     .swap-pc .main .el-checkbox-group .el-checkbox img {
+        width: 30px;
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+    
+     .swap-pc .main .el-checkbox-group .border_let {
+        border-left: #E1E5EA 1px solid;
+    }
+    
+     .swap-pc .main .enterDiv {
+        width: 95%;
+        height: 32%;
+        margin: 10px auto 0px;
+        border-top: 1px solid #E1E5EA;
+        position: relative;
+    }
+    
+     .swap-pc .main .enterDiv img {
+        width: 55px;
+        position: absolute;
+        top: -30px;
+        left: 43%;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv {
+        height: 44px;
+        padding-top: 14px;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv .blance {
+        float: left;
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #000000;
+        line-height: 28px;
+        margin-right: 10px;
+    }
+    
+     .swap-pc .main .enterDiv .blanceDiv p {
+        float: left;
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #999999;
+        line-height: 28px;
+        margin: 0px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv {
+        height: 50px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div {
+        float: left;
+        width: 50%;
+        height: 50px;
+        position: relative;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div input {
+        background: #FAFAFA;
+        padding: 0px 13px;
+        height: 40px;
+        width: 98%;
+        margin: 0 auto;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv div span {
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #2480FF;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .minInput {
+        background: #FAFAFA;
+        padding: 0px 13px;
+        height: 40px;
+        width: 57%;
+        margin: 0 auto;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-right: 3px;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .approve { 
+        // display: none;  /*隐藏按钮*/
+        background: #2480FF;
+        border-radius: 12px;
+        width: 60px;
+        font-size: 12px;
+        line-height: 40px;
+        height: 40px;
+        color: #ffffff;
+    }
+    
+    .swap-pc .main .enterDiv .inputDiv div .noApprove { 
+        // display: none;  /*隐藏按钮*/
+        background: #D4DDE9;
+        border-radius: 12px;
+        width: 60px;
+        font-size: 12px;
+        line-height: 40px;
+        height: 40px;
+        color: #ffffff;
+    }
+    
+    
+     .swap-pc .butDiv {
+        width: 100%;
+        height: 100px;
+    }
+    
+     .swap-pc .butDiv div {
+        height: 50px;
+        line-height: 50px;
+    }
+    
+     .swap-pc .butDiv div span {
+        font-size: 10px;
+        float: right;
+    }
+    
+     .swap-pc .butDiv div img {
+        width: 5%;
+        float: right;
+        display: block;
+        margin: 18px 5px;
+    }
+    
+     .swap-pc .butDiv button {
+        width: 90%;
+        margin: 0px auto;
+        height: 50px;
+        // background: #2480FF;
+        border-radius: 16px;
+        color: #fff;
+        font-size: 16px;
+        display: block;
+    }
+ }

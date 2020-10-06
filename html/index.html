@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap</title>
+    <link rel="stylesheet" href="./static/bootstrap/bootstrap.css">
+    <script src="./js/jquery.js" type="text/javascript"></script>
+    <script src="./static/bootstrap/bootstrap.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/x-ico" href="./static/img/logo1.ico" />
+</head>
+
+<body>
+    <div class="maxDiv" id="maxDiv">
+        <div class="navigation">
+            <div class="main">
+                <div class="logo">
+                    <router-link to="/">
+                        <img class="cursor" @click.stop="closeList()" src="static/img/logo.png" alt="logo">
+                    </router-link>
+                </div>
+
+                <button class="noConnectButton btn btn-primary" data-toggle="modal" data-target="#con-close-modal">
+                    <img src="static/img/noConnct.png" alt="">
+                    <span>Connect to a Wallet</span>
+                </button>
+                <!-- <div class="ConnectedButton"> 
+                  <span></span>
+                  <img src="static/img/conncted.png" alt="">
+              </div> -->
+
+                <!-- <el-dialog
+              :visible.sync="dialogVisible"
+              width="30%"
+              :before-close="handleClose">
+              <div class="titleDiv">
+                  <p> <img src="static/img/wallet.png" alt=""><span>连接钱包</span></p>
+              </div>
+              <span>这是一段信息</span>
+              <span slot="footer" class="dialog-footer">
+                  <el-button @click="dialogVisible = false">取 消</el-button>
+                  <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          </span>
+          </el-dialog> -->
+
+            </div>
+        </div>
+        <div class="trade-pc">
+            <div class="main">
+                <div class="swapContent">
+                    <ul class="tabDiv">
+                        <!-- <li
+                      v-for="(item,index) in menu"
+                      :key="index"
+                      :class="{active : ( isActive == item.value ? true : false )}"
+                      @click="isActive = item.value;currentComp = item.comp"
+                  >{{item.name}}</li> -->
+                        <li class="active" @click="tabExchange(Swap)">Swap</li>
+                        <li @click="tabExchange(Add)">Add Liquidity</li>
+                        <li @click="tabExchange(Manage)">Manage Liquidity</li>
+                    </ul>
+                    <div class="SwapDiv">
+                        <!-- 兑换 -->
+                        <div class="swap-pc">
+                            <div class="main">
+                                <!-- <el-checkbox-group v-model="checkList"> -->
+                                <div class="el-checkbox-group">
+                                    <div class="el-checkbox l" label="复选框 A">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/USDT.png" alt="">
+                                        <span>USDT</span>
+                                    </div>
+                                    <div class="el-checkbox border_let r" label="复选框 C">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/USDT.png" alt="">
+                                        <span>USDT</span>
+                                    </div>
+                                    <!-- <el-checkbox label="禁用" disabled></el-checkbox>
+                          <el-checkbox label="选中且禁用" disabled></el-checkbox> -->
+                                </div>
+                                <!-- </el-checkbox-group> -->
+                                <!-- <el-checkbox-group v-model="checkList"> -->
+                                <div class="el-checkbox-group">
+                                    <div class="el-checkbox l" label="复选框 A">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/DAI.png" alt="">
+                                        <span>DAI</span>
+                                    </div>
+                                    <div class="el-checkbox border_let r" label="复选框 C">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/DAI.png" alt="">
+                                        <span>DAI</span>
+                                    </div>
+                                </div>
+                                <!-- </el-checkbox-group> -->
+                                <!-- <el-checkbox-group v-model="checkList"> -->
+                                <div class="el-checkbox-group">
+                                    <div class="el-checkbox l" label="复选框 A">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/BUSD.png" alt="">
+                                        <span>BUSD</span>
+                                    </div>
+                                    <div class="el-checkbox border_let r" label="复选框 C">
+                                        <input type="checkbox" name="" id="">
+                                        <img src="static/img/coins/BUSD.png" alt="">
+                                        <span>BUSD</span>
+                                    </div>
+                                </div>
+                                <!-- </el-checkbox-group> -->
+                                <div class="enterDiv">
+                                    <img src="static/img/exchange.png" alt="">
+                                    <div class="blanceDiv"><span class="blance">Balance</span>
+                                        <p><span>67461</span> <span>USDT</span></p>
+                                    </div>
+                                    <div class="inputDiv">
+                                        <div>
+                                            <input type="text" name="" id="" placeholder="Enter an amount">
+                                            <span>MAX</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="" id="" placeholder="Estimated">
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="butDiv">
+                                <div>
+                                    <span>DAI/USDT Rate (including fees): 0.98786</span>
+                                    <img src="static/img/qiehuan.png" alt="">
+                                </div>
+                                <button>Connect to a Wallet</button>
+                            </div>
+                        </div>
+                        <!-- 增加流动性 -->
+                        <div class="addLiqui-pc">
+                            <div class="main">
+                                <div class="coinDiv">
+                                    <div class="firstPart">
+                                        <div>
+                                            <img src="static/img/coins/USDT.png" alt="">
+                                            <span>USDT</span>
+                                        </div>
+                                        <div>
+                                            <span>Balance</span>
+                                            <span>6741</span>
+                                            <span>USDT</span>
+                                        </div>
+                                    </div>
+                                    <div class="second">
+                                        <input type="text" name="" id="" placeholder="Enter an amount">
+                                        <!-- <el-input
+                            placeholder="请输入数量"
+                            v-model="input"
+                            clearable>
+                            </el-input> -->
+                                    </div>
+                                </div>
+                                <div class="coinDiv">
+                                    <div class="firstPart">
+                                        <div>
+                                            <img src="static/img/coins/DAI.png" alt="">
+                                            <span>DAI</span>
+                                        </div>
+                                        <div>
+                                            <span>Balance</span>
+                                            <span>6741</span>
+                                            <span>DAI</span>
+                                        </div>
+                                    </div>
+                                    <div class="second">
+                                        <!-- <el-input
+                            placeholder="请输入数量"
+                            v-model="input"
+                            clearable>
+                            </el-input> -->
+                                        <input type="text" name="" id="" placeholder="Enter an amount">
+                                    </div>
+                                </div>
+                                <div class="coinDiv">
+                                    <div class="firstPart">
+                                        <div>
+                                            <img src="static/img/coins/BUSD.png" alt="">
+                                            <span>BUSD</span>
+                                        </div>
+                                        <div>
+                                            <span>Balance</span>
+                                            <span>6741</span>
+                                            <span>BUSD</span>
+                                        </div>
+                                    </div>
+                                    <div class="second">
+                                        <!-- <el-input
+                            placeholder="请输入数量"
+                            v-model="input"
+                            clearable>
+                            </el-input> -->
+                                        <input type="text" name="" id="" placeholder="Enter an amount">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="butDiv">
+                                <button>Add Liquidity</button>
+                            </div>
+                        </div>
+
+                        <!-- 取出流动性 -->
+                        <div class="withdrawLiqui-pc">
+                            <div class="main">
+                                <div class="LiquidityRatio">
+                                    <p>Your pool share (%)</p>
+                                    <div class="enterDiv">
+                                        <input type="text" name="" id="" placeholder="Please enter a number (%)">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="el-checkbox-group">
+                                        <div class="coinDiv">
+                                            <div class="firstPart">
+                                                <div>
+                                                    <img src="static/img/coins/USDT.png" alt="">
+                                                    <span>USDT</span>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="second">
+                                                <input type="text" name="" id="" placeholder="Enter an amount">
+                                            </div>
+                                        </div>
+                                        <div class="coinDiv">
+                                            <div class="firstPart">
+                                                <div>
+                                                    <img src="static/img/coins/DAI.png" alt="">
+                                                    <span>DAI</span>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="second">
+                                                <input type="text" name="" id="" placeholder="Enter an amount">
+                                            </div>
+                                        </div>
+                                        <div class="coinDiv">
+                                            <div class="firstPart">
+                                                <div>
+                                                    <img src="static/img/coins/BUSD.png" alt="">
+                                                    <span>BUSD</span>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="second">
+                                                <input type="text" name="" id="" placeholder="Enter an amount">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="butDiv">
+                                <button>Withdraw Liquidity</button>
+                            </div>
+                        </div>
+                        <!-- <test1 :is="currentComp"></test1> -->
+                        <!-- <action /> -->
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="assetDiv">
+                    <div class="main">
+                        <div class="tittle">
+                            <div></div>
+                            <p>Liquidity</p>
+                        </div>
+                        <div class="consinfo">
+                            <ul>
+                                <li>
+                                    <p><em class="coinName">DAI:</em> <em class="coinVal">0.234567</em></p>
+                                    <span>23%</span>
+                                </li>
+                                <li>
+                                    <p><em class="coinName">USDT:</em> <em class="coinVal">0.234567</em></p>
+                                    <span>29%</span>
+                                </li>
+                                <li>
+                                    <p><em class="coinName">BUSD:</em> <em class="coinVal">0.234567</em></p>
+                                    <span>48%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sum">
+                            <p>DAI+USDC+USDT：</p>
+                            <p>236,172,863.37</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" id="fabu">
+                <div class="modal-content">
+                    <form data-name="" role="form" id="yz_fb" onsubmit="return false">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <img src="./static/img/wallet.png" alt="">
+                            <h4 class="road_title">
+                                Connect to a Wallet
+                            </h4>
+                            <p>Please select a wallet to connect</p>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <ul>
+                                    <li>
+                                        <img src="./static/img/wallet/metamask.png" alt="">
+                                        <span>MetaMask</span>
+                                    </li>
+                                </ul>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal -->
+
+        <!-- <script src="./js/all.min.js"></script> -->
+</body>
+
+</html>

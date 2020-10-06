@@ -1,0 +1,22 @@
+{
+    "Swap": "兑换",
+    "Connect to a Wallet": "链接钱包",
+    "Add Liquidity": "增加流动性",
+    "Manage Liquidity": "赎回流动性",
+    "MAX": "最大",
+    "Balance": "余额",
+    "Enter an amount": "输入数量",
+    "Min Amount": "最小数量",
+    "Approve": "同意划转",
+    "Exchange": "兑换",
+    "Your pool share": "流动性余额",
+    "Withdraw Liquidity": "赎回流动性",
+    "Liquidity": "流动性",
+    "Install a Binance Smart Chain Wallet": "安装币安钱包",
+    "Would you like to install Binance Smart Chain Wallet?": "是否需要安装币安钱包？",
+    "Yes": "是",
+    "No": "否",
+    "Unsupported Network": "不支持的网络",
+    "The network your wallet on is not supported! Please check it.": "不支持当前钱包的网络！请检查当前钱包的网络链接情况。",
+    "OK": "好的"
+}

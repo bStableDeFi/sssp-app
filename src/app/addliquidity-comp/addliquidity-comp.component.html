@@ -1,0 +1,75 @@
+<!-- 增加流动性 -->
+<div class="addLiqui-pc">
+    <div class="main">
+
+        <div class="coinDiv">
+            <div class="firstPart">
+                <div>
+                    <img src="assets/static/img/coins/DAI.png" alt="">
+                    <span>DAI</span>
+                </div>
+                <div>
+                    <span>{{'Balance'|translate}}</span>
+                    <span>{{boot.balance.dai.toFixed(9)}}</span>
+                    <span>DAI</span>
+                </div>
+            </div>
+            <div class="second">
+                <input type="number" name="daiAmt" [(ngModel)]="daiAmt" placeholder="{{'Enter an amount'|translate}}">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveDai()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
+            </div>
+        </div>
+        <div class="coinDiv">
+            <div class="firstPart">
+                <div>
+                    <img src="assets/static/img/coins/BUSD.png" alt="">
+                    <span>BUSD</span>
+                </div>
+                <div>
+                    <span>{{'Balance'|translate}}</span>
+                    <span>{{boot.balance.busd.toFixed(9)}}</span>
+                    <span>BUSD</span>
+                </div>
+            </div>
+            <div class="second">
+                <input type="number" name="busdAmt" [(ngModel)]="busdAmt" placeholder="{{'Enter an amount'|translate}}">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveBusd()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
+            </div>
+        </div>
+        <div class="coinDiv">
+            <div class="firstPart">
+                <div>
+                    <img src="assets/static/img/coins/USDT.png" alt="">
+                    <span>USDT</span>
+                </div>
+                <div>
+                    <span>{{'Balance'|translate}}</span>
+                    <span>{{boot.balance.usdt.toFixed(9)}}</span>
+                    <span>USDT</span>
+                </div>
+            </div>
+            <div class="second">
+                <input type="number" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="{{'Enter an amount'|translate}}">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveUsdt()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="butDiv">
+        <!-- <button (click)="approveDai()" style="margin-bottom: 1em;">Approve
+            DAI</button>
+        <button (click)="approveBusd()" style="margin-bottom: 1em;">Approve
+            BUSD</button>
+        <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
+        <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()" [disabled]="status===0||status===3||status===1||status===4"
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1||status===4}">{{'Add
+            Liquidity'|translate}}</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{'Connect to a
+            Wallet'|translate}}</button>
+    </div>
+</div>

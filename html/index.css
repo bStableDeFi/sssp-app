@@ -1,0 +1,600 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+html body {
+  background-color: #ffff;
+}
+html body #maxDiv {
+  background-color: #ffff;
+}
+html body #maxDiv .navigation {
+  width: 100%;
+  height: 60px;
+  background-color: #ffff;
+  position: fixed;
+  top: 0;
+  z-index: 9999999;
+}
+html body #maxDiv .navigation .cursor {
+  cursor: pointer;
+}
+html body #maxDiv .navigation .main {
+  width: 960px;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+html body #maxDiv .navigation .main .logo {
+  width: 100px;
+  min-width: 140px;
+  position: relative;
+}
+html body #maxDiv .navigation .main .logo img {
+  width: 100%;
+}
+html body #maxDiv .navigation .main .noConnectButton {
+  padding: 0px;
+  width: 190px;
+  height: 32px;
+  background: #FAFAFA;
+  color: #0E0E0E;
+  border: #BEBEBE 0.5px solid;
+  border-radius: 12px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 1px;
+  outline: none;
+}
+html body #maxDiv .navigation .main .noConnectButton img {
+  float: left;
+  width: 19%;
+}
+html body #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {
+  width: 20px;
+  margin-left: 8px;
+}
+html body #maxDiv .navigation .el-dialog .el-dialog__body {
+  padding: 0px 20px !important;
+}
+html body #maxDiv .trade-pc {
+  background: url("static/img/bigBG.jpg") no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+html body #maxDiv .trade-pc .main {
+  margin: 0 auto ;
+  width: 35%;
+  height: 80%;
+}
+html body #maxDiv .trade-pc .main .swapContent {
+  width: 100%;
+  height: 82%;
+  background: #ffffff;
+  box-shadow: 0px 10px 43px 0px rgba(234, 238, 244, 0.51);
+  border-radius: 38px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+html body #maxDiv .trade-pc .main .swapContent .tabDiv {
+  width: 80%;
+  height: 40px;
+  margin: 0px auto;
+  display: flex;
+  background: #FAFAFA;
+  border-radius: 12px;
+}
+html body #maxDiv .trade-pc .main .swapContent .tabDiv li {
+  flex: 1;
+  font-size: 13px;
+  text-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #646464;
+  line-height: 40px;
+  cursor: pointer;
+}
+html body #maxDiv .trade-pc .main .swapContent .tabDiv .active {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #006BFF;
+  font-weight: 500;
+  color: #2480FF;
+  background: #ffffff;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv {
+  width: 80%;
+  height: 80%;
+  margin: 20px auto 0px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc {
+  background-color: #fff;
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main {
+  width: 100%;
+  height: 280px;
+  border-radius: 12px;
+  border: 1px solid #E1E5EA;
+  padding-top: 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .el-checkbox-group {
+  height: 56px;
+  width: 90%;
+  margin: 0 auto;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .el-checkbox-group .el-checkbox {
+  width: 49%;
+  padding: 14px ;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .el-checkbox-group .el-checkbox input {
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  border: 1px solid #E1E5EA;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .el-checkbox-group .el-checkbox img {
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .el-checkbox-group .border_let {
+  border-left: #E1E5EA 1px solid;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv {
+  width: 90%;
+  height: 32%;
+  margin: 10px auto 0px;
+  border-top: 1px solid #E1E5EA;
+  position: relative;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv img {
+  width: 40px;
+  position: absolute;
+  top: -21px;
+  left: 46%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .blanceDiv {
+  height: 35px;
+  padding-top: 10px;
+  width: 45%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .blanceDiv .blance {
+  float: left;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+  line-height: 28px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .blanceDiv p {
+  float: right;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  line-height: 28px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .inputDiv {
+  height: 50px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .inputDiv div {
+  float: left;
+  width: 50%;
+  height: 50px;
+  position: relative;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .inputDiv div input {
+  background: #FAFAFA;
+  padding: 0px 13px;
+  height: 40px;
+  width: 98%;
+  margin: 0 auto;
+  border: 1px solid #E1E5EA;
+  border-radius: 15px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .main .enterDiv .inputDiv div span {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: #2480FF;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .butDiv {
+  width: 100%;
+  height: 100px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .butDiv div {
+  height: 50px;
+  line-height: 50px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .butDiv div span {
+  font-size: 10px;
+  float: right;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .butDiv div img {
+  width: 5%;
+  float: right;
+  display: block;
+  margin: 18px 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .swap-pc .butDiv button {
+  width: 90%;
+  margin: 0px auto;
+  height: 50px;
+  background: #2480FF;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc {
+  /* display: none; */
+  /*隐藏增加流动性*/
+  background-color: #fff;
+  height: auto;
+  width: 100%;
+  position: relative;
+  z-index: 4000;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main {
+  width: 100%;
+  height: 348px;
+  padding-top: 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv {
+  border: 1px solid #E1E5EA;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  height: 100px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart {
+  width: 90%;
+  height: 45px;
+  margin: 0px auto;
+  line-height: 45px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(1) {
+  float: left;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(1) img {
+  width: 30px;
+  margin-top: -3px;
+  margin-right: 8px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(1) span {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #000000;
+  display: inline-block;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) {
+  float: right;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) span:nth-child(1) {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #000000;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) span:nth-child(2),
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) .span:nth-child(3) {
+  font-weight: 400;
+  color: #999999;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .second {
+  height: 40px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .main .coinDiv .second input {
+  width: 90% ;
+  display: block;
+  margin-bottom: 12px;
+  background: #FAFAFA;
+  padding: 0px 13px;
+  height: 40px;
+  margin: 0 auto;
+  border: 1px solid #E1E5EA;
+  border-radius: 10px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .butDiv {
+  width: 100%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .butDiv div {
+  height: 50px;
+  line-height: 50px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .butDiv div span {
+  font-size: 10px;
+  float: right;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .butDiv div img {
+  width: 5%;
+  float: right;
+  display: block;
+  margin: 18px 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .addLiqui-pc .butDiv button {
+  width: 90%;
+  margin: 0px auto;
+  height: 50px;
+  background: #2480FF;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc {
+  /* display: none; */
+  /*隐藏  取出流动性*/
+  background-color: #ffffff;
+  height: auto;
+  width: 100%;
+  position: relative;
+  z-index: 6000;
+  background-size: 100% 100%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main {
+  width: 100%;
+  height: 340px;
+  border-radius: 12px;
+  border: 1px solid #E1E5EA;
+  padding-top: 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main .LiquidityRatio {
+  width: 90%;
+  height: 40px;
+  margin: 0 auto;
+  background: #2480FF;
+  border-radius: 10px;
+  border: 1px solid #E1E5EA;
+  margin-bottom: 10px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main .LiquidityRatio p {
+  width: 38%;
+  float: left;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 39px;
+  padding-left: 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main .LiquidityRatio .enterDiv {
+  float: right;
+  width: 60%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main .LiquidityRatio .enterDiv input {
+  width: 101% ;
+  display: block;
+  margin-bottom: 12px;
+  background: #FAFAFA;
+  padding: 0px 13px;
+  height: 39px;
+  margin: 0 auto;
+  border: 1px solid #E1E5EA;
+  border-radius: 10px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group {
+  width: 100%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv {
+  border-radius: 16px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart {
+  width: 90%;
+  height: 45px;
+  margin: 0px auto;
+  line-height: 45px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) {
+  float: left;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) img {
+  width: 30px;
+  margin-top: -9px;
+  margin-right: 8px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) span {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #000000;
+  display: inline-block;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(2) {
+  float: right;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(2) input {
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  border: 1px solid #E1E5EA;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .second input {
+  width: 91% ;
+  display: block;
+  margin-bottom: 12px;
+  background: #FAFAFA;
+  padding: 0px 13px;
+  height: 40px;
+  margin: 0 auto;
+  border: 1px solid #E1E5EA;
+  border-radius: 10px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .butDiv {
+  margin-top: 10px;
+  width: 100%;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .butDiv div {
+  height: 50px;
+  line-height: 50px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .butDiv div span {
+  font-size: 10px;
+  float: right;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .butDiv div img {
+  width: 5%;
+  float: right;
+  display: block;
+  margin: 18px 5px;
+}
+html body #maxDiv .trade-pc .main .swapContent .SwapDiv .withdrawLiqui-pc .butDiv button {
+  width: 90%;
+  margin: 0px auto;
+  height: 50px;
+  background: #2480FF;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+html body #maxDiv .trade-pc .main .assetDiv {
+  margin-top: 20px;
+  width: 100%;
+  height: 40%;
+  background: #FFFFFF;
+  box-shadow: 0px 14px 44px 0px #EAF2FF;
+  border-radius: 38px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main {
+  width: 80%;
+  padding-top: 20px ;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .tittle {
+  width: 100%;
+  height: 30px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .tittle div {
+  float: left;
+  width: 7px;
+  height: 30px;
+  background: #2480FF;
+  border-radius: 38px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .tittle p {
+  float: left;
+  font-size: 18px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #000000;
+  line-height: 30px;
+  margin-left: 10px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo {
+  width: 100%;
+  height: 150px;
+  border-bottom: 1px solid #E1E5EA;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul {
+  width: 100%;
+  margin-top: 20px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul li {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul li p {
+  float: left;
+  width: 70%;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul li p .coinName {
+  width: 50px;
+  display: inline-block;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B6B6B;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul li p .coinVal {
+  font-size: 16px;
+  font-family: DINPro-Regular, DINPro;
+  font-weight: 400;
+  color: #000000;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .consinfo ul li span {
+  float: right;
+  font-size: 16px;
+  font-family: DINPro-Regular, DINPro;
+  font-weight: 400;
+  color: #000000;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .sum {
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .sum p:nth-child(1) {
+  float: left;
+  width: 50%;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B6B6B;
+}
+html body #maxDiv .trade-pc .main .assetDiv .main .sum p:nth-child(2) {
+  float: right;
+  width: 50%;
+  font-family: DINPro-Medium, DINPro;
+  font-weight: 500;
+  color: #000000;
+  text-align: right;
+}
+html body #maxDiv .modal .modal-dialog {
+  width: 500px !important;
+  margin: 200px auto !important;
+}
+html body #maxDiv .modal .modal-dialog .modal-content {
+  width: 85% ;
+  margin: 0 auto;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-header {
+  padding: 20px 30px;
+  border: none;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-header img {
+  width: 20px;
+  float: left;
+  margin-right: 10px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-header h4 {
+  width: 88%;
+  float: left;
+  line-height: 30px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-header p {
+  font-size: 12px;
+  font-family: "PingFangSC-Regular, PingFang SC";
+  font-weight: 400;
+  color: #6B6B6B;
+  line-height: 30px;
+  height: 30px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-body {
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li {
+  float: left;
+  width: 50%;
+  padding-top: 20px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li img {
+  width: 20%;
+  float: left;
+  margin-left: 10px;
+}
+html body #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li span {
+  float: left;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 40px;
+}

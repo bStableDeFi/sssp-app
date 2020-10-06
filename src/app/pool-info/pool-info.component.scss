@@ -1,0 +1,107 @@
+.assetDiv {
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+    padding-bottom: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 14px 44px 0px #EAF2FF;
+    border-radius: 38px;
+}
+
+.assetDiv .main {
+    width: 80%;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+.assetDiv .main .tittle {
+    width: 100%;
+    height: 30px;
+}
+
+.assetDiv .main .tittle div {
+    float: left;
+    width: 7px;
+    height: 30px;
+    background: #2480FF;
+    border-radius: 38px;
+}
+
+.assetDiv .main .tittle p {
+    float: left;
+    font-size: 18px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #000000;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.assetDiv .main .consinfo {
+    width: 100%;
+    height: 150px;
+    border-bottom: 1px solid #E1E5EA;
+}
+
+.assetDiv .main .consinfo ul {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.assetDiv .main .consinfo ul li {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+}
+
+.assetDiv .main .consinfo ul li p {
+    float: left;
+    width: 70%;
+}
+
+.assetDiv .main .consinfo ul li p .coinName {
+    width: 50px;
+    display: inline-block;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #6B6B6B;
+}
+
+.assetDiv .main .consinfo ul li p .coinVal {
+    font-size: 16px;
+    font-family: DINPro-Regular, DINPro;
+    font-weight: 400;
+    color: #000000;
+}
+
+.assetDiv .main .consinfo ul li span {
+    float: right;
+    font-size: 16px;
+    font-family: DINPro-Regular, DINPro;
+    font-weight: 400;
+    color: #000000;
+}
+
+.assetDiv .main .sum {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.assetDiv .main .sum p:nth-child(1) {
+    float: left;
+    width: 50%;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #6B6B6B;
+}
+
+.assetDiv .main .sum p:nth-child(2) {
+    float: right;
+    width: 50%;
+    font-family: DINPro-Medium, DINPro;
+    font-weight: 500;
+    color: #000000;
+    text-align: right;
+}

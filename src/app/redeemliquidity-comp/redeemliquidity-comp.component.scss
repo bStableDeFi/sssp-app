@@ -1,0 +1,146 @@
+@import '../global.scss';
+
+.withdrawLiqui-pc {
+    /* display: none; */
+    /*隐藏  取出流动性*/
+    background-color: #ffffff;
+    height: auto;
+    width: 100%;
+    position: relative;
+    z-index: 6000;
+    background-size: 100% 100%;
+}
+
+.withdrawLiqui-pc .main {
+    width: 100%;
+    height: 340px;
+    border-radius: 12px;
+    border: 1px solid #E1E5EA;
+    padding-top: 5px;
+}
+
+.withdrawLiqui-pc .main .LiquidityRatio {
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+    background: #2480FF;
+    border-radius: 10px;
+    border: 1px solid #E1E5EA;
+    margin-bottom: 10px;
+}
+
+.withdrawLiqui-pc .main .LiquidityRatio p {
+    // width: 41%;
+    float: left;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 35px;
+    padding-left: 5px;
+}
+
+.withdrawLiqui-pc .main .LiquidityRatio .enterDiv {
+    float: right;
+    width: 59%;
+}
+
+.withdrawLiqui-pc .main .LiquidityRatio .enterDiv input {
+    width: 101%;
+    display: block;
+    margin-bottom: 12px;
+    background: #FAFAFA;
+    padding: 0px 13px;
+    height: 39px;
+    margin: 0 auto;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group {
+    width: 100%;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv {
+    border-radius: 16px;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart {
+    width: 90%;
+    height: 45px;
+    margin: 0px auto;
+    line-height: 45px;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) {
+    float: left;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) img {
+    width: 30px;
+    margin-top: -9px;
+    margin-right: 8px;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(1) span {
+    font-size: 16px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #000000;
+    display: inline-block;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(2) {
+    float: right;
+    padding-top: 11px;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(2) input {
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    border: 1px solid #E1E5EA;
+}
+
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .second input {
+    width: 91%;
+    display: block;
+    margin-bottom: 12px;
+    background: #FAFAFA;
+    padding: 0px 13px;
+    height: 40px;
+    margin: 0 auto;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+}
+
+.withdrawLiqui-pc .butDiv {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.withdrawLiqui-pc .butDiv div {
+    height: 50px;
+    line-height: 50px;
+}
+
+.withdrawLiqui-pc .butDiv div span {
+    font-size: 10px;
+    float: right;
+}
+
+.withdrawLiqui-pc .butDiv div img {
+    width: 5%;
+    float: right;
+    display: block;
+    margin: 18px 5px;
+}
+
+.withdrawLiqui-pc .butDiv button {
+    width: 90%;
+    margin: 0px auto;
+    height: 50px;
+    // background: #2480FF;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+}

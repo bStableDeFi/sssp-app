@@ -1,0 +1,1 @@
+ng b --aot --prod

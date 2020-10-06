@@ -1,0 +1,28 @@
+<div class="assetDiv">
+    <div class="main">
+        <div class="tittle">
+            <div></div>
+            <p>{{"Liquidity"|translate}}</p>
+        </div>
+        <div class="consinfo">
+            <ul>
+                <li>
+                    <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai.toFixed(9)}}</em></p>
+                    <span>{{daiPercent().toFixed(2)}}%</span>
+                </li>
+                <li>
+                    <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd.toFixed(9)}}</em></p>
+                    <span>{{busdPercent().toFixed(2)}}%</span>
+                </li>
+                <li>
+                    <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt.toFixed(9)}}</em></p>
+                    <span>{{usdtPercent().toFixed(2)}}%</span>
+                </li>
+            </ul>
+        </div>
+        <div class="sum">
+            <p>DAI+USDC+USDT：</p>
+            <p>{{getTotal().toFixed(9)}}</p>
+        </div>
+    </div>
+</div>

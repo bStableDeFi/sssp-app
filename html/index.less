@@ -1,0 +1,663 @@
+html{ 
+  width: 100%;
+  height:100%;
+  body{
+    background-color: #ffff;
+    #maxDiv{
+      background-color: #ffff;
+      .navigation {
+        .cursor{
+            cursor: pointer;
+        }
+        width: 100%;
+        height: 60px;
+        background-color:#ffff;
+        position: fixed;
+        top: 0;
+        z-index: 9999999;
+        .main {
+            width: 960px;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .logo {
+                width: 100px;
+                min-width: 140px;
+                // height: 41px;
+                position: relative;
+                img {
+                    width: 100%;
+                }
+               
+            }
+            .noConnectButton{
+                padding: 0px;
+                width: 190px;
+                height: 32px;
+                background:#FAFAFA;
+                color: #0E0E0E;
+                border:#BEBEBE 0.5px solid ;
+                border-radius: 12px;
+                font-weight: 400;;
+                line-height: 32px;
+                letter-spacing: 1px;
+                outline: none;
+                img{
+                  float: left;
+                    width: 19%;
+                }
+                button{
+                }
+            } 
+            .el-dialog{
+                .el-dialog__body{
+                    .titleDiv{
+                        p{
+                            img{
+                                width: 20px;
+                                margin-left: 8px;
+                            }
+                            span{
+    
+                            }
+    
+                        }
+                    }
+                          
+                }
+            } 
+             
+        }
+         .el-dialog{
+            .el-dialog__body{
+                padding: 0px 20px !important;       
+            }
+        }
+      }
+      .trade-pc {
+        background:url("./static/img/bigBG.jpg") no-repeat;
+        background-size: 100% 100%;
+        // height: 850px;
+        width: 100%;
+        position: relative;
+        z-index: 1000;
+        padding-top: 80px;
+        padding-bottom: 50px;
+        .main {
+            margin: 0 auto ;
+            width: 35%;
+            height: 80%;
+            .swapContent{
+                width: 100%;
+                height: 82%;
+                background: #ffffff;
+                box-shadow: 0px 10px 43px 0px rgba(234, 238, 244, 0.51);
+                border-radius: 38px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                .tabDiv{
+                    width: 80%;
+                    height: 40px;
+                    margin: 0px auto;
+                    display: flex; 
+                    // flex-wrap: wrap;
+                    // justify-content: flex-start;           
+                    background: #FAFAFA;
+                    border-radius: 12px;
+                    li{ 
+                        flex: 1; 
+                        // display: flex;
+                        // align-items: center;
+                        font-size: 13px;
+                        text-align: center;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: #646464;
+                        line-height: 40px;
+                        cursor: pointer;
+                    }
+                    .active{
+                        width: 100%;
+                        border-radius: 12px;
+                        border: 1px solid #006BFF;
+                        font-weight: 500;
+                        color: #2480FF;
+                        background: #ffffff;
+                    }
+                }
+                .SwapDiv{
+                    width: 80%;
+                    height: 80%;
+                    margin: 20px auto 0px;
+                    // background: pink;
+                    .swap-pc {
+                      // display: none;/*隐藏兑换模块*/
+                      background-color: #fff;
+                      height: auto;
+                      width: 100%;
+                      position: relative;
+                      .main {
+                          width: 100%;
+                          height:280px;
+                          border-radius: 12px;
+                          border: 1px solid #E1E5EA;
+                          padding-top: 5px;
+                          .el-checkbox-group{
+                            height: 56px;
+                              width: 90%;
+                              margin: 0 auto;
+                              .el-checkbox{
+                                  width: 49%;
+                                  padding: 14px ;
+                                  input{
+                                    width: 16px;
+                                    height: 16px;
+                                    border-radius: 10px;
+                                    border:1px solid  #E1E5EA;
+                                  }
+                                  img{
+                                      width: 30px;
+                                      margin-left: 10px;
+                                      margin-right: 5px;
+                                  }
+                              }
+                              .border_let{
+                                  border-left: #E1E5EA 1px solid;
+                              }
+                          }
+                          .enterDiv{
+                              width: 90%;
+                              height: 32%;
+                              margin: 10px auto 0px;
+                              border-top:1px solid #E1E5EA ;
+                              position: relative;
+                              img{
+                                  width: 40px;
+                                  position: absolute;
+                                  top: -21px;
+                                  left: 46%;
+                              }
+                              .blanceDiv{
+                                height: 35px;
+                                  padding-top: 10px;
+                                  width: 45%;
+                                  .blance{
+                                      float: left;
+                                      font-size: 14px;
+                                      font-family: PingFangSC-Regular, PingFang SC;
+                                      font-weight: 400;
+                                      color: #000000;
+                                      line-height: 28px;
+                                  }
+                                  p{
+                                      float: right;              
+                                      font-size: 12px;
+                                      font-family: PingFangSC-Regular, PingFang SC;
+                                      font-weight: 400;
+                                      color: #999999;
+                                      line-height: 28px;
+                                  }
+                  
+                              }
+                              .inputDiv{
+                                height: 50px;
+                                  div{
+                                      float: left;
+                                      width: 50%;
+                                      height: 50px;
+                                      position: relative;
+                                      input{
+                                        
+                                        background: #FAFAFA;
+                                        padding: 0px 13px;
+                                        height: 40px;
+                                          width: 98%;
+                                          margin: 0 auto;
+                                          border:1px solid #E1E5EA ;
+                                          border-radius: 15px;
+                                      }
+                                      span{
+                                        position: absolute;
+                                        top: 12px;
+                                        right: 10px;
+                                        color: #2480FF;
+                                      }
+                                  }
+                                  
+                              }
+                  
+                  
+                          }              
+                      }
+                      .butDiv{
+                          width: 100%;
+                          height: 100px;
+                          div{
+                              height: 50px;
+                              line-height: 50px;
+                              span{
+                                  font-size: 10px;
+                                  float: right;
+                              }
+                              img{
+                                  width: 5%;
+                                  float: right;
+                                  display: block;
+                                  margin: 18px 5px;
+                              }
+                          }
+                           button{
+                              width: 90%; 
+                              margin: 0px auto;         
+                              height: 50px;
+                              background: #2480FF;
+                              border-radius: 16px;
+                              color: #fff;
+                              font-size: 16px;
+                              display: block;
+                          }
+                      }  
+                  }
+                  .addLiqui-pc {
+                    display: none; /*隐藏增加流动性*/
+                    background-color: #fff;
+                    height: auto;
+                    width: 100%;
+                    position: relative;
+                    z-index: 4000;
+                      .main {
+                        width: 100%;
+                        height:348px;
+                        padding-top: 5px;
+                        .coinDiv{
+                            border: 1px solid #E1E5EA;       
+                            border-radius: 16px;
+                            margin-bottom: 15px;
+                            height: 100px;
+                            .firstPart{
+                                width: 90%;
+                                height: 45px;
+                                margin:0px auto;
+                                line-height: 45px;
+                                div:nth-child(1){
+                                    float: left;
+                                    img{
+                                        width: 30px;
+                                        margin-top: -3px;
+                                        margin-right: 8px;
+                                    }
+                                    span{ 
+                                        font-size: 16px;
+                                        font-family: PingFangSC-Medium, PingFang SC;
+                                        font-weight: 500;
+                                        color: #000000;
+                                        display: inline-block;
+                                    }
+                                }
+                                 div:nth-child(2){
+                                    float: right;
+                                    span:nth-child(1){ 
+                                        font-size: 14px;
+                                        font-family: PingFangSC-Regular, PingFang SC;
+                                        font-weight: 400;
+                                        color: #000000;
+                                    }
+                                    span:nth-child(2),.span:nth-child(3){                        
+                                        font-weight: 400;
+                                        color: #999999;
+                                    }
+                                }
+                            }
+                            .second{
+                              height: 40px;
+                                input{
+                                    width:90% ;
+                                    margin: 0 auto;
+                                    display: block;
+                                    margin-bottom: 12px;
+                                    background: #FAFAFA;
+                                    padding: 0px 13px;
+                                    height: 40px;
+                                    margin: 0 auto;
+                                    border:1px solid #E1E5EA ;
+                                    border-radius: 10px;
+                                }
+                            }
+                        }   
+                
+                    }
+                    .butDiv{
+                        width: 100%;
+                        div{
+                            height: 50px;
+                            line-height: 50px;
+                            span{
+                                font-size: 10px;
+                                float: right;
+                            }
+                            img{
+                                width: 5%;
+                                float: right;
+                                display: block;
+                                margin: 18px 5px;
+                            }
+                        }
+                         button{
+                            width: 90%; 
+                            margin: 0px auto;         
+                            height: 50px;
+                            background: #2480FF;
+                            border-radius: 16px;
+                            color: #fff;
+                            font-size: 16px;
+                            display: block;
+                        }
+                    }
+                }
+                .withdrawLiqui-pc {
+                  display: none; /*隐藏  取出流动性*/
+                  background-color: #ffffff;
+                  height: auto;
+                  width: 100%;
+                  position: relative;
+                  z-index: 6000;
+                  background-size: 100% 100%;
+                    .main {
+                      width: 100%;
+                      height:340px;
+                      border-radius: 12px;
+                      border: 1px solid #E1E5EA;   
+                      padding-top: 5px;
+                      .LiquidityRatio{
+                          width: 90%;
+                          height: 40px;
+                          margin: 0 auto;
+                          background: #2480FF;
+                          border-radius: 10px;
+                          border: 1px solid #E1E5EA;
+                          margin-bottom: 10px;
+                          p{
+                              width: 38%;
+                              float: left;
+                              font-weight: 500;
+                              color: #FFFFFF;
+                              line-height: 39px;
+                              padding-left: 5px;
+                          }
+                          .enterDiv{
+                              float: right;
+                              width: 60%;
+                              input{
+                                width:101% ;
+                                margin: 0 auto;
+                                display: block;
+                                margin-bottom: 12px;
+                                background: #FAFAFA;
+                                padding: 0px 13px;
+                                height: 39px;
+                                margin: 0 auto;
+                                border:1px solid #E1E5EA ;
+                                border-radius: 10px;
+                              }
+                              // background: #FAFAFA;
+                              // border-radius: 16px;
+                              // border: 1px solid #E1E5EA;
+                          }
+              
+                      }
+                      div{
+                          .el-checkbox-group{
+                              width: 100%;
+                               .coinDiv{ 
+                                  border-radius: 16px;
+                                  // margin-bottom: 15px;
+                                  .firstPart{
+                                      width: 90%;
+                                      height: 45px;
+                                      margin:0px auto;
+                                      line-height: 45px;
+                                      div:nth-child(1){
+                                          float: left;
+                                          img{
+                                              width: 30px;
+                                              margin-top: -9px;
+                                              margin-right: 8px;
+                                          }
+                                          span{ 
+                                              font-size: 16px;
+                                              font-family: PingFangSC-Medium, PingFang SC;
+                                              font-weight: 500;
+                                              color: #000000;
+                                              display: inline-block;
+                                          }
+                                      }
+                                      div:nth-child(2){
+                                          float: right;
+                                          input{
+                                            width: 16px;
+                                            height: 16px;
+                                            border-radius: 10px;
+                                            border:1px solid  #E1E5EA;
+
+                                          }
+                                      }
+                                  }
+                                  .second{
+                                    input{
+                                      width:91% ;
+                                      margin: 0 auto;
+                                      display: block;
+                                      margin-bottom: 12px;
+                                      background: #FAFAFA;
+                                      padding: 0px 13px;
+                                      height: 40px;
+                                      margin: 0 auto;
+                                      border:1px solid #E1E5EA ;
+                                      border-radius: 10px;
+                                    }
+                                  }
+                              }   
+                          }
+                         
+                      }
+                     
+                  }
+                  .butDiv{
+                      margin-top: 10px;
+                      width: 100%;
+                      div{
+                          height: 50px;
+                          line-height: 50px;
+                          span{
+                              font-size: 10px;
+                              float: right;
+                          }
+                          img{
+                              width: 5%;
+                              float: right;
+                              display: block;
+                              margin: 18px 5px;
+                          }
+                      }
+                       button{
+                          width: 90%; 
+                          margin: 0px auto;         
+                          height: 50px;
+                          background: #2480FF;
+                          border-radius: 16px;
+                          color: #fff;
+                          font-size: 16px;
+                          display: block;
+                      }
+                  }
+              }
+                    
+                }
+    
+            }
+            .assetDiv{
+                margin-top: 20px;   
+                width: 100%;
+                height: 40%;        
+                background: #FFFFFF;
+                box-shadow: 0px 14px 44px 0px #EAF2FF;
+                border-radius: 38px;
+                .main{
+                    width: 80%;
+                    padding-top:20px ;
+                    .tittle{
+                        width: 100%;
+                        height: 30px;
+                        div{
+                            float: left;
+                            width: 7px;
+                            height: 30px;
+                            background: #2480FF;
+                            border-radius: 38px;
+                        }
+                        p{
+                            float: left;              
+                            font-size: 18px;
+                            font-family: PingFangSC-Medium, PingFang SC;
+                            font-weight: 500;
+                            color: #000000;
+                            line-height: 30px;
+                            margin-left: 10px;
+                        }
+                       
+                    }
+                    .consinfo{
+                        width: 100%;
+                        height: 150px;
+                        border-bottom: 1px solid #E1E5EA;
+                        ul{
+                            width: 100%;
+                            margin-top: 20px;
+                            li{
+                                width: 100%;
+                                height: 45px;
+                                line-height: 45px;
+                                p{
+                                    float: left;
+                                    width: 70%;
+                                    .coinName{ 
+                                        width: 50px;
+                                        display: inline-block;
+                                        font-size: 14px;
+                                        font-family: PingFangSC-Regular, PingFang SC;
+                                        font-weight: 400;
+                                        color: #6B6B6B;
+                                    }
+                                    .coinVal{                        
+                                        font-size: 16px;
+                                        font-family: DINPro-Regular, DINPro;
+                                        font-weight: 400;
+                                        color: #000000;
+                                    }
+                                }
+                                span{
+                                    float: right;                               
+                                    font-size: 16px;
+                                    font-family: DINPro-Regular, DINPro;
+                                    font-weight: 400;
+                                    color: #000000;
+                                }
+    
+                            }
+                        }
+                    }
+                    .sum{
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 18px;
+                        p:nth-child(1){
+                            float: left;
+                            width: 50%;                
+                            font-family: PingFangSC-Regular, PingFang SC;
+                            font-weight: 400;
+                            color: #6B6B6B;
+                            
+                        }
+                        p:nth-child(2){
+                            float: right;
+                            width: 50%;                       
+                            font-family: DINPro-Medium, DINPro;
+                            font-weight: 500;
+                            color: #000000;
+                            text-align: right;
+                        }
+                    }
+                    
+                }
+            }
+       
+        }
+      }
+      .modal{
+        .modal-dialog {
+          width: 500px !important;
+          margin: 200px auto !important;
+          .modal-content{
+            width:85% ;
+            margin: 0 auto;
+            .modal-header{
+              padding: 20px 30px;
+              border: none;
+              img{
+                width: 20px;
+                float: left;
+                margin-right: 10px;
+              }
+              h4{
+                width: 88%;
+                float: left;
+                line-height: 30px;
+              }
+              p{
+                font-size: 12px;
+                font-family: "PingFangSC-Regular, PingFang SC";
+                font-weight: 400;
+                color: #6B6B6B;
+                line-height: 30px;
+                height: 30px;
+              }
+            }
+            .modal-body{
+              width: 85%;
+              margin: 0 auto;
+              margin-bottom: 40px;
+              .row{
+                ul{
+                  li{
+                    float: left;
+                    width: 50%;
+                    // padding: 10px;
+                    padding-top: 20px;
+                    img{
+                      width: 20%;
+                      float: left;
+                      margin-left: 10px;
+                    }
+                    span{
+                      float: left;
+                      font-size: 18px;
+                      font-weight: 700;
+                      line-height: 40px;
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+          
+        }
+      }
+    }
+
+  }
+}
+
