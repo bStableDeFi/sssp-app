@@ -106,7 +106,8 @@
         background: url(../assets/static/img/bigBG.jpg) no-repeat;
         background-size: 100% 100%;
         width: 100%;
-        height: 100%;
+        // height: 100%;
+        height: 880px;
         // position: relative;
         // z-index: 1000;
         padding-top: 1em;
@@ -116,7 +117,8 @@
     
     #maxDiv .trade-pc .main {
         margin: 0 auto;
-        width: 35%;
+        // width: 35%;
+        width: 480px;
         height: 80%;
     }
     
@@ -163,6 +165,45 @@
         width: 80%;
         height: 80%;
         margin: 20px auto 0px;
+    }
+
+    #maxDiv .footer{
+        width: 100%;
+        height: 100px;
+        background-color: #ffffff;
+    }
+
+    #maxDiv .footer .centerPart{
+        width: 480px;
+        height: 100px;
+        margin: 0 auto;
+        background: #BEBEBE;
+
+    }
+
+    #maxDiv .footer .centerPart ul{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction:row;
+        justify-content : center;
+        align-items : center;
+        align-content: stretch;
+    }
+
+    #maxDiv .footer .centerPart ul li{
+        flex: 1;
+        padding: 0 3px;
+    }
+
+    #maxDiv .footer .centerPart ul li a img{
+        float: left;
+        width: 20px;
+        margin-left: 2px;
+    }
+    #maxDiv .footer .centerPart ul li a span{
+        float: left;
+        font-size: 12px;
     }
     
     #maxDiv .modal .modal-dialog {
