@@ -144,7 +144,7 @@ export class BootService {
                 this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
                 this.web3 = null;
             }
-        } 
+        }
     }
 
     public async loadData() {
@@ -231,6 +231,43 @@ export class BootService {
             } catch (e) {
                 console.log(e);
             }
+        }
+    }
+
+    public async redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
+        if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
+            lps = this.web3.utils.toWei(String(lps), 'ether');
+            let data = this.poolContract.methods.remove_liquidity(lps, minAmts).encodeABI();
+            try {
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, gas: 6721975, data: data });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
+    public async redeemToOneCoin(lps: string, coinIndex: string, minAmt: string): Promise<any> {
+        if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
+            lps = this.web3.utils.toWei(String(lps), 'ether');
+            let data = this.poolContract.methods.remove_liquidity_one_coin(lps, coinIndex, minAmt).encodeABI();
+            try {
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, gas: 6721975, data: data });
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
+    public async calcWithdrawOneCoin(lps: string, coinIndex: string): Promise<any> {
+        if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
+            lps = this.web3.utils.toWei(String(lps), 'ether');
+            let data = await this.poolContract.methods.calc_withdraw_one_coin(lps, coinIndex).call({ from: this.accounts[0] });
+            return data;
+            // try {
+            //     return await this.web3.eth.call({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, gas: 6721975, data: data });
+            // } catch (e) {
+            //     console.log(e);
+            // }
         }
     }
 

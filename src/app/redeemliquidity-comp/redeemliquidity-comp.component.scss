@@ -20,9 +20,9 @@
 }
 
 .withdrawLiqui-pc .main .LiquidityRatio {
-    width: 90%;
+    // width: 90%;
     height: 40px;
-    margin: 0 auto;
+    margin: 0 .8em;
     background: #2480FF;
     border-radius: 10px;
     border: 1px solid #E1E5EA;
@@ -42,6 +42,8 @@
     float: right;
     width: 59%;
 }
+
+
 
 .withdrawLiqui-pc .main .LiquidityRatio .enterDiv input {
     width: 101%;
@@ -98,6 +100,17 @@
     height: 16px;
     border-radius: 10px;
     border: 1px solid #E1E5EA;
+}
+.withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart div:nth-child(2) label
+{
+    width: 12em;
+    font-size: .8em;
+    height: 16px;
+    font-weight: normal;
+    margin-left: .5em;
+    line-height: 18px;
+    padding: .1em;
+    margin-bottom: 0px;
 }
 
 .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .second input {

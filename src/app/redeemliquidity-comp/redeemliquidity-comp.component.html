@@ -2,10 +2,12 @@
 <div class="withdrawLiqui-pc">
     <div class="main">
         <div class="LiquidityRatio">
-            <p>{{'Your pool share'|translate}} {{boot.balance.lp.toFixed(9)}} (sSSLP)</p>
-            <!-- <div class="enterDiv">
-                <input type="text" name="" placeholder="Please enter a number (%)">
-            </div> -->
+            <p>sSSLP {{boot.balance.lp.toFixed(9)}}</p>
+            <div class="enterDiv">
+                <input type="number" name="redeemPrecent" [ngModel]="redeemPrecent"
+                    (ngModelChange)="redeemPrecentChange($event)"
+                    placeholder="{{'Please enter a number'|translate}} (%)" (click)="reset()">
+            </div>
         </div>
         <div>
             <div class="el-checkbox-group">
@@ -16,11 +18,14 @@
                             <span>DAI</span>
                         </div>
                         <div>
-                            <!-- <input type="checkbox"> -->
+                            <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
+                                (ngModelChange)="redeemToIndexChange($event)" value="0">
+                            <label for="daiEabled">{{"Redeem All to"|translate}} DAI</label>
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="daiAmt" [(ngModel)]="daiAmt" placeholder="{{'Enter an amount'|translate}}">
+                        <input type="text" name="daiAmt" [(ngModel)]="daiAmt"
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="daiInputDisabled">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -30,11 +35,14 @@
                             <span>BUSD</span>
                         </div>
                         <div>
-                            <!-- <input type="checkbox"> -->
+                            <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
+                                (ngModelChange)="redeemToIndexChange($event)" value="1">
+                            <label for="busdEnabled">{{"Redeem All to"|translate}} BUSD</label>
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="busdAmt" [(ngModel)]="busdAmt" placeholder="{{'Enter an amount'|translate}}">
+                        <input type="text" name="busdAmt" [(ngModel)]="busdAmt"
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="busdInputDisabled">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -44,11 +52,14 @@
                             <span>USDT</span>
                         </div>
                         <div>
-                            <!-- <input type="checkbox"> -->
+                            <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
+                                (ngModelChange)="redeemToIndexChange($event)" value="2">
+                            <label for="usdtEnabled">{{"Redeem All to"|translate}} USDT</label>
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="{{'Enter an amount'|translate}}">
+                        <input type="text" name="usdtAmt" [(ngModel)]="usdtAmt"
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="usdtInputDisabled">
                     </div>
                 </div>
             </div>
