@@ -19,7 +19,7 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="0">
+                                (ngModelChange)="redeemToIndexChange($event)" value="0" [disabled]="redeemToAllDisabled">
                             <label for="daiEabled">{{"Redeem All to"|translate}} DAI</label>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="1">
+                                (ngModelChange)="redeemToIndexChange($event)" value="1" [disabled]="redeemToAllDisabled">
                             <label for="busdEnabled">{{"Redeem All to"|translate}} BUSD</label>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="2">
+                                (ngModelChange)="redeemToIndexChange($event)" value="2" [disabled]="redeemToAllDisabled">
                             <label for="usdtEnabled">{{"Redeem All to"|translate}} USDT</label>
                         </div>
                     </div>

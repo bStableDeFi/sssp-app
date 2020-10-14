@@ -21,6 +21,8 @@ export class RedeemliquidityCompComponent implements OnInit {
 
     redeemPrecent: number;
 
+    redeemToAllDisabled: boolean = true;
+
     daiInputDisabled: boolean = false;
     busdInputDisabled: boolean = false;
     usdtInputDisabled: boolean = false;
@@ -77,6 +79,7 @@ export class RedeemliquidityCompComponent implements OnInit {
             this.redeemPrecent = val;
         }
         if (this.redeemPrecent && this.redeemPrecent !== 0) {
+            this.redeemToAllDisabled = false;
             this.daiInputDisabled = true;
             this.busdInputDisabled = true;
             this.usdtInputDisabled = true;
@@ -89,6 +92,7 @@ export class RedeemliquidityCompComponent implements OnInit {
             this.usdtAmt = Number(usdtAmt.toFixed(9, BigNumber.ROUND_DOWN));
             this.redeemToIndex = '-1';
         } else {
+            this.redeemToAllDisabled = true;
             this.daiInputDisabled = false;
             this.busdInputDisabled = false;
             this.usdtInputDisabled = false;
