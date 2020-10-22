@@ -12,6 +12,6 @@ export class IntallWalletDlgComponent implements OnInit {
     ngOnInit(): void {
     }
     goToBsc() {
-        window.location.href = "https://www.binance.org/en/smartChain";
+        window.open("https://www.binance.org/en/smartChain", "_blank");
     }
 }

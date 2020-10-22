@@ -26,7 +26,8 @@ export const environment = {
                     address: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd'
                 },
                 SSSPool: {
-                    address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                    // address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                    address: '0x7836E470b788d6911DFE0F1292ec0f4D51805D4f',
                 }
             }
         }

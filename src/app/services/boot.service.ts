@@ -45,7 +45,7 @@ export class BootService {
             async num => {
                 acc += num;
                 // @ts-ignore 
-                if (acc >= 3 && !window.BinanceChain) { // 3秒提示安装币安钱包
+                if (acc >= 5 && !window.BinanceChain) { // 3秒提示安装币安钱包
                     this.dialog.open(IntallWalletDlgComponent, { height: '15em', width: '40em' });
                     intervalSubject.unsubscribe();
                 }
