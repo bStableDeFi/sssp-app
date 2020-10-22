@@ -45,7 +45,7 @@ export class BootService {
             async num => {
                 acc += num;
                 // @ts-ignore 
-                if (acc >= 5 && !window.BinanceChain) { // 3秒提示安装币安钱包
+                if (acc >= 5 && !this.isMetaMaskInstalled() && !this.isBinanceInstalled() && !this.isWalletConnectInstalled()) { // 3秒提示安装币安钱包
                     this.dialog.open(IntallWalletDlgComponent, { height: '15em', width: '40em' });
                     intervalSubject.unsubscribe();
                 }
@@ -57,7 +57,17 @@ export class BootService {
             }
         });
     }
-
+    isMetaMaskInstalled() {
+        //@ts-ignore
+        return window.ethereum && window.ethereum.isMetaMask;
+    }
+    isBinanceInstalled() {
+        // @ts-ignore
+        return window.BinanceChain;
+    }
+    isWalletConnectInstalled() {
+        return false;
+    }
     private initContracts() {
         // @ts-ignore
         this.daiContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.DAI.address);
@@ -77,13 +87,21 @@ export class BootService {
     }
 
     public async connectWallet() {
+        if (!this.isMetaMaskInstalled() && !this.isBinanceInstalled() && !this.isWalletConnectInstalled()) {
+            this.dialog.open(IntallWalletDlgComponent, { height: '15em', width: '40em' });
+            return;
+        }
         // @ts-ignore
-        if (!this.web3 && window.BinanceChain) {
-            // @ts-ignore
-            // this.bianceChain = window.BinanceChain;
-            // await this.bianceChain.isConnected();
+        if (!this.web3 && this.isBinanceInstalled()) {
             // @ts-ignore
             this.web3 = new Web3(window.BinanceChain);
+        } else if (!this.web3 && this.isMetaMaskInstalled()) {
+            //@ts-ignore
+            await window.ethereum.enable();
+            //@ts-ignore
+            this.web3 = new Web3(window.ethereum);
+        }
+        if (this.web3) {
             let chainId = await this.web3.eth.getChainId();
             this.chainConfig = environment.chains[chainId];
             this.chainId = chainId;
@@ -91,6 +109,10 @@ export class BootService {
                 this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
                 return;
             }
+            this.web3.eth.getAccounts().then(async accounts => {
+                this.accounts = accounts;
+                await this.loadData();
+            });
             let intervalCheckNetwork = interval(1000).subscribe(async num => {
                 if (this.web3 && this.chainId) {
                     let chainId = await this.web3.eth.getChainId();
@@ -116,34 +138,7 @@ export class BootService {
                     }
                 }
             });
-            // @ts-ignore
-            // window.BinanceChain.on('chainChanged', (_chainId) => {
-            //     this.chainConfig = environment.chains[_chainId];
-            //     if (!this.chainConfig || !this.chainConfig.enabled) {
-            //         this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-            //         return;
-            //     }
-            // });
-            // @ts-ignore
-            // window.BinanceChain.on('accountsChanged', (_chainId) => {
-            //     this.chainConfig = environment.chains[_chainId];
-            //     if (!this.chainConfig || !this.chainConfig.enabled) {
-            //         this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-            //         return;
-            //     }
-            // });
             this.initContracts();
-        }
-        if (this.web3) {
-            if (this.chainConfig && this.chainConfig.enabled) {
-                this.web3.eth.getAccounts().then(accounts => {
-                    this.accounts = accounts;
-                    this.loadData();
-                });
-            } else {
-                this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-                this.web3 = null;
-            }
         }
     }
 
