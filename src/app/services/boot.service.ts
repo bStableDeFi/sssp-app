@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { interval } from 'rxjs';
-import Web3 from 'web3';
-import { WalletBase } from 'web3-core';
+import { interval, Subject } from 'rxjs';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
@@ -10,13 +8,18 @@ import { Contract } from 'web3-eth-contract';
 import { environment } from 'src/environments/environment';
 import { BigNumber } from 'bignumber.js';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
+import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import Web3 from 'web3';
 @Injectable({
     providedIn: 'root'
 })
 export class BootService {
 
     web3: Web3;
-    wallet: WalletBase;
+    binanceWeb3: Web3;
+    metamaskWeb3: Web3;
+    wcWeb3: Web3;
     accounts: string[] = new Array();
     // bianceChain: any;
 
@@ -35,27 +38,75 @@ export class BootService {
     contracts: Array<Contract> = new Array();
     contractsAddress: Array<string> = new Array();
     chainConfig: any;
+    unSupportedNetworkSubject: Subject<any> = new Subject();
     chainId: number;
-
+    wcProvider: WalletConnectProvider = new WalletConnectProvider({
+        // infuraId: "a1b8fe06fc1349b1b812bdb7b8f79465",
+        rpc: {
+            // @ts-ignore
+            56: environment.chains[56].rpc,
+            // @ts-ignore
+            97: environment.chains[97].rpc,
+        },
+    });
 
     constructor(private dialog: MatDialog) {
-        let acc = 0;
+        // Subscribe to session connection
+        this.wcProvider.on("connect", async () => {
+            console.log("connect");
+        });
 
-        let intervalSubject = interval(200).subscribe(
-            async num => {
-                acc += num;
-                // @ts-ignore 
-                if (acc >= 5 && !this.isMetaMaskInstalled() && !this.isBinanceInstalled() && !this.isWalletConnectInstalled()) { // 3秒提示安装币安钱包
-                    this.dialog.open(IntallWalletDlgComponent, { height: '15em', width: '40em' });
-                    intervalSubject.unsubscribe();
-                }
-            }
-        );
+        // Subscribe to session disconnection
+        this.wcProvider.on("disconnect", (code: number, reason: string) => {
+            console.log(code, reason);
+        });
         interval(1000 * 60).subscribe(num => { // 轮训刷新数据
-            if (this.web3 && this.accounts) {
-                this.loadData();
+            if (this.web3 && this.accounts && this.chainConfig && this.chainConfig.enabled) {
+                this.loadData().then();
             }
         });
+        interval(200).subscribe(async num => {
+            if (this.web3) {
+                //@ts-ignore
+                if (this.web3.currentProvider && this.web3.currentProvider.chainId) {
+                    // @ts-ignore
+                    let chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
+                    if (this.chainId !== chainId) {// chainId changed.
+                        this.chainConfig = environment.chains[chainId];
+                        this.chainId = chainId;
+                        if (!this.chainConfig || !this.chainConfig.enabled) {
+                            this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
+                            this.balance = new Balance();
+                            this.poolInfo = new PoolInfo();
+                        } else {
+                            this.initContracts();
+                            await this.loadData();
+                        }
+                    }
+                }
+                if (this.accounts) {
+                    let accounts = await this.web3.eth.getAccounts();
+                    if (this.accounts[0] !== accounts[0] && accounts[0]) {// accounts changed.
+                        this.accounts = accounts;
+                        await this.loadData();
+                    }
+                }
+            }
+            if (!this.wcWeb3 && this.wcProvider.connected) {
+                //@ts-ignore
+                this.wcWeb3 = new Web3(this.wcProvider);
+                this.web3 = this.wcWeb3;
+                this.init();
+            }
+        });
+        if (this.isMetaMaskInstalled()) {
+            // @ts-ignore
+            this.metamaskWeb3 = new Web3(window.ethereum);
+        }
+        if (this.isBinanceInstalled()) {
+            // @ts-ignore
+            this.binanceWeb3 = new Web3(window.BinanceChain);
+        }
     }
     isMetaMaskInstalled() {
         //@ts-ignore
@@ -65,9 +116,11 @@ export class BootService {
         // @ts-ignore
         return window.BinanceChain;
     }
-    isWalletConnectInstalled() {
-        return false;
+
+    chooseWallet() {
+        this.dialog.open(ChooseWalletDlgComponent, { width: '40em' });
     }
+
     private initContracts() {
         // @ts-ignore
         this.daiContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.DAI.address);
@@ -86,59 +139,79 @@ export class BootService {
 
     }
 
-    public async connectWallet() {
-        if (!this.isMetaMaskInstalled() && !this.isBinanceInstalled() && !this.isWalletConnectInstalled()) {
-            this.dialog.open(IntallWalletDlgComponent, { height: '15em', width: '40em' });
-            return;
-        }
-        // @ts-ignore
-        if (!this.web3 && this.isBinanceInstalled()) {
-            // @ts-ignore
-            this.web3 = new Web3(window.BinanceChain);
-        } else if (!this.web3 && this.isMetaMaskInstalled()) {
-            //@ts-ignore
-            await window.ethereum.enable();
-            //@ts-ignore
-            this.web3 = new Web3(window.ethereum);
-        }
+    private async init() {
         if (this.web3) {
-            let chainId = await this.web3.eth.getChainId();
-            this.chainConfig = environment.chains[chainId];
+            // @ts-ignore
+            let chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
             this.chainId = chainId;
+            this.chainConfig = environment.chains[chainId];
+            //@ts-ignore
+            this.web3.currentProvider.on('chainChanged', async (chainId) => {
+                // chainId = this.web3.utils.hexToNumber(chainId);
+                // this.chainConfig = environment.chains[chainId];
+                // if (!this.chainConfig || !this.chainConfig.enabled) {
+                //     this.unSupportedNetworkSubject.next();
+                // } else {
+                //     this.initContracts();
+                //     this.balance = new Balance();
+                //     this.poolInfo = new PoolInfo();
+                //     await this.loadData();
+                // }
+            });
+            //@ts-ignore
+            this.web3.currentProvider.on("accountsChanged", async (accounts: string[]) => {
+                console.log(accounts);
+                // this.accounts = accounts;
+                // await this.loadData();;
+            });
+            this.accounts = await this.web3.eth.getAccounts();
             if (!this.chainConfig || !this.chainConfig.enabled) {
                 this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
                 return;
             }
-            this.web3.eth.getAccounts().then(async accounts => {
-                this.accounts = accounts;
-                await this.loadData();
-            });
-            let intervalCheckNetwork = interval(1000).subscribe(async num => {
-                if (this.web3 && this.chainId) {
-                    let chainId = await this.web3.eth.getChainId();
-                    if (this.chainId != chainId) {
-                        if (!environment.chains[chainId]) {
-                            this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-                            this.accounts.splice(0, this.accounts.length);
-                            this.balance.clear();
-                            this.poolInfo.clear();
-                            this.web3 = null;
-                        } else if (!environment.chains[chainId].enabled) {
-                            this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-                            this.chainConfig = environment.chains[chainId];
-                            this.accounts.splice(0, this.accounts.length);
-                            this.balance.clear();
-                            this.poolInfo.clear();
-                            this.web3 = null;
-                        } else {
-                            this.chainConfig = environment.chains[chainId];
-                            this.initContracts();
-                        }
-                        this.chainId = chainId;
-                    }
-                }
-            });
             this.initContracts();
+            await this.loadData();
+        }
+    }
+    /**
+     * connect to wallet connect
+     */
+    public async connectWC() {
+        //  Enable session (triggers QR Code modal)
+        await this.wcProvider.enable();
+        if (this.wcProvider.connected && this.wcWeb3) {
+            this.web3 = this.wcWeb3;
+            this.init();
+        } else if (this.wcProvider.connected && !this.wcWeb3) {
+            // @ts-ignore
+            this.wcWeb3 = new Web3(this.wcProvider);
+            this.web3 = this.wcWeb3;
+            this.init();
+        }
+    }
+
+    public async connentMetaMask() {
+        if (this.wcProvider.connected) {
+            this.wcProvider.disconnect();
+        }
+        //@ts-ignore
+        await window.ethereum.enable();
+        this.web3 = this.metamaskWeb3;
+        this.init();
+    }
+
+    public async connectBinance() {
+        this.wcProvider.disconnect();
+        this.web3 = this.binanceWeb3;
+        this.init();
+    }
+
+    public async connectWallet() {
+        if (!this.isMetaMaskInstalled() && !this.isBinanceInstalled()) {
+            this.dialog.open(IntallWalletDlgComponent, { width: '40em' });
+            return;
+        } else {
+            this.chooseWallet();
         }
     }
 

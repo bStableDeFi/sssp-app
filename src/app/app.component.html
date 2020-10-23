@@ -7,9 +7,9 @@
             </div>
             <div class="leftpart">
                 <div class="ConnectedButton" *ngIf="boot.accounts.length>0; else noConnect">
-                    <span class="network">{{boot.chainConfig?boot.chainConfig.name:''}}</span>
+                    <span class="network">{{boot.chainConfig?boot.chainConfig.name:'Unsupport Network'}}</span>
                     <span class="address">{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
-                    <img src="assets/static/img/conncted.png" alt="">
+                    <img style="cursor: pointer;" src="assets/static/img/conncted.png" alt="" (click)="boot.chooseWallet()">
                 </div>
                 <ng-template #noConnect>
                     <!-- data-toggle="modal" data-target="#con-close-modal -->
@@ -18,7 +18,7 @@
                         <span>{{"Connect to a Wallet"|translate}}</span>
                     </button>
                 </ng-template>
-                <div class="lang">
+                <div class="lang" style="cursor:pointer;">
                     <img *ngIf="lang.curLanguage.indexOf('en')!=0" src="assets/static/img/en.png" alt=""
                         (click)="changeLang('en')">
                     <img *ngIf="lang.curLanguage.indexOf('zh')!=0" src="assets/static/img/cn.png" alt=""

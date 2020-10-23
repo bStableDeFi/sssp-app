@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { BootService } from '../services/boot.service';
 
 @Component({
     selector: 'app-intall-wallet-dlg',
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntallWalletDlgComponent implements OnInit {
 
-    constructor() { }
+    constructor(public boot: BootService, public dialogRef: MatDialogRef<IntallWalletDlgComponent>) { }
 
     ngOnInit(): void {
     }
-    goToBsc() {
-        window.open("https://www.binance.org/en/smartChain", "_blank");
+    connectWC() {
+        this.dialogRef.close();
+        this.boot.connectWC();
     }
 }

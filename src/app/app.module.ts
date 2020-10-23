@@ -16,6 +16,7 @@ import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-n
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ChooseWalletDlgComponent } from './choose-wallet-dlg/choose-wallet-dlg.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
         SwapCompComponent,
         AddliquidityCompComponent,
         RedeemliquidityCompComponent,
-        UnsupportedNetworkComponent
+        UnsupportedNetworkComponent,
+        ChooseWalletDlgComponent
     ],
     imports: [
         BrowserModule,

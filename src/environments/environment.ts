@@ -10,11 +10,12 @@ export const environment = {
         56: {
             enabled: false,
             name: 'BSC Main Net',
-
+            rpc: 'https://bsc-dataseed.binance.org/',
         },
         97: {
             enabled: true,
-            name: 'BSC Test Net',
+            name: 'BSC Testnet',
+            rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
             contracts: {
                 DAI: {
                     address: '0xec5dcb5dbf4b114c9d0f65bccab49ec54f6a0867'

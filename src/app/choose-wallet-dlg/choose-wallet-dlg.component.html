@@ -1,23 +1,21 @@
-<h1 mat-dialog-title>{{"Install a Wallet"|translate}}</h1>
+<h1 mat-dialog-title>{{"Choose a Wallet"|translate}}</h1>
 <div mat-dialog-content>
     <div class="row">
         <ul>
             <li>
-                <a href="https://metamask.io/" target="_blank">
+                <a (click)="connectMetaMask()">
                     <img src="assets/static/img/wallet/metamask.png" alt="">
                     <span>MetaMask</span>
                 </a>
             </li>
             <!-- <li>
-                <a href="https://chrome.google.com/webstore/detail/binance-chain-wallet/fhbohimaelbohpjbbldcngcnapndodjp"
-                    target="_blank">
+                <a (click)="connectBinance()">
                     <img src="assets/static/img/wallet/binanceWLT.jpg" alt="">
                     <span>Binance</span>
                 </a>
             </li> -->
             <li>
-                <a (click)="connectWC()" 
-                    target="_blank">
+                <a (click)="connectWC()">
                     <img src="assets/static/img/wallet/walletconnect.png" alt="">
                     <span>Wallet Connect</span>
                 </a>
