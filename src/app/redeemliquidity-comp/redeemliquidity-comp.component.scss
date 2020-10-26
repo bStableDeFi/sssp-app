@@ -13,7 +13,7 @@
 
 .withdrawLiqui-pc .main {
     width: 100%;
-    height: 340px;
+    height: 356px;
     border-radius: 12px;
     border: 1px solid #E1E5EA;
     padding-top: 5px;
@@ -43,18 +43,29 @@
     width: 59%;
 }
 
-
-
-.withdrawLiqui-pc .main .LiquidityRatio .enterDiv input {
+.withdrawLiqui-pc .main .LiquidityRatio .enterDiv .inputDiv {
     width: 101%;
     display: block;
     margin-bottom: 12px;
     background: #FAFAFA;
-    padding: 0px 13px;
+    padding: 0px 7px;
     height: 39px;
     margin: 0 auto;
     border: 1px solid #E1E5EA;
     border-radius: 10px;
+}
+
+
+.withdrawLiqui-pc .main .LiquidityRatio .enterDiv .inputDiv input {
+    width: 90%;
+    background: #FAFAFA;
+    height: 36px;
+    float: left;
+}
+
+.withdrawLiqui-pc .main .LiquidityRatio .enterDiv .inputDiv span {
+    float: right;
+    line-height: 39px;
 }
 
 .withdrawLiqui-pc .main div .el-checkbox-group {
@@ -63,6 +74,7 @@
 
 .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv {
     border-radius: 16px;
+    margin-bottom: 10px;
 }
 
 .withdrawLiqui-pc .main div .el-checkbox-group .coinDiv .firstPart {
@@ -123,6 +135,35 @@
     margin: 0 auto;
     border: 1px solid #E1E5EA;
     border-radius: 10px;
+}
+
+.withdrawLiqui-pc .averageDiv {
+    width: 100%;
+}
+
+.withdrawLiqui-pc .averageDiv .leftDiv {
+    float: right;
+    // width: 140px;   
+    height: 28px;
+    margin:11px 20px;
+    background: linear-gradient(90deg, #2480FF 0%, #2480FF 73%, #2480FF 100%);
+    border-radius: 15px;
+    padding: 0 10px;
+}
+
+.withdrawLiqui-pc .averageDiv .leftDiv .radioInput {
+    width: 22px;
+    height: 22px;
+    margin: 0px;
+    background-color: #ffffff;
+}
+
+.withdrawLiqui-pc .averageDiv .leftDiv span {   
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 28px;
+    padding: 0 10px;
 }
 
 .withdrawLiqui-pc .butDiv {

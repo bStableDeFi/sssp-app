@@ -4,9 +4,12 @@
         <div class="LiquidityRatio">
             <p>sSSLP {{boot.balance.lp.toFixed(9)}}</p>
             <div class="enterDiv">
-                <input type="number" name="redeemPrecent" [ngModel]="redeemPrecent"
+                <div class="inputDiv">
+                    <input type="number" name="redeemPrecent" [ngModel]="redeemPrecent"
                     (ngModelChange)="redeemPrecentChange($event)"
-                    placeholder="{{'Please enter a number'|translate}} (%)" (click)="reset()">
+                    placeholder="{{'Please enter a number'|translate}}" (click)="reset()">
+                    <span>%</span>
+                </div>  
             </div>
         </div>
         <div>
@@ -65,6 +68,12 @@
             </div>
         </div>
 
+    </div>
+    <div class="averageDiv">
+        <div class="leftDiv">
+            <input type="radio" class="radioInput">
+            <span>{{"Redeem Average"|translate}}</span>
+        </div>
     </div>
     <div class="butDiv">
         <button *ngIf="boot.accounts.length>0" (click)="redeemCoin()" [disabled]="status===1"

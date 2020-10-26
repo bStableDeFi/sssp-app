@@ -56,6 +56,10 @@
         float: left;
         width: 19%;
     }
+
+    #maxDiv .navigation .main .leftpart .ConnectedButton {
+        float: left;
+    }
     
     #maxDiv .navigation .main .leftpart .ConnectedButton img {
         float: right;
@@ -124,7 +128,7 @@
     
     #maxDiv .trade-pc .main .swapContent {
         width: 100%;
-        height: 500px;
+        // height: 500px;
         background: #ffffff;
         box-shadow: 0px 10px 43px 0px rgba(234, 238, 244, 0.51);
         border-radius: 38px;
@@ -163,7 +167,7 @@
     
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
         width: 80%;
-        height: 80%;
+        // height: 80%;
         margin: 20px auto 0px;
     }
 
@@ -297,7 +301,7 @@
     
     #maxDiv .navigation .main .logo {
         width: 100px;
-        min-width: 140px;
+        min-width: 112px;
         position: relative;
     }
     
@@ -323,6 +327,11 @@
     #maxDiv .navigation .main .leftpart .noConnectButton img {
         float: left;
         width: 19%;
+    }
+
+    #maxDiv .navigation .main .leftpart .ConnectedButton {
+        float: left;
+        margin-top: 0.03rem;
     }
     
     #maxDiv .navigation .main .leftpart .ConnectedButton img {
@@ -394,7 +403,7 @@
     
     #maxDiv .trade-pc .main .swapContent {
         width: 100%;
-        height: 500px;
+        // height: 500px;
         background: #ffffff;
         box-shadow: 0px 10px 43px 0px rgba(234, 238, 244, 0.51);
         border-radius: 18px;
@@ -433,7 +442,7 @@
     
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
         width: 94%;
-        height: 80%;
+        // height: 80%;
         margin: 20px auto 0px;
     }
 

@@ -21,5 +21,6 @@
     "The network your wallet on is not supported! Please check it.": "不支持当前钱包的网络！请检查当前钱包的网络链接情况。",
     "OK": "好的",
     "Please enter a number":"赎回百分比",
-    "Redeem All to":"全部赎回成"
+    "Redeem All to":"全部赎回成",
+    "Redeem Average":"平均赎回"
 }
