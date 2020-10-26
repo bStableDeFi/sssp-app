@@ -3,17 +3,17 @@
     <div class="row">
         <ul>
             <li>
-                <a (click)="connectMetaMask()">
+                <a (click)="connectMetaMask()" *ngIf="boot.isMetaMaskInstalled()">
                     <img src="assets/static/img/wallet/metamask.png" alt="">
                     <span>MetaMask</span>
                 </a>
             </li>
-            <!-- <li>
-                <a (click)="connectBinance()">
+            <li>
+                <a (click)="connectBinance()" *ngIf="boot.isBinanceInstalled()">
                     <img src="assets/static/img/wallet/binanceWLT.jpg" alt="">
                     <span>Binance</span>
                 </a>
-            </li> -->
+            </li>
             <li>
                 <a (click)="connectWC()">
                     <img src="assets/static/img/wallet/walletconnect.png" alt="">

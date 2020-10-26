@@ -10,16 +10,18 @@ import { BigNumber } from 'bignumber.js';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import Web3 from 'web3';
+
+const Web3_1_3 = require('web3_1_3');
+const Web3_1_2 = require('web3_1_2');
 @Injectable({
     providedIn: 'root'
 })
 export class BootService {
 
-    web3: Web3;
-    binanceWeb3: Web3;
-    metamaskWeb3: Web3;
-    wcWeb3: Web3;
+    web3: any;
+    binanceWeb3: any;
+    metamaskWeb3: any;
+    wcWeb3: any;
     accounts: string[] = new Array();
     // bianceChain: any;
 
@@ -40,26 +42,10 @@ export class BootService {
     chainConfig: any;
     unSupportedNetworkSubject: Subject<any> = new Subject();
     chainId: number;
-    wcProvider: WalletConnectProvider = new WalletConnectProvider({
-        // infuraId: "a1b8fe06fc1349b1b812bdb7b8f79465",
-        rpc: {
-            // @ts-ignore
-            56: environment.chains[56].rpc,
-            // @ts-ignore
-            97: environment.chains[97].rpc,
-        },
-    });
+    wcProvider: WalletConnectProvider;
 
     constructor(private dialog: MatDialog) {
-        // Subscribe to session connection
-        this.wcProvider.on("connect", async () => {
-            console.log("connect");
-        });
 
-        // Subscribe to session disconnection
-        this.wcProvider.on("disconnect", (code: number, reason: string) => {
-            console.log(code, reason);
-        });
         interval(1000 * 60).subscribe(num => { // 轮训刷新数据
             if (this.web3 && this.accounts && this.chainConfig && this.chainConfig.enabled) {
                 this.loadData().then();
@@ -92,20 +78,20 @@ export class BootService {
                     }
                 }
             }
-            if (!this.wcWeb3 && this.wcProvider.connected) {
+            if (!this.wcWeb3 && this.wcProvider && this.wcProvider.connected) {
                 //@ts-ignore
-                this.wcWeb3 = new Web3(this.wcProvider);
+                this.wcWeb3 = new Web3_1_2(this.wcProvider);
                 this.web3 = this.wcWeb3;
                 this.init();
             }
         });
         if (this.isMetaMaskInstalled()) {
             // @ts-ignore
-            this.metamaskWeb3 = new Web3(window.ethereum);
+            this.metamaskWeb3 = new Web3_1_3(window.ethereum);
         }
         if (this.isBinanceInstalled()) {
             // @ts-ignore
-            this.binanceWeb3 = new Web3(window.BinanceChain);
+            this.binanceWeb3 = new Web3_1_3(window.BinanceChain);
         }
     }
     isMetaMaskInstalled() {
@@ -145,25 +131,6 @@ export class BootService {
             let chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
             this.chainId = chainId;
             this.chainConfig = environment.chains[chainId];
-            //@ts-ignore
-            this.web3.currentProvider.on('chainChanged', async (chainId) => {
-                // chainId = this.web3.utils.hexToNumber(chainId);
-                // this.chainConfig = environment.chains[chainId];
-                // if (!this.chainConfig || !this.chainConfig.enabled) {
-                //     this.unSupportedNetworkSubject.next();
-                // } else {
-                //     this.initContracts();
-                //     this.balance = new Balance();
-                //     this.poolInfo = new PoolInfo();
-                //     await this.loadData();
-                // }
-            });
-            //@ts-ignore
-            this.web3.currentProvider.on("accountsChanged", async (accounts: string[]) => {
-                console.log(accounts);
-                // this.accounts = accounts;
-                // await this.loadData();;
-            });
             this.accounts = await this.web3.eth.getAccounts();
             if (!this.chainConfig || !this.chainConfig.enabled) {
                 this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
@@ -177,33 +144,63 @@ export class BootService {
      * connect to wallet connect
      */
     public async connectWC() {
+        this.wcProvider = new WalletConnectProvider({
+            // infuraId: "a1b8fe06fc1349b1b812bdb7b8f79465",
+            rpc: {
+                // @ts-ignore
+                56: environment.chains[56].rpc,
+                // @ts-ignore
+                97: environment.chains[97].rpc,
+            },
+        });
+        // Subscribe to session connection
+        this.wcProvider.on("connect", async () => {
+            console.log("WalletConnect connect");
+        });
+        // Subscribe to session disconnection
+        this.wcProvider.on("disconnect", (code: number, reason: string) => {
+            console.log(code, reason);
+        });
         //  Enable session (triggers QR Code modal)
-        await this.wcProvider.enable();
-        if (this.wcProvider.connected && this.wcWeb3) {
-            this.web3 = this.wcWeb3;
-            this.init();
-        } else if (this.wcProvider.connected && !this.wcWeb3) {
+        this.wcProvider.enable().then(res => {
+            if (this.wcProvider.connected && this.wcWeb3) {
+                this.web3 = this.wcWeb3;
+                this.init();
+            } else if (this.wcProvider.connected && !this.wcWeb3) {
+                // @ts-ignore
+                this.wcWeb3 = new Web3_1_2(this.wcProvider);
+                this.web3 = this.wcWeb3;
+                this.init();
+            }
+        }).catch(e => {
             // @ts-ignore
-            this.wcWeb3 = new Web3(this.wcProvider);
-            this.web3 = this.wcWeb3;
-            this.init();
-        }
+            // this.wcWeb3 = new Web3_1_2(this.wcProvider);
+            // this.web3 = this.wcWeb3;
+            console.log(e);
+        });
+
     }
 
     public async connentMetaMask() {
-        if (this.wcProvider.connected) {
-            this.wcProvider.disconnect();
+        if (this.isMetaMaskInstalled()) {
+            //@ts-ignore
+            await window.ethereum.enable();
+            // @ts-ignore
+            this.metamaskWeb3 = new Web3_1_3(window.ethereum);
+            this.web3 = this.metamaskWeb3;
+            this.init();
         }
-        //@ts-ignore
-        await window.ethereum.enable();
-        this.web3 = this.metamaskWeb3;
-        this.init();
     }
 
     public async connectBinance() {
-        this.wcProvider.disconnect();
-        this.web3 = this.binanceWeb3;
-        this.init();
+        if (this.isBinanceInstalled()) {
+            // @ts-ignore
+            window.BinanceChain.enable();
+            // @ts-ignore
+            this.binanceWeb3 = new Web3_1_3(window.BinanceChain);
+            this.web3 = this.binanceWeb3;
+            this.init();
+        }
     }
 
     public async connectWallet() {
