@@ -53,21 +53,22 @@ export class BootService {
         });
         interval(200).subscribe(async num => {
             if (this.web3) {
-                //@ts-ignore
+                let chainId;
                 if (this.web3.currentProvider && this.web3.currentProvider.chainId) {
-                    // @ts-ignore
-                    let chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
-                    if (this.chainId !== chainId) {// chainId changed.
-                        this.chainConfig = environment.chains[chainId];
-                        this.chainId = chainId;
-                        if (!this.chainConfig || !this.chainConfig.enabled) {
-                            this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
-                            this.balance = new Balance();
-                            this.poolInfo = new PoolInfo();
-                        } else {
-                            this.initContracts();
-                            await this.loadData();
-                        }
+                    chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
+                } else if (this.web3.currentProvider && !this.web3.currentProvider.chainId) {
+                    chainId = await this.web3.eth.getChainId();
+                }
+                if (this.chainId !== chainId) {// chainId changed.
+                    this.chainConfig = environment.chains[chainId];
+                    this.chainId = chainId;
+                    if (!this.chainConfig || !this.chainConfig.enabled) {
+                        this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
+                        this.balance = new Balance();
+                        this.poolInfo = new PoolInfo();
+                    } else {
+                        this.initContracts();
+                        await this.loadData();
                     }
                 }
                 if (this.accounts) {
@@ -127,13 +128,17 @@ export class BootService {
 
     private async init() {
         if (this.web3) {
-            // @ts-ignore
-            let chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
+            let chainId;
+            if (this.web3.currentProvider && this.web3.currentProvider.chainId) {
+                chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
+            } else if (this.web3.currentProvider && !this.web3.currentProvider.chainId) {
+                chainId = await this.web3.eth.getChainId();
+            }
             this.chainId = chainId;
             this.chainConfig = environment.chains[chainId];
             this.accounts = await this.web3.eth.getAccounts();
             if (!this.chainConfig || !this.chainConfig.enabled) {
-                this.dialog.open(UnsupportedNetworkComponent, { height: '15em', width: '40em' });
+                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
                 return;
             }
             this.initContracts();

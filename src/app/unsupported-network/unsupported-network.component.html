@@ -1,5 +1,8 @@
 <h1 mat-dialog-title>{{"Unsupported Network"|translate}}</h1>
-<div mat-dialog-content>{{"The network your wallet on is not supported! Please check it."|translate}}</div>
+<div mat-dialog-content>
+    {{"The network your wallet on is not supported! Please check it."|translate}}
+    Chain Id: {{chainId}}
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>{{"OK"|translate}}</button>
 </div>
