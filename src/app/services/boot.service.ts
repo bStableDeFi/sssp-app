@@ -63,7 +63,7 @@ export class BootService {
                     this.chainConfig = environment.chains[chainId];
                     this.chainId = chainId;
                     if (!this.chainConfig || !this.chainConfig.enabled) {
-                        this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: this.web3.currentProvider.chainId }, height: '15em', width: '40em' });
+                        this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
                         this.balance = new Balance();
                         this.poolInfo = new PoolInfo();
                     } else {
@@ -138,7 +138,7 @@ export class BootService {
             this.chainConfig = environment.chains[chainId];
             this.accounts = await this.web3.eth.getAccounts();
             if (!this.chainConfig || !this.chainConfig.enabled) {
-                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: this.web3.currentProvider.chainId }, height: '15em', width: '40em' });
+                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
                 return;
             }
             this.initContracts();
