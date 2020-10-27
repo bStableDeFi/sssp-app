@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 import BigNumber from 'bignumber.js';
 import { BootService } from '../services/boot.service';
 
@@ -19,13 +21,7 @@ export class RedeemliquidityCompComponent implements OnInit {
 
     usdtAmt: number;
 
-    redeemPrecent: number;
-
-    redeemToAllDisabled: boolean = true;
-
-    daiInputDisabled: boolean = false;
-    busdInputDisabled: boolean = false;
-    usdtInputDisabled: boolean = false;
+    redeemPrecent: number = 0;
 
     redeemToIndex: string = '4';
 
@@ -34,7 +30,13 @@ export class RedeemliquidityCompComponent implements OnInit {
     @Output() loading: EventEmitter<any> = new EventEmitter();
     @Output() loaded: EventEmitter<any> = new EventEmitter();
 
-    constructor(public boot: BootService) { }
+    slideToggleColor: ThemePalette = "accent";
+
+    @ViewChild('redeemToThree')
+    redeemToThree: MatSlideToggle;
+
+    constructor(public boot: BootService) {
+    }
 
     ngOnInit(): void {
     }
@@ -73,33 +75,24 @@ export class RedeemliquidityCompComponent implements OnInit {
     }
 
     redeemPrecentChange(val) {
-        if (val && (val < 0 || val > 100)) {
-            this.redeemPrecent = 0;
-        } else {
-            this.redeemPrecent = val;
-        }
+        this.redeemPrecent = val;
         if (this.redeemPrecent && this.redeemPrecent !== 0) {
-            this.redeemToAllDisabled = false;
-            this.daiInputDisabled = true;
-            this.busdInputDisabled = true;
-            this.usdtInputDisabled = true;
-            let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100);
-            let daiAmt = this.boot.poolInfo.dai.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-            this.daiAmt = Number(daiAmt.toFixed(9, BigNumber.ROUND_DOWN));
-            let busdAmt = this.boot.poolInfo.busd.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-            this.busdAmt = Number(busdAmt.toFixed(9, BigNumber.ROUND_DOWN));
-            let usdtAmt = this.boot.poolInfo.usdt.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-            this.usdtAmt = Number(usdtAmt.toFixed(9, BigNumber.ROUND_DOWN));
-            this.redeemToIndex = '-1';
-        } else {
-            this.redeemToAllDisabled = true;
-            this.daiInputDisabled = false;
-            this.busdInputDisabled = false;
-            this.usdtInputDisabled = false;
+            if (this.redeemToThree.checked) {
+                let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100);
+                let daiAmt = this.boot.poolInfo.dai.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                this.daiAmt = Number(daiAmt.toFixed(9, BigNumber.ROUND_DOWN));
+                let busdAmt = this.boot.poolInfo.busd.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                this.busdAmt = Number(busdAmt.toFixed(9, BigNumber.ROUND_DOWN));
+                let usdtAmt = this.boot.poolInfo.usdt.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                this.usdtAmt = Number(usdtAmt.toFixed(9, BigNumber.ROUND_DOWN));
+            } else {
+                this.redeemToIndexChange(this.redeemToIndex).then();
+            }
         }
     }
 
     async redeemToIndexChange(val) {
+        this.redeemToThree.checked = false;
         this.redeemToIndex = val;
         let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_DOWN);
         let res = await this.boot.calcWithdrawOneCoin(lps, this.redeemToIndex);
@@ -118,9 +111,11 @@ export class RedeemliquidityCompComponent implements OnInit {
         }
     }
 
-    reset() {
-        this.redeemPrecentChange(this.redeemPrecent);
-        this.redeemToIndex = '-1';
+    reset(val) {
+        if (val.checked) {
+            this.redeemPrecentChange(this.redeemPrecent);
+            this.redeemToIndex = '-1';
+        }
     }
 
 }

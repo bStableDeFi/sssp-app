@@ -6,10 +6,10 @@
             <div class="enterDiv">
                 <div class="inputDiv">
                     <input type="number" name="redeemPrecent" [ngModel]="redeemPrecent"
-                    (ngModelChange)="redeemPrecentChange($event)"
-                    placeholder="{{'Please enter a number'|translate}}" (click)="reset()">
+                        (ngModelChange)="redeemPrecentChange($event)"
+                        placeholder="{{'Please enter a number'|translate}}" >
                     <span>%</span>
-                </div>  
+                </div>
             </div>
         </div>
         <div>
@@ -22,13 +22,14 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="0" [disabled]="redeemToAllDisabled">
+                                (ngModelChange)="redeemToIndexChange($event)" value="0"
+                                [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0">
                             <label for="daiEabled">{{"Redeem All to"|translate}} DAI</label>
                         </div>
                     </div>
                     <div class="second">
                         <input type="text" name="daiAmt" [(ngModel)]="daiAmt"
-                            placeholder="{{'Enter an amount'|translate}}" [disabled]="daiInputDisabled">
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="redeemPrecent&&redeemPrecent!==null&&redeemPrecent!==0">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -39,13 +40,14 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="1" [disabled]="redeemToAllDisabled">
+                                (ngModelChange)="redeemToIndexChange($event)" value="1"
+                                [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0">
                             <label for="busdEnabled">{{"Redeem All to"|translate}} BUSD</label>
                         </div>
                     </div>
                     <div class="second">
                         <input type="text" name="busdAmt" [(ngModel)]="busdAmt"
-                            placeholder="{{'Enter an amount'|translate}}" [disabled]="busdInputDisabled">
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="redeemPrecent&&redeemPrecent!==null&&redeemPrecent!==0">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -56,13 +58,14 @@
                         </div>
                         <div>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
-                                (ngModelChange)="redeemToIndexChange($event)" value="2" [disabled]="redeemToAllDisabled">
+                                (ngModelChange)="redeemToIndexChange($event)" value="2"
+                                [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0">
                             <label for="usdtEnabled">{{"Redeem All to"|translate}} USDT</label>
                         </div>
                     </div>
                     <div class="second">
                         <input type="text" name="usdtAmt" [(ngModel)]="usdtAmt"
-                            placeholder="{{'Enter an amount'|translate}}" [disabled]="usdtInputDisabled">
+                            placeholder="{{'Enter an amount'|translate}}" [disabled]="redeemPrecent&&redeemPrecent!==null&&redeemPrecent!==0">
                     </div>
                 </div>
             </div>
@@ -71,8 +74,7 @@
     </div>
     <div class="averageDiv">
         <div class="leftDiv">
-            <input type="radio" class="radioInput">
-            <span>{{"Redeem Average"|translate}}</span>
+            <mat-slide-toggle [color]="slideToggleColor" [checked]="false" [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0" (change)="reset($event)" #redeemToThree>{{"Redeem to three coins"|translate}}</mat-slide-toggle>
         </div>
     </div>
     <div class="butDiv">

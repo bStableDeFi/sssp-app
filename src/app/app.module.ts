@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IntallWalletDlgComponent } from './intall-wallet-dlg/intall-wallet-dlg.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from '@angular/forms';
 import { SwapCompComponent } from './swap-comp/swap-comp.component';
@@ -35,6 +36,7 @@ import { ChooseWalletDlgComponent } from './choose-wallet-dlg/choose-wallet-dlg.
         MatDialogModule,
         MatButtonModule,
         MatProgressBarModule,
+        MatSlideToggleModule,
         FormsModule,
         TranslateModule.forRoot({
             loader: {
