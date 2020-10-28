@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
-import { MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
-import { interval, Subject } from 'rxjs';
+import {
+    ApplicationRef
+    , Injectable
+} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import { BigNumber } from 'bignumber.js';
+import { interval, Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Contract } from 'web3-eth-contract';
+import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
-import { Contract } from 'web3-eth-contract';
-import { environment } from 'src/environments/environment';
-import { BigNumber } from 'bignumber.js';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
-import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import { resolve } from 'dns';
 
 const Web3_1_3 = require('web3_1_3');
 const Web3_1_2 = require('web3_1_2');
@@ -45,7 +47,7 @@ export class BootService {
     chainId: string;
     wcProvider: WalletConnectProvider;
 
-    constructor(private dialog: MatDialog) {
+    constructor(private dialog: MatDialog, private applicationRef: ApplicationRef) {
 
         interval(1000 * 60).subscribe(num => { // 轮训刷新数据
             if (this.web3 && this.accounts && this.chainConfig && this.chainConfig.enabled) {
@@ -97,27 +99,31 @@ export class BootService {
             let chainId;
             if (this.web3.currentProvider) {
                 // Subscribe to accounts change
-                new Promise((resolve, reject) => {
+                let accountsChanged = new Observable((observer) => {
                     this.web3.currentProvider.on("accountsChanged", async (accounts: string[]) => {
-                        resolve(accounts);
+                        observer.next(accounts);
                     });
-                }).then((accounts: string[]) => {
-                    console.log(accounts);
+                });
+                accountsChanged.subscribe(async (accounts: string[]) => {
+                    console.log('accounts: ' + accounts);
                     if (accounts.length > 0) {
                         this.accounts = accounts;
-                        this.loadData().then();
+                        await this.loadData();
                     } else {
                         this.accounts = accounts;
                         this.balance.clear();
                     }
+                    this.applicationRef.tick();
                 });
 
-                new Promise((resolve, reject) => {
+                let chainChanged = new Observable((observer) => {
                     this.web3.currentProvider.on("chainChanged", async (chainId: string) => {
-                        resolve(chainId);
+                        observer.next(chainId);
                     });
-                }).then(async (chainId: string) => {
-                    console.log(chainId);
+                });
+                chainChanged.subscribe(async (chainId: string) => {
+                    console.log('chainId: ' + chainId);
+                    chainId = String(chainId);
                     if (chainId.indexOf('0x') === 0) {
                         chainId = this.web3.utils.hexToNumber(chainId);
                     } else {
@@ -129,37 +135,43 @@ export class BootService {
                     if (!this.chainConfig || !this.chainConfig.enabled) {
                         if (!this.web3.currentProvider.isMetaMask) {
                             this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
-                            this.balance = new Balance();
-                            this.poolInfo = new PoolInfo();
+                            this.balance.clear();
+                            this.poolInfo.clear();
+                            this.accounts = [];
                         }
                     } else {
                         this.initContracts();
                         this.loadData().then();
                     }
+                    this.applicationRef.tick();
                 });
 
                 // Subscribe to session connection
-                new Promise((resolve, reject) => {
+                let connected = new Observable((observer) => {
                     this.web3.currentProvider.on("connect", () => {
-                        resolve();
+                        observer.next();
                     });
-                }).then(() => {
-                    console.log("connect");
+                });
+                connected.subscribe(() => {
+                    console.log("connect!");
                     if (!this.wcWeb3 && this.wcProvider) { // 监听wc的链接状态，连上以后才能初始化
                         //@ts-ignore
                         this.wcWeb3 = new Web3_1_2(this.wcProvider);
                         this.web3 = this.wcWeb3;
                         this.init();
                     }
+                    this.applicationRef.tick();
                 });
 
                 // Subscribe to session disconnection
-                new Promise((resolve, reject) => {
+                let disconnected = new Observable((observer) => {
                     this.web3.currentProvider.on("disconnect", (code: number, reason: string) => {
-                        resolve({ code: code, reason: reason });
+                        observer.next({ code: code, reason: reason });
                     });
-                }).then((res: any) => {
-                    console.log(res.code, res.reason);
+                });
+                disconnected.subscribe((res: any) => {
+                    console.log('disconnect!');
+                    console.log(res);
                     window.location.reload();
                 });
 
