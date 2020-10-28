@@ -30,6 +30,25 @@ export const environment = {
                     address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
                 }
             }
+        },
+        "Binance-Chain-Ganges": {
+            enabled: true,
+            name: 'BSC Testnet',
+            rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+            contracts: {
+                DAI: {
+                    address: '0xec5dcb5dbf4b114c9d0f65bccab49ec54f6a0867'
+                },
+                BUSD: {
+                    address: '0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee'
+                },
+                USDT: {
+                    address: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd'
+                },
+                SSSPool: {
+                    address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                }
+            }
         }
     },
 };

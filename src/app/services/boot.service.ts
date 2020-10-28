@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { interval, Subject } from 'rxjs';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
@@ -10,6 +10,7 @@ import { BigNumber } from 'bignumber.js';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { resolve } from 'dns';
 
 const Web3_1_3 = require('web3_1_3');
 const Web3_1_2 = require('web3_1_2');
@@ -41,7 +42,7 @@ export class BootService {
     contractsAddress: Array<string> = new Array();
     chainConfig: any;
     unSupportedNetworkSubject: Subject<any> = new Subject();
-    chainId: number;
+    chainId: string;
     wcProvider: WalletConnectProvider;
 
     constructor(private dialog: MatDialog) {
@@ -49,41 +50,6 @@ export class BootService {
         interval(1000 * 60).subscribe(num => { // 轮训刷新数据
             if (this.web3 && this.accounts && this.chainConfig && this.chainConfig.enabled) {
                 this.loadData().then();
-            }
-        });
-        interval(200).subscribe(async num => {
-            if (this.web3) {
-                let chainId;
-                if (this.web3.currentProvider && this.web3.currentProvider.chainId) {
-                    chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
-                } else if (this.web3.currentProvider && !this.web3.currentProvider.chainId) {
-                    chainId = await this.web3.eth.getChainId();
-                }
-                if (this.chainId !== chainId) {// chainId changed.
-                    this.chainConfig = environment.chains[chainId];
-                    this.chainId = chainId;
-                    if (!this.chainConfig || !this.chainConfig.enabled) {
-                        this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
-                        this.balance = new Balance();
-                        this.poolInfo = new PoolInfo();
-                    } else {
-                        this.initContracts();
-                        await this.loadData();
-                    }
-                }
-                if (this.accounts) {
-                    let accounts = await this.web3.eth.getAccounts();
-                    if (this.accounts[0] !== accounts[0] && accounts[0]) {// accounts changed.
-                        this.accounts = accounts;
-                        await this.loadData();
-                    }
-                }
-            }
-            if (!this.wcWeb3 && this.wcProvider && this.wcProvider.connected) {
-                //@ts-ignore
-                this.wcWeb3 = new Web3_1_2(this.wcProvider);
-                this.web3 = this.wcWeb3;
-                this.init();
             }
         });
         if (this.isMetaMaskInstalled()) {
@@ -129,9 +95,78 @@ export class BootService {
     private async init() {
         if (this.web3) {
             let chainId;
-            if (this.web3.currentProvider && this.web3.currentProvider.chainId) {
+            if (this.web3.currentProvider) {
+                // Subscribe to accounts change
+                new Promise((resolve, reject) => {
+                    this.web3.currentProvider.on("accountsChanged", async (accounts: string[]) => {
+                        resolve(accounts);
+                    });
+                }).then((accounts: string[]) => {
+                    console.log(accounts);
+                    if (accounts.length > 0) {
+                        this.accounts = accounts;
+                        this.loadData().then();
+                    } else {
+                        this.accounts = accounts;
+                        this.balance.clear();
+                    }
+                });
+
+                new Promise((resolve, reject) => {
+                    this.web3.currentProvider.on("chainChanged", async (chainId: string) => {
+                        resolve(chainId);
+                    });
+                }).then(async (chainId: string) => {
+                    console.log(chainId);
+                    if (chainId.indexOf('0x') === 0) {
+                        chainId = this.web3.utils.hexToNumber(chainId);
+                    } else {
+                        chainId = await this.web3.eth.getChainId();
+                    }
+
+                    this.chainConfig = environment.chains[chainId];
+                    this.chainId = chainId;
+                    if (!this.chainConfig || !this.chainConfig.enabled) {
+                        if (!this.web3.currentProvider.isMetaMask) {
+                            this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
+                            this.balance = new Balance();
+                            this.poolInfo = new PoolInfo();
+                        }
+                    } else {
+                        this.initContracts();
+                        this.loadData().then();
+                    }
+                });
+
+                // Subscribe to session connection
+                new Promise((resolve, reject) => {
+                    this.web3.currentProvider.on("connect", () => {
+                        resolve();
+                    });
+                }).then(() => {
+                    console.log("connect");
+                    if (!this.wcWeb3 && this.wcProvider) { // 监听wc的链接状态，连上以后才能初始化
+                        //@ts-ignore
+                        this.wcWeb3 = new Web3_1_2(this.wcProvider);
+                        this.web3 = this.wcWeb3;
+                        this.init();
+                    }
+                });
+
+                // Subscribe to session disconnection
+                new Promise((resolve, reject) => {
+                    this.web3.currentProvider.on("disconnect", (code: number, reason: string) => {
+                        resolve({ code: code, reason: reason });
+                    });
+                }).then((res: any) => {
+                    console.log(res.code, res.reason);
+                    window.location.reload();
+                });
+
+            }
+            if (this.web3.currentProvider && this.web3.currentProvider.chainId && String(this.web3.currentProvider.chainId).indexOf('0x') === 0) {
                 chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
-            } else if (this.web3.currentProvider && !this.web3.currentProvider.chainId) {
+            } else if (this.web3.currentProvider && String(this.web3.currentProvider.chainId).indexOf('0x') !== 0) {
                 chainId = await this.web3.eth.getChainId();
             }
             this.chainId = chainId;
@@ -200,7 +235,7 @@ export class BootService {
     public async connectBinance() {
         if (this.isBinanceInstalled()) {
             // @ts-ignore
-            window.BinanceChain.enable();
+            await window.BinanceChain.enable();
             // @ts-ignore
             this.binanceWeb3 = new Web3_1_3(window.BinanceChain);
             this.web3 = this.binanceWeb3;
