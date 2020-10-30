@@ -89,18 +89,6 @@ export class BootService {
         this.chainConfig.contracts.coins.forEach((e) => {
             this.contracts.push(new this.web3.eth.Contract(environment.coinABI, e.address));
         });
-        // // @ts-ignore
-        // this.daiContract = ;
-        // // @ts-ignore
-        // this.busdContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.BUSD.address);
-        // // @ts-ignore
-        // this.usdtContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.USDT.address);
-        // this.contracts.push(this.daiContract);
-        // this.contracts.push(this.busdContract);
-        // this.contracts.push(this.usdtContract);
-        // this.contractsAddress.push(this.chainConfig.contracts.DAI.address);
-        // this.contractsAddress.push(this.chainConfig.contracts.BUSD.address);
-        // this.contractsAddress.push(this.chainConfig.contracts.USDT.address);
         // @ts-ignore
         this.poolContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.Pool.address);
 
@@ -108,7 +96,6 @@ export class BootService {
 
     private async init() {
         if (this.web3) {
-            let chainId;
             if (this.web3.currentProvider) {
                 // Subscribe to accounts change
                 let accountsChanged = new Observable((observer) => {
@@ -141,19 +128,19 @@ export class BootService {
                     } else {
                         chainId = await this.web3.eth.getChainId();
                     }
-
-                    this.chainConfig = environment.chains[chainId];
-                    this.chainId = chainId;
-                    if (!this.chainConfig || !this.chainConfig.enabled) {
+                    let networkInfo = await this.getNetworkInfo(chainId);
+                    if (networkInfo.isSupported) {
+                        this.chainConfig = environment.chains[chainId];
+                        this.chainId = chainId;
+                        this.initContracts();
+                        await this.loadData();
+                    }else{
                         if (!this.web3.currentProvider.isMetaMask) {
                             this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
                             this.balance.clear();
                             this.poolInfo.clear();
-                            this.accounts = [];
-                        }
-                    } else {
-                        this.initContracts();
-                        this.loadData().then();
+                            // this.accounts = [];
+                        } 
                     }
                     this.applicationRef.tick();
                 });
@@ -188,20 +175,41 @@ export class BootService {
                 });
 
             }
-            if (this.web3.currentProvider && this.web3.currentProvider.chainId && String(this.web3.currentProvider.chainId).indexOf('0x') === 0) {
-                chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
-            } else if (this.web3.currentProvider && String(this.web3.currentProvider.chainId).indexOf('0x') !== 0) {
-                chainId = await this.web3.eth.getChainId();
-            }
-            this.chainId = chainId;
-            this.chainConfig = environment.chains[chainId];
-            this.accounts = await this.web3.eth.getAccounts();
-            if (!this.chainConfig || !this.chainConfig.enabled) {
-                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
+
+            let networkInfo = await this.getNetworkInfo();
+            if (networkInfo.isSupported) {
+                this.chainConfig = networkInfo.config;
+                this.chainId = networkInfo.chainId;
+                this.accounts = await this.web3.eth.getAccounts();
+                this.initContracts();
+                await this.loadData();
+            } else {
+                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: networkInfo.chainId }, height: '15em', width: '40em' });
                 return;
             }
-            this.initContracts();
-            await this.loadData();
+        }
+    }
+
+    async getNetworkInfo(_chainId?: string) {
+        if (this.web3) {
+            let chainId;
+            if (!_chainId) {
+                if (this.web3.currentProvider && this.web3.currentProvider.chainId && String(this.web3.currentProvider.chainId).indexOf('0x') === 0) {
+                    chainId = this.web3.utils.hexToNumber(this.web3.currentProvider.chainId);
+                } else if (this.web3.currentProvider && String(this.web3.currentProvider.chainId).indexOf('0x') !== 0) {
+                    chainId = await this.web3.eth.getChainId();
+                }
+            } else {
+                chainId = _chainId;
+            }
+            let chainConfig = environment.chains[chainId];
+            if (!chainConfig || !chainConfig.enabled) {
+                return { isSupported: false, chainId: chainId, config: chainConfig };
+            } else {
+                return { isSupported: true, chainId: chainId, config: chainConfig };
+            }
+        } else {
+            throw "There is no web3 object yet."
         }
     }
     /**
