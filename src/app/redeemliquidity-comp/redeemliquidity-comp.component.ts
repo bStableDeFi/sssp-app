@@ -15,11 +15,7 @@ export enum ActionStatus {
 })
 export class RedeemliquidityCompComponent implements OnInit {
 
-    daiAmt: number;
-
-    busdAmt: number;
-
-    usdtAmt: number;
+    amts: Array<number>;
 
     redeemPrecent: number = 0;
 
@@ -36,6 +32,10 @@ export class RedeemliquidityCompComponent implements OnInit {
     redeemToThree: MatSlideToggle;
 
     constructor(public boot: BootService) {
+        this.amts = new Array();
+        this.boot.coins.forEach((e, i, arr) => {
+            this.amts.push(0);
+        })
     }
 
     ngOnInit(): void {
@@ -62,29 +62,33 @@ export class RedeemliquidityCompComponent implements OnInit {
                 });
             }
         } else {
-            if (this.daiAmt || this.busdAmt || this.usdtAmt) { // 根据输入的币的数量赎回
-                this.status = ActionStatus.Transfering;
-                this.loading.emit();
-                this.boot.redeemImBalance(String(this.daiAmt ? this.daiAmt : 0), String(this.busdAmt ? this.daiAmt : 0), String(this.usdtAmt ? this.daiAmt : 0)).then(r => {
-                    this.status = ActionStatus.TrasactionEnd;
-                    this.boot.loadData();
-                    this.loaded.emit();
-                });
-            }
+            // 根据输入的币的数量赎回
+            this.status = ActionStatus.Transfering;
+            this.loading.emit();
+            let amtsStr = new Array();
+            this.amts.forEach((e, i, arr) => {
+                amtsStr.push(String(e));
+            })
+            this.boot.redeemImBalance(amtsStr).then(r => {
+                this.status = ActionStatus.TrasactionEnd;
+                this.boot.loadData();
+                this.loaded.emit();
+            });
         }
     }
 
     redeemPrecentChange(val) {
+        if (!this.redeemPrecent || this.redeemPrecent === 0) {
+            this.redeemToThree.checked = true;
+        }
         this.redeemPrecent = val;
         if (this.redeemPrecent && this.redeemPrecent !== 0) {
             if (this.redeemToThree.checked) {
                 let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100);
-                let daiAmt = this.boot.poolInfo.dai.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-                this.daiAmt = Number(daiAmt.toFixed(9, BigNumber.ROUND_DOWN));
-                let busdAmt = this.boot.poolInfo.busd.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-                this.busdAmt = Number(busdAmt.toFixed(9, BigNumber.ROUND_DOWN));
-                let usdtAmt = this.boot.poolInfo.usdt.multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
-                this.usdtAmt = Number(usdtAmt.toFixed(9, BigNumber.ROUND_DOWN));
+                this.amts.forEach((e, i, arr) => {
+                    let amt = this.boot.poolInfo.coinsBalance[i].multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                    arr[i] = Number(amt.toFixed(9, BigNumber.ROUND_DOWN))
+                });
             } else {
                 this.redeemToIndexChange(this.redeemToIndex).then();
             }
@@ -96,19 +100,13 @@ export class RedeemliquidityCompComponent implements OnInit {
         this.redeemToIndex = val;
         let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_DOWN);
         let res = await this.boot.calcWithdrawOneCoin(lps, this.redeemToIndex);
-        if (this.redeemToIndex === '0') {
-            this.daiAmt = Number(new BigNumber(res).dividedBy(new BigNumber(10).exponentiatedBy(18)).toFixed(9));
-            this.busdAmt = null;
-            this.usdtAmt = null;
-        } else if (this.redeemToIndex === '1') {
-            this.daiAmt = null;
-            this.busdAmt = Number(new BigNumber(res).dividedBy(new BigNumber(10).exponentiatedBy(18)).toFixed(9));
-            this.usdtAmt = null;
-        } else if (this.redeemToIndex === '2') {
-            this.daiAmt = null;
-            this.busdAmt = null;
-            this.usdtAmt = Number(new BigNumber(res).dividedBy(new BigNumber(10).exponentiatedBy(18)).toFixed(9));
-        }
+        this.amts.forEach((e, i, arr) => {
+            if (Number(this.redeemToIndex) === i) {
+                arr[i] = Number(new BigNumber(res).dividedBy(new BigNumber(10).exponentiatedBy(18)).toFixed(9));
+            } else {
+                arr[i] = null;
+            }
+        });
     }
 
     reset(val) {

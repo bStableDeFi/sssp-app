@@ -2,52 +2,24 @@
 <div class="swap-pc">
     <div class="main">
 
-        <div class="el-checkbox-group">
+        <div class="el-checkbox-group" *ngFor="let coin of boot.coins;let i=index;">
             <div class="el-checkbox l" label="复选框 A">
-                <input type="radio" [ngModel]="left" name="left" value="0" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/DAI.png" alt="" (click)="chooseLeft('0')">
-                <span (click)="chooseLeft('0')">DAI</span>
+                <input type="radio" [ngModel]="left" name="left" value="{{i}}" (ngModelChange)="chooseLeft($event)">
+                <img src="assets/static/img/coins/{{boot.poolId}}-c{{i}}.png" alt="" (click)="chooseLeft(i)">
+                <span (click)="chooseLeft(i)">{{coin.symbol}}</span>
             </div>
             <div class="el-checkbox border_let r" label="复选框 C">
-                <input type="radio" [ngModel]="right" name="right" value="0" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/DAI.png" alt="" (click)="chooseRight('0')">
-                <span (click)="chooseRight('0')">DAI</span>
-            </div>
-        </div>
-        <div class="el-checkbox-group">
-            <div class="el-checkbox l" label="复选框 A">
-                <input type="radio" [ngModel]="left" name="left" value="1" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/BUSD.png" alt="" (click)="chooseLeft('1')">
-                <span (click)="chooseLeft('1')">BUSD</span>
-            </div>
-            <div class="el-checkbox border_let r" label="复选框 C">
-                <input type="radio" [ngModel]="right" name="right" value="1" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/BUSD.png" alt="" (click)="chooseRight('1')">
-                <span (click)="chooseRight('1')">BUSD</span>
-            </div>
-        </div>
-        <div class="el-checkbox-group">
-            <div class="el-checkbox l" label="复选框 A">
-                <input type="radio" [ngModel]="left" name="left" value="2" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/USDT.png" alt="" (click)="chooseLeft('2')">
-                <span (click)="chooseLeft('2')">USDT</span>
-            </div>
-            <div class="el-checkbox border_let r" label="复选框 C">
-                <input type="radio" [ngModel]="right" name="right" value="2" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/USDT.png" alt="" (click)="chooseRight('2')">
-                <span (click)="chooseRight('2')">USDT</span>
+                <input type="radio" [ngModel]="right" name="right" value="{{i}}" (ngModelChange)="chooseRight($event)">
+                <img src="assets/static/img/coins/{{boot.poolId}}-c{{i}}.png" alt="" (click)="chooseRight(i)">
+                <span (click)="chooseRight(i)">{{coin.symbol}}</span>
             </div>
         </div>
         <div class="enterDiv">
             <img src="assets/static/img/exchange.png" alt="">
             <div class="blanceDiv"><span class="blance">{{"Balance"|translate}}</span>
-                <p [ngSwitch]="left">
-                    <span *ngSwitchCase="'0'">{{boot.balance.dai.toFixed(9)}}</span> <span
-                        *ngSwitchCase="'0'">DAI</span>
-                    <span *ngSwitchCase="'1'">{{boot.balance.busd.toFixed(9)}}</span> <span
-                        *ngSwitchCase="'1'">BUSD</span>
-                    <span *ngSwitchCase="'2'">{{boot.balance.usdt.toFixed(9)}}</span> <span
-                        *ngSwitchCase="'2'">USDT</span>
+                <p>
+                    <span>{{boot.balance.coinsBalance[left].toFixed(9)}}</span>
+                    <span>{{boot.coins[left].symbol}}</span>
                 </p>
             </div>
             <div class="inputDiv">
@@ -56,7 +28,8 @@
                     <span (click)="maxAmt()">{{'MAX'|translate}}</span>
                 </div>
                 <div>
-                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="{{'Min Amount'|translate}}">
+                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt"
+                        placeholder="{{'Min Amount'|translate}}">
                     <button (click)="approve()" [disabled]="status==1"
                         [ngClass]="{myBtn: status!==1,'myBtn-disabled':boot.accounts.length===0||status===1||status===3}">{{'Approve'|translate}}</button>
                 </div>
@@ -70,7 +43,7 @@
         </div> -->
         <!-- <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
             Approve</button> -->
-        <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status==3"
+        <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status===0||status===3||status===1"
             [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{"Exchange"|translate}}</button>
         <button *ngIf="boot.accounts.length==0" (click)="connectWallet()" class="myBtn">{{"Connect to a
             Wallet"|translate}}</button>

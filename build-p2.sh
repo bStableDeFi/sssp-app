@@ -1,0 +1,1 @@
+ng b --aot --configuration=p2

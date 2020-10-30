@@ -58,17 +58,7 @@ export class SwapCompComponent implements OnInit {
     }
 
     maxAmt() {
-        switch (this.left) {
-            case '0':
-                this.amt = this.boot.balance.dai.toFixed(9);
-                break;
-            case '1':
-                this.amt = this.boot.balance.busd.toFixed(9);
-                break;
-            case '2':
-                this.amt = this.boot.balance.usdt.toFixed(9);
-                break;
-        }
+        this.amt = this.boot.balance.coinsBalance[this.left].toFixed(9);
     }
 
     approve() {

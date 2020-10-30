@@ -14,28 +14,30 @@ export class PoolInfoComponent implements OnInit {
     ngOnInit(): void {
     }
     getTotal() {
-        return this.boot.poolInfo.dai.plus(this.boot.poolInfo.busd).plus(this.boot.poolInfo.usdt);
+        let result = new BigNumber(0);
+        this.boot.poolInfo.coinsBalance.forEach(e => {
+            result = result.plus(e);
+        })
+        return result;
     }
 
-    daiPercent() {
+    percent(i) {
         if (this.getTotal().comparedTo(0) === 0) {
             return new BigNumber(0);
         } else {
-            return this.boot.poolInfo.dai.div(this.getTotal()).multipliedBy(100);
+            return this.boot.poolInfo.coinsBalance[i].div(this.getTotal()).multipliedBy(100);
         }
     }
-    busdPercent() {
-        if (this.getTotal().comparedTo(0) === 0) {
-            return new BigNumber(0);
-        } else {
-            return this.boot.poolInfo.busd.div(this.getTotal()).multipliedBy(100);
-        }
-    }
-    usdtPercent() {
-        if (this.getTotal().comparedTo(0) === 0) {
-            return new BigNumber(0);
-        } else {
-            return this.boot.poolInfo.usdt.div(this.getTotal()).multipliedBy(100);
-        }
+
+    getCoinsStr() {
+        let s = '';
+        this.boot.coins.forEach((e, i) => {
+            if (s !== '') {
+                s = s + '+' + e.symbol;
+            } else {
+                s = e.symbol;
+            }
+        });
+        return s;
     }
 }

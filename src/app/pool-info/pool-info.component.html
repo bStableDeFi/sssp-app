@@ -6,22 +6,14 @@
         </div>
         <div class="consinfo">
             <ul>
-                <li>
-                    <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai.toFixed(9)}}</em></p>
-                    <span>{{daiPercent().toFixed(2)}}%</span>
-                </li>
-                <li>
-                    <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd.toFixed(9)}}</em></p>
-                    <span>{{busdPercent().toFixed(2)}}%</span>
-                </li>
-                <li>
-                    <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt.toFixed(9)}}</em></p>
-                    <span>{{usdtPercent().toFixed(2)}}%</span>
+                <li *ngFor="let coin of boot.coins;let i=index">
+                    <p><em class="coinName">{{coin.symbol}}:</em> <em class="coinVal">{{boot.poolInfo.coinsBalance[i].toFixed(9)}}</em></p>
+                    <span>{{percent(i).toFixed(2)}}%</span>
                 </li>
             </ul>
         </div>
         <div class="sum">
-            <p>DAI+BUSD+USDT：</p>
+            <p>{{getCoinsStr()}}：</p>
             <p>{{getTotal().toFixed(9)}}</p>
         </div>
     </div>
