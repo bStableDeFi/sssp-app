@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { BootService } from '../services/boot.service';
 
 export enum ActionStatus {

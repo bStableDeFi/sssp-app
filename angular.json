@@ -3,33 +3,33 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "sssp-app": {
+        "ssp-app": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
                     "style": "scss"
                 }
             },
-            "root": "",
-            "sourceRoot": "src",
+            "root": "projects/ssp-app",
+            "sourceRoot": "projects/ssp-app/src",
             "prefix": "app",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/sssp-app",
-                        "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.app.json",
+                        "outputPath": "dist/ssp-app",
+                        "index": "projects/ssp-app/src/index.html",
+                        "main": "projects/ssp-app/src/main.ts",
+                        "polyfills": "projects/ssp-app/src/polyfills.ts",
+                        "tsConfig": "projects/ssp-app/tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "projects/ssp-app/src/favicon.ico",
+                            "projects/ssp-app/src/assets"
                         ],
                         "styles": [
                             "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "src/styles.scss"
+                            "projects/ssp-app/src/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -37,8 +37,8 @@
                         "production": {
                             "fileReplacements": [
                                 {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.ts"
+                                    "replace": "projects/ssp-app/src/environments/environment.ts",
+                                    "with": "projects/ssp-app/src/environments/environment.prod.ts"
                                 }
                             ],
                             "optimization": true,
@@ -65,8 +65,8 @@
                         "p1": {
                             "fileReplacements": [
                                 {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.p1.ts"
+                                    "replace": "projects/ssp-app/src/environments/environment.ts",
+                                    "with": "projects/ssp-app/src/environments/environment.prod.p1.ts"
                                 }
                             ],
                             "optimization": true,
@@ -93,8 +93,8 @@
                         "p2": {
                             "fileReplacements": [
                                 {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.p2.ts"
+                                    "replace": "projects/ssp-app/src/environments/environment.ts",
+                                    "with": "projects/ssp-app/src/environments/environment.prod.p2.ts"
                                 }
                             ],
                             "optimization": true,
@@ -121,8 +121,8 @@
                         "p3": {
                             "fileReplacements": [
                                 {
-                                    "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.prod.p3.ts"
+                                    "replace": "projects/ssp-app/src/environments/environment.ts",
+                                    "with": "projects/ssp-app/src/environments/environment.prod.p3.ts"
                                 }
                             ],
                             "optimization": true,
@@ -151,43 +151,43 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "sssp-app:build"
+                        "browserTarget": "ssp-app:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "sssp-app:build:production"
+                            "browserTarget": "ssp-app:build:production"
                         },
                         "p1": {
-                            "browserTarget": "sssp-app:build:p1"
+                            "browserTarget": "ssp-app:build:p1"
                         },
                         "p2": {
-                            "browserTarget": "sssp-app:build:p2"
+                            "browserTarget": "ssp-app:build:p2"
                         },
                         "p3": {
-                            "browserTarget": "sssp-app:build:p3"
+                            "browserTarget": "ssp-app:build:p3"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "sssp-app:build"
+                        "browserTarget": "ssp-app:build"
                     }
                 },
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "main": "src/test.ts",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "tsconfig.spec.json",
-                        "karmaConfig": "karma.conf.js",
+                        "main": "projects/ssp-app/src/test.ts",
+                        "polyfills": "projects/ssp-app/src/polyfills.ts",
+                        "tsConfig": "projects/ssp-app/tsconfig.spec.json",
+                        "karmaConfig": "projects/ssp-app/karma.conf.js",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
+                            "projects/ssp-app/src/favicon.ico",
+                            "projects/ssp-app/src/assets"
                         ],
                         "styles": [
                             "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "src/styles.scss"
+                            "projects/ssp-app/src/styles.scss"
                         ],
                         "scripts": []
                     }
@@ -196,9 +196,9 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "tsconfig.app.json",
-                            "tsconfig.spec.json",
-                            "e2e/tsconfig.json"
+                            "projects/ssp-app/tsconfig.app.json",
+                            "projects/ssp-app/tsconfig.spec.json",
+                            "projects/ssp-app/e2e/tsconfig.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"
@@ -208,19 +208,140 @@
                 "e2e": {
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
-                        "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "sssp-app:serve"
+                        "protractorConfig": "projects/ssp-app/e2e/protractor.conf.js",
+                        "devServerTarget": "ssp-app:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "sssp-app:serve:production"
+                            "devServerTarget": "ssp-app:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "ssp-home": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/ssp-home",
+            "sourceRoot": "projects/ssp-home/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/ssp-home",
+                        "index": "projects/ssp-home/src/index.html",
+                        "main": "projects/ssp-home/src/main.ts",
+                        "polyfills": "projects/ssp-home/src/polyfills.ts",
+                        "tsConfig": "projects/ssp-home/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "projects/ssp-home/src/favicon.ico",
+                            "projects/ssp-home/src/assets"
+                        ],
+                        "styles": [
+                            "projects/ssp-home/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/ssp-home/src/environments/environment.ts",
+                                    "with": "projects/ssp-home/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "ssp-home:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "ssp-home:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "ssp-home:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/ssp-home/src/test.ts",
+                        "polyfills": "projects/ssp-home/src/polyfills.ts",
+                        "tsConfig": "projects/ssp-home/tsconfig.spec.json",
+                        "karmaConfig": "projects/ssp-home/karma.conf.js",
+                        "assets": [
+                            "projects/ssp-home/src/favicon.ico",
+                            "projects/ssp-home/src/assets"
+                        ],
+                        "styles": [
+                            "projects/ssp-home/src/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/ssp-home/tsconfig.app.json",
+                            "projects/ssp-home/tsconfig.spec.json",
+                            "projects/ssp-home/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/ssp-home/e2e/protractor.conf.js",
+                        "devServerTarget": "ssp-home:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "ssp-home:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "sssp-app",
+    "defaultProject": "ssp-app",
     "cli": {
         "analytics": "ec04ead6-ee75-477c-bbc3-6c4e93976bdb"
     }

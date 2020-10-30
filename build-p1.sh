@@ -1,1 +1,1 @@
-ng b --aot --configuration=p1
+ng b --project=ssp-app --aot --configuration=p1 --outputPath=dist/ssp-app-p1
