@@ -24,7 +24,7 @@
                         "tsConfig": "projects/ssp-app/tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "projects/ssp-app/src/favicon1.ico",
+                            "projects/ssp-app/src/favicon.ico",
                             "projects/ssp-app/src/assets"
                         ],
                         "styles": [
@@ -182,7 +182,7 @@
                         "tsConfig": "projects/ssp-app/tsconfig.spec.json",
                         "karmaConfig": "projects/ssp-app/karma.conf.js",
                         "assets": [
-                            "projects/ssp-app/src/favicon1.ico",
+                            "projects/ssp-app/src/favicon.ico",
                             "projects/ssp-app/src/assets"
                         ],
                         "styles": [
@@ -240,7 +240,7 @@
                         "tsConfig": "projects/ssp-home/tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "projects/ssp-home/src/favicon1.ico",
+                            "projects/ssp-home/src/favicon.ico",
                             "projects/ssp-home/src/assets"
                         ],
                         "styles": [
@@ -304,7 +304,7 @@
                         "tsConfig": "projects/ssp-home/tsconfig.spec.json",
                         "karmaConfig": "projects/ssp-home/karma.conf.js",
                         "assets": [
-                            "projects/ssp-home/src/favicon1.ico",
+                            "projects/ssp-home/src/favicon.ico",
                             "projects/ssp-home/src/assets"
                         ],
                         "styles": [

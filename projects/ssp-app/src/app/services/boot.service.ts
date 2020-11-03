@@ -23,6 +23,7 @@ export class BootService {
 
     poolId = environment.poolId;
     coins = environment.coins;
+    liquiditySymbol = environment.liquiditySymbol;
     web3: any;
     binanceWeb3: any;
     metamaskWeb3: any;
@@ -134,13 +135,13 @@ export class BootService {
                         this.chainId = chainId;
                         this.initContracts();
                         await this.loadData();
-                    }else{
+                    } else {
                         if (!this.web3.currentProvider.isMetaMask) {
                             this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
                             this.balance.clear();
                             this.poolInfo.clear();
                             // this.accounts = [];
-                        } 
+                        }
                     }
                     this.applicationRef.tick();
                 });
