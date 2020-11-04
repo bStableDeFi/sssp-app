@@ -52,7 +52,7 @@
     #maxDiv .trade-pc {
         background: url(/assets/static/img/bigBG.jpg) no-repeat;
         background-size: cover;
-        height: calc(100vh-160px);
+        height: calc(100vh - 270px);
         width: 100%;
         position: relative;
         z-index: 1000;
@@ -272,6 +272,7 @@
     #maxDiv .trade-pc {
         background: #FAFCFF;
         background-size: 100% 100%;
+        height: calc(100vh - 280px);
         width: 100%;
         position: relative;
         z-index: 1000;
