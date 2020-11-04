@@ -4,110 +4,9 @@
     #maxDiv {
         background-color: #ffff;
     }
-    
-    #maxDiv .navigation {
-        width: 100%;
-        height: 60px;
-        background-color: #ffff;
-        // position: fixed;
-        // top: 0;
-        // z-index: 9999999;
-    }
-    
-    #maxDiv .navigation .cursor {
-        cursor: pointer;
-    }
-    
-    #maxDiv .navigation .main {
-        width: 960px;
-        height: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    #maxDiv .navigation .main .logo {
-        width: 100px;
-        min-width: 140px;
-        position: relative;
-    }
-    
-    #maxDiv .navigation .main .logo img {
-        width: 100%;
-    }
-    
-    #maxDiv .navigation .main .leftpart .noConnectButton {
-        padding: 0px;
-        width: 190px;
-        height: 32px;
-        background: #FAFAFA;
-        color: #0E0E0E;
-        border: #BEBEBE 0.5px solid;
-        border-radius: 12px;
-        font-weight: 400;
-        line-height: 32px;
-        letter-spacing: 1px;
-        outline: none;
-    }
-    
-    #maxDiv .navigation .main .leftpart .noConnectButton img {
-        float: left;
-        width: 19%;
-    }
 
-    #maxDiv .navigation .main .leftpart .ConnectedButton {
-        float: left;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton img {
-        float: right;
-        width: 30px;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton .address {
-        width: 60px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: inline-block;
-        line-height: 25px;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton .network {
-        padding: 0px 10px;
-        margin-right: 10px;
-        background: #2480FF;
-        border-radius: 12px;
-        height: 25px;
-        line-height: 25px;
-        display: inline-block;
-        color: #ffff;
-        text-align: center;
-        float: left;
-    
-    }
-
-    #maxDiv .navigation .main .leftpart .lang {
-        float: right;
-        margin-left: 10px;
-        img{
-            width: 30px;
-        }
-    }
-    
-    #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {
-        width: 20px;
-        margin-left: 8px;
-    }
-    
-    #maxDiv .navigation .el-dialog .el-dialog__body {
-        padding: 0px 20px !important;
-    }
-    
     #maxDiv .trade-pc {
-        background: url(../assets/static/img/bigBG.jpg) no-repeat;
+        background: url(/assets/static/img/bigBG.jpg) no-repeat;
         background-size: 100% 100%;
         width: 100%;
         // height: 100%;
@@ -118,14 +17,14 @@
         padding-bottom: 50px;
         background-repeat: repeat-y;
     }
-    
+
     #maxDiv .trade-pc .main {
         margin: 0 auto;
         // width: 35%;
         width: 480px;
         height: 80%;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent {
         width: 100%;
         // height: 500px;
@@ -135,7 +34,7 @@
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv {
         width: 80%;
         height: 40px;
@@ -144,7 +43,7 @@
         background: #FAFAFA;
         border-radius: 12px;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv li {
         flex: 1;
         font-size: 13px;
@@ -155,7 +54,7 @@
         line-height: 40px;
         cursor: pointer;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv .active {
         width: 100%;
         border-radius: 12px;
@@ -164,78 +63,42 @@
         color: #2480FF;
         background: #ffffff;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
         width: 80%;
         // height: 80%;
         margin: 20px auto 0px;
     }
 
-    #maxDiv .footer{
-        width: 100%;
-        height: 100px;
-        background-color: #ffffff;
-    }
-
-    #maxDiv .footer .centerPart{
-        width: 480px;
-        height: 100px;
-        margin: 0 auto;
-    }
-
-    #maxDiv .footer .centerPart ul{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction:row;
-        justify-content : center;
-        align-items : center;
-        align-content: stretch;
-    }
-
-    #maxDiv .footer .centerPart ul li{
-        flex: 1;
-        padding: 0 3px;
-    }
-
-    #maxDiv .footer .centerPart ul li a img{
-        float: left;
-        width: 25px;
-        margin-right: 5px;
-    }
-    #maxDiv .footer .centerPart ul li a span{
-        float: left;
-        font-size: 12px;
-        color: #8B8B8B;
-    }
     
+
     #maxDiv .modal .modal-dialog {
         width: 500px !important;
         margin: 200px auto !important;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content {
         width: 85%;
         margin: 0 auto;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header {
         padding: 20px 30px;
         border: none;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header img {
         width: 20px;
         float: left;
         margin-right: 10px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header h4 {
         width: 88%;
         float: left;
         line-height: 30px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header p {
         font-size: 12px;
         font-family: "PingFangSC-Regular, PingFang SC";
@@ -244,25 +107,25 @@
         line-height: 30px;
         height: 30px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body {
         width: 85%;
         margin: 0 auto;
         margin-bottom: 40px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li {
         float: left;
         width: 50%;
         padding-top: 20px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li img {
         width: 20%;
         float: left;
         margin-left: 10px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li span {
         float: left;
         font-size: 18px;
@@ -271,116 +134,13 @@
     }
 
 }
-@media screen and (max-width: 768px){
+
+@media screen and (max-width: 768px) {
 
     maxDiv {
         background-color: #ffff;
     }
-    
-    #maxDiv .navigation {
-        width: 100%;
-        height: 60px;
-        background-color: #ffff;
-        // position: fixed;
-        // top: 0;
-        // z-index: 9999999;
-    }
-    
-    #maxDiv .navigation .cursor {
-        cursor: pointer;
-    }
-    
-    #maxDiv .navigation .main {
-        width: 94%;
-        margin: 0 auto;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    #maxDiv .navigation .main .logo {
-        width: 100px;
-        min-width: 112px;
-        position: relative;
-    }
-    
-    #maxDiv .navigation .main .logo img {
-        width: 100%;
-    }
-    
-    #maxDiv .navigation .main .leftpart .noConnectButton {
-        padding: 0px;
-        width: 168px;
-        height: 32px;
-        background: #FAFAFA;
-        color: #0E0E0E;
-        border: #BEBEBE 0.5px solid;
-        border-radius: 12px;
-        font-weight: 400;
-        line-height: 32px;
-        letter-spacing: 1px;
-        outline: none;
-        font-size: 0.11rem;
-    }
-    
-    #maxDiv .navigation .main .leftpart .noConnectButton img {
-        float: left;
-        width: 19%;
-    }
 
-    #maxDiv .navigation .main .leftpart .ConnectedButton {
-        float: left;
-        margin-top: 0.03rem;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton img {
-        float: right;
-        width: 30px;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton .address {
-        width: 60px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: inline-block;
-        line-height: 25px;
-    }
-    
-    #maxDiv .navigation .main .leftpart .ConnectedButton .network {
-        padding: 0px 10px;
-        margin-right: 10px;
-        background: #2480FF;
-        border-radius: 12px;
-        height: 25px;
-        line-height: 25px;
-        display: inline-block;
-        color: #ffff;
-        text-align: center;
-        float: left;
-    
-    }
-
-    #maxDiv .navigation .main .leftpart .lang {
-        float: right;
-        margin-left: 5px;
-        margin-top: 2px;
-        width: 30px;
-        img{
-            width: 30px;
-        }
-    }
-    
-    #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {
-        width: 20px;
-        margin-left: 8px;
-    }
-    
-    #maxDiv .navigation .el-dialog .el-dialog__body {
-        padding: 0px 20px !important;
-    }
-    
     #maxDiv .trade-pc {
         // background: url(assets/static/img/bigBG.jpg) no-repeat;
         // background-size: 100% 100%;
@@ -394,13 +154,13 @@
         padding-bottom: 50px;
         background-repeat: repeat-y;
     }
-    
+
     #maxDiv .trade-pc .main {
         margin: 0 auto;
         // width: 35%;
         height: 80%;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent {
         width: 100%;
         // height: 500px;
@@ -410,7 +170,7 @@
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv {
         width: 95%;
         height: 40px;
@@ -419,7 +179,7 @@
         background: #FAFAFA;
         border-radius: 12px;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv li {
         flex: 1;
         font-size: 0.12rem;
@@ -430,7 +190,7 @@
         line-height: 40px;
         cursor: pointer;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .tabDiv .active {
         width: 100%;
         border-radius: 12px;
@@ -439,83 +199,43 @@
         color: #2480FF;
         background: #ffffff;
     }
-    
+
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
         width: 94%;
         // height: 80%;
         margin: 20px auto 0px;
     }
 
+
     
-    #maxDiv .footer{
-        width: 100%;
-        height: 100px;
-        background-color: #ffffff;
-    }
 
-    #maxDiv .footer .centerPart{
-        width: 100%;
-        height: 100px;
-        margin: 0 auto;
-    }
-
-    #maxDiv .footer .centerPart ul{
-        width: 95%;
-        height: 100%;
-        display: flex;
-        flex-direction:row;
-        justify-content : center;
-        align-items : center;
-        align-content: stretch;
-        margin: 0 auto;
-        margin-top: 20px;
-        background-color: #ffffff;
-    }
-
-    #maxDiv .footer .centerPart ul li{
-        flex: 1;
-        padding: 0 3px;
-    }
-
-    #maxDiv .footer .centerPart ul li a img{
-        display: block;
-        margin: 0 auto;
-        width: 25px;
-    }
-    #maxDiv .footer .centerPart ul li a span{
-        display: block;
-        text-align: center;
-        font-size: 12px;
-        color: #8B8B8B;
-    }
-    
     #maxDiv .modal .modal-dialog {
         width: 500px !important;
         margin: 200px auto !important;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content {
         width: 85%;
         margin: 0 auto;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header {
         padding: 20px 30px;
         border: none;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header img {
         width: 20px;
         float: left;
         margin-right: 10px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header h4 {
         width: 88%;
         float: left;
         line-height: 30px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-header p {
         font-size: 12px;
         font-family: "PingFangSC-Regular, PingFang SC";
@@ -524,25 +244,25 @@
         line-height: 30px;
         height: 30px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body {
         width: 85%;
         margin: 0 auto;
         margin-bottom: 40px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li {
         float: left;
         width: 50%;
         padding-top: 20px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li img {
         width: 20%;
         float: left;
         margin-left: 10px;
     }
-    
+
     #maxDiv .modal .modal-dialog .modal-content .modal-body .row ul li span {
         float: left;
         font-size: 18px;
@@ -552,4 +272,3 @@
 
 
 }
-

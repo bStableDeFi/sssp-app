@@ -20,8 +20,13 @@
     "Unsupported Network": "不支持的网络",
     "The network your wallet on is not supported! Please check it.": "不支持当前钱包的网络！请检查当前钱包的网络链接情况。",
     "OK": "好的",
-    "Please enter a number":"赎回百分比",
-    "Redeem All to":"全部赎回成",
-    "Redeem Average":"平均赎回",
-    "Redeem to all coins":"赎回成全部币种"
+    "Please enter a number": "赎回百分比",
+    "Redeem All to": "全部赎回成",
+    "Redeem Average": "平均赎回",
+    "Redeem to all coins": "赎回成全部币种",
+    "Choose a Pool": "选择币池进行兑换",
+    "Pool 1": "币池 1",
+    "Enter": "进入",
+    "Pool 2": "币池 2",
+    "Pool 3": "币池 3"
 }

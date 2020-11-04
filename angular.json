@@ -24,12 +24,20 @@
                         "tsConfig": "projects/ssp-app/tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "projects/ssp-app/src/favicon.ico",
-                            "projects/ssp-app/src/assets"
+                            "projects/ssp-app/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "libs/shared-assets/",
+                                "output": "./assets"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "libs/",
+                                "output": "./"
+                            }
                         ],
                         "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "projects/ssp-app/src/styles.scss"
+                            "libs/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -182,12 +190,20 @@
                         "tsConfig": "projects/ssp-app/tsconfig.spec.json",
                         "karmaConfig": "projects/ssp-app/karma.conf.js",
                         "assets": [
-                            "projects/ssp-app/src/favicon.ico",
-                            "projects/ssp-app/src/assets"
+                            "projects/ssp-app/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "libs/shared-assets/",
+                                "output": "./assets"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "libs/",
+                                "output": "./"
+                            }
                         ],
                         "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-                            "projects/ssp-app/src/styles.scss"
+                            "libs/styles.scss"
                         ],
                         "scripts": []
                     }
@@ -240,11 +256,20 @@
                         "tsConfig": "projects/ssp-home/tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "projects/ssp-home/src/favicon.ico",
-                            "projects/ssp-home/src/assets"
+                            "projects/ssp-home/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "libs/shared-assets/",
+                                "output": "./assets"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "libs/",
+                                "output": "./"
+                            }
                         ],
                         "styles": [
-                            "projects/ssp-home/src/styles.scss"
+                            "libs/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -304,11 +329,20 @@
                         "tsConfig": "projects/ssp-home/tsconfig.spec.json",
                         "karmaConfig": "projects/ssp-home/karma.conf.js",
                         "assets": [
-                            "projects/ssp-home/src/favicon.ico",
-                            "projects/ssp-home/src/assets"
+                            "projects/ssp-home/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "libs/shared-assets/",
+                                "output": "./assets"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "libs/",
+                                "output": "./"
+                            }
                         ],
                         "styles": [
-                            "projects/ssp-home/src/styles.scss"
+                            "libs/styles.scss"
                         ],
                         "scripts": []
                     }
@@ -336,6 +370,46 @@
                         "production": {
                             "devServerTarget": "ssp-home:serve:production"
                         }
+                    }
+                }
+            }
+        },
+        "app-lib": {
+            "projectType": "library",
+            "root": "projects/app-lib",
+            "sourceRoot": "projects/app-lib/src",
+            "prefix": "lib",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "tsConfig": "projects/app-lib/tsconfig.lib.json",
+                        "project": "projects/app-lib/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/app-lib/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/app-lib/src/test.ts",
+                        "tsConfig": "projects/app-lib/tsconfig.spec.json",
+                        "karmaConfig": "projects/app-lib/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/app-lib/tsconfig.lib.json",
+                            "projects/app-lib/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
                     }
                 }
             }

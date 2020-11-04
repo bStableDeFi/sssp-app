@@ -8,7 +8,6 @@ import { IntallWalletDlgComponent } from './intall-wallet-dlg/intall-wallet-dlg.
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule } from '@angular/forms';
 import { SwapCompComponent } from './swap-comp/swap-comp.component';
 import { AddliquidityCompComponent } from './addliquidity-comp/addliquidity-comp.component';
@@ -18,6 +17,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ChooseWalletDlgComponent } from './choose-wallet-dlg/choose-wallet-dlg.component';
+import { AppLibModule } from 'app-lib';
 
 @NgModule({
     declarations: [
@@ -35,22 +35,11 @@ import { ChooseWalletDlgComponent } from './choose-wallet-dlg/choose-wallet-dlg.
         BrowserAnimationsModule,
         MatDialogModule,
         MatButtonModule,
-        MatProgressBarModule,
         MatSlideToggleModule,
         FormsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        HttpClientModule,
+        AppLibModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
 })
 export class AppModule { }
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
-}

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BootService } from './services/boot.service';
-import { LanguageService } from './services/language.service';
+import { HeaderComponent, LanguageService } from 'app-lib';
 
 @Component({
     selector: 'app-root',
@@ -12,32 +12,21 @@ export class AppComponent {
 
     curTab = 0;
 
-    loading: boolean = false;
-
+    @ViewChild('header')
+    header: HeaderComponent;
 
     constructor(public boot: BootService, public lang: LanguageService) {
     }
 
-    public connectWallet() {
-        this.loading = true;
-        this.boot.connectWallet().then(() => this.loading = false);
-    }
+
 
     changeTab(tab) {
         this.curTab = tab;
     }
 
-    changeLang(lang: string) {
-        this.lang.changeLanguage(lang);
-    }
+    
 
 
-    onLoading() {
-        this.loading = true;
-    }
 
-    onLoaded() {
-        this.loading = false;
-    }
 
 }

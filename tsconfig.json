@@ -18,6 +18,12 @@
         },
         {
             "path": "./projects/ssp-home/tsconfig.spec.json"
-        }
+        },
+    {
+      "path": "./projects/app-lib/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/app-lib/tsconfig.spec.json"
+    }
     ]
 }
