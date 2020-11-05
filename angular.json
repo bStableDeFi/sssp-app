@@ -153,6 +153,34 @@
                                     "maximumError": "10kb"
                                 }
                             ]
+                        },
+                        "t1": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/ssp-app/src/environments/environment.ts",
+                                    "with": "projects/ssp-app/src/environments/environment.prod.t1.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
                         }
                     }
                 },
@@ -173,6 +201,9 @@
                         },
                         "p3": {
                             "browserTarget": "ssp-app:build:p3"
+                        },
+                        "t1": {
+                            "browserTarget": "ssp-app:build:t1"
                         }
                     }
                 },
