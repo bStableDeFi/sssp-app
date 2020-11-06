@@ -67,6 +67,9 @@ export class SwapCompComponent implements OnInit {
 
     maxAmt() {
         this.amt = this.boot.balance.coinsBalance[this.left].toFixed(9);
+        this.boot.getExchangeOutAmt(Number(this.left), Number(this.right), this.amt).then(res => {
+            this.minAmt = res.toFixed(9, BigNumber.ROUND_UP);
+        });
         this.updateApproveStatus();
     }
 
