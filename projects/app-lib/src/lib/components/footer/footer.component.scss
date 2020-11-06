@@ -26,6 +26,10 @@
         padding: 0 3px;
     }
 
+    .footer .centerPart ul li .wechatImg {
+      width: 75px;
+    }
+
      .footer .centerPart ul li a img {
         float: left;
         width: 25px;
@@ -36,6 +40,9 @@
         float: left;
         font-size: 12px;
         color: #8B8B8B;
+        width: 100%;
+        display: block;
+        text-align: center;
     }
 }
 
@@ -69,6 +76,10 @@
         flex: 1;
         padding: 0 3px;
     }
+
+    .footer .centerPart ul li .wechatImg {
+        width: 75px;
+      }
 
      .footer .centerPart ul li a img {
         display: block;
