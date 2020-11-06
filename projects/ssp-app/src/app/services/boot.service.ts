@@ -1,11 +1,10 @@
 import {
-    ApplicationRef
-    , Injectable
+    ApplicationRef,
+    Injectable
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { BigNumber } from 'bignumber.js';
-import { resolve } from 'dns';
 import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
@@ -21,6 +20,8 @@ const Web3_1_2 = require('web3_1_2');
     providedIn: 'root'
 })
 export class BootService {
+
+    walletReady: Subject<any> = new Subject();
 
     poolId = environment.poolId;
     coins = environment.coins;
@@ -183,6 +184,7 @@ export class BootService {
                 this.chainConfig = networkInfo.config;
                 this.chainId = networkInfo.chainId;
                 this.accounts = await this.web3.eth.getAccounts();
+                this.walletReady.next();
                 this.initContracts();
                 await this.loadData();
             } else {
@@ -345,7 +347,7 @@ export class BootService {
     }
 
     public async getExchangeOutAmt(i: number, j: number, amt: string) {
-        if (this.poolContract) {
+        if (this.poolContract && !new BigNumber(amt).isNaN()) {
             amt = this.web3.utils.toWei(String(amt), 'ether');
             let decimals = await this.contracts[j].methods.decimals().call({ from: this.accounts[0] });
             return this.poolContract.methods.get_dy(i, j, amt).call().then((res) => {

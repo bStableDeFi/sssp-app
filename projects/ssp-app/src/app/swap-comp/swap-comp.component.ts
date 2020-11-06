@@ -34,7 +34,11 @@ export class SwapCompComponent implements OnInit {
     @Output() loading: EventEmitter<any> = new EventEmitter();
     @Output() loaded: EventEmitter<any> = new EventEmitter();
 
-    constructor(public boot: BootService) { }
+    constructor(public boot: BootService) {
+        this.boot.walletReady.subscribe(res => {
+            this.updateApproveStatus();
+        });
+    }
 
     ngOnInit(): void {
     }
