@@ -1,6 +1,6 @@
 import {
-    ApplicationRef
-    , Injectable
+    ApplicationRef,
+    Injectable
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -20,6 +20,8 @@ const Web3_1_2 = require('web3_1_2');
     providedIn: 'root'
 })
 export class BootService {
+
+    walletReady: Subject<any> = new Subject();
 
     poolId = environment.poolId;
     coins = environment.coins;
@@ -182,6 +184,7 @@ export class BootService {
                 this.chainConfig = networkInfo.config;
                 this.chainId = networkInfo.chainId;
                 this.accounts = await this.web3.eth.getAccounts();
+                this.walletReady.next();
                 this.initContracts();
                 await this.loadData();
             } else {
@@ -343,6 +346,20 @@ export class BootService {
         }
     }
 
+    public async getExchangeOutAmt(i: number, j: number, amt: string) {
+        if (this.poolContract && !new BigNumber(amt).isNaN()) {
+            amt = this.web3.utils.toWei(String(amt), 'ether');
+            let decimals = await this.contracts[j].methods.decimals().call({ from: this.accounts[0] });
+            return this.poolContract.methods.get_dy(i, j, amt).call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(decimals));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
+    }
+
     public async redeemImBalance(amts: string[]): Promise<any> {
         amts.forEach((e, i, arr) => {
             arr[i] = this.web3.utils.toWei(String(e), 'ether');
@@ -393,5 +410,19 @@ export class BootService {
             //     console.log(e);
             // }
         }
+    }
+
+    public async allowance(i): Promise<BigNumber> {
+        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
+            let decimals = await this.contracts[i].methods.decimals().call({ from: this.accounts[0] });
+            return this.contracts[i].methods.allowance(this.accounts[0], this.chainConfig.contracts.Pool.address).call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(decimals));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
+
     }
 }

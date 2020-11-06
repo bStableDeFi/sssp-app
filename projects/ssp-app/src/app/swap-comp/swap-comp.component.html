@@ -24,14 +24,15 @@
             </div>
             <div class="inputDiv">
                 <div>
-                    <input type="number" name="amt" [(ngModel)]="amt" placeholder="{{'Enter an amount'|translate}}">
+                    <input type="number" name="amt" [ngModel]="amt" (ngModelChange)="amtChanged($event)"
+                        placeholder="{{'Enter an amount'|translate}}">
                     <span (click)="maxAmt()">{{'MAX'|translate}}</span>
                 </div>
                 <div>
                     <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt"
                         placeholder="{{'Min Amount'|translate}}">
-                    <button (click)="approve()" [disabled]="status==1"
-                        [ngClass]="{myBtn: status!==1,'myBtn-disabled':boot.accounts.length===0||status===1||status===3}">{{'Approve'|translate}}</button>
+                    <button (click)="approve()" [disabled]="!isApproveEnabled()"
+                        [ngClass]="{myBtn: isApproveEnabled(),'myBtn-disabled':boot.accounts.length===0||!isApproveEnabled()}">{{'Approve'|translate}}</button>
                 </div>
             </div>
         </div>
@@ -43,8 +44,8 @@
         </div> -->
         <!-- <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
             Approve</button> -->
-        <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status===0||status===3||status===1"
-            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{"Exchange"|translate}}</button>
+        <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="!isExchangeEnabled()"
+            [ngClass]="{myBtn: isExchangeEnabled(),'myBtn-disabled':!isExchangeEnabled()}">{{"Exchange"|translate}}</button>
         <button *ngIf="boot.accounts.length==0" (click)="connectWallet()" class="myBtn">{{"Connect to a
             Wallet"|translate}}</button>
     </div>

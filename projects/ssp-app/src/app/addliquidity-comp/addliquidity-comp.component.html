@@ -15,11 +15,12 @@
                 </div>
             </div>
             <div class="second">
-                <input type="number" name="{{coin.symbol}}Amt" [(ngModel)]="amts[i]" placeholder="{{'Enter an amount'|translate}}">
+                <input type="number" name="{{coin.symbol}}Amt" [ngModel]="amts[i]" (ngModelChange)="amtChange(i,$event)"
+                    placeholder="{{'Enter an amount'|translate}}">
                 <button style="margin-bottom: 1em;"
-                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    [ngClass]="{myBtn:isApproveEnabled(i),'myBtn-disabled':!isApproveEnabled(i)||loadStatus===1}"
                     (click)="approve(i)"
-                    [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
+                    [disabled]="!isApproveEnabled(i)||loadStatus===1">{{'Approve'|translate}}</button>
             </div>
         </div>
     </div>
@@ -30,10 +31,10 @@
             BUSD</button>
         <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
         <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()"
-            [disabled]="status===0||status===3||status===1||status===4"
-            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1||status===4}">{{'Add
+            [disabled]="!isAddLiquidityBtnEnabled()||loadStatus===1"
+            [ngClass]="{myBtn: isAddLiquidityBtnEnabled(),'myBtn-disabled':!isAddLiquidityBtnEnabled()||loadStatus===1}">{{'Add
             Liquidity'|translate}}</button>
-        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{'Connect to a
+        <button *ngIf="boot.accounts.length==0" (click)="connectWallet()" class="myBtn">{{'Connect to a
             Wallet'|translate}}</button>
     </div>
 </div>
