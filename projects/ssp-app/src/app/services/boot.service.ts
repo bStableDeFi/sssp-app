@@ -307,14 +307,22 @@ export class BootService {
         }
     }
 
+    private async getTXData(data) {
+        let gas = await this.web3.eth.estimateGas(data);
+        data.gas = gas;
+        return data;
+    }
+
     public async addLiquidity(amts: string[]): Promise<any> {
         amts.forEach((e, i, arr) => {
             arr[i] = this.web3.utils.toWei(String(e), 'ether');
         });
         if (this.poolContract) {
             let data = this.poolContract.methods.add_liquidity(amts, 0).encodeABI();
+            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, gas: 6721975, data: data });
+                // txdata = await this.getTXData(txdata);
+                return await this.web3.eth.sendTransaction(txdata);
             } catch (e) {
                 console.log(e);
             }
@@ -338,8 +346,10 @@ export class BootService {
             amt = this.web3.utils.toWei(String(amt), 'ether');
             minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
             let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
+            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, value: 0, data: data };
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, value: 0, gas: 6721975, data: data });
+                // txdata = await this.getTXData(txdata);
+                return await this.web3.eth.sendTransaction(txdata);
             } catch (e) {
                 console.log(e);
             }
@@ -367,8 +377,10 @@ export class BootService {
         if (this.poolContract) {
             let lp = await this.poolContract.methods.balanceOf(this.accounts[0]).call();
             let data = this.poolContract.methods.remove_liquidity_imbalance(amts, lp.toString()).encodeABI();
+            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, gas: 6721975, data: data });
+                // txdata = await this.getTXData(txdata);
+                return await this.web3.eth.sendTransaction(txdata);
             } catch (e) {
                 console.log(e);
             }
@@ -379,8 +391,10 @@ export class BootService {
         if (this.poolContract) {
             lps = this.web3.utils.toWei(String(lps), 'ether');
             let data = this.poolContract.methods.remove_liquidity(lps, minAmts).encodeABI();
+            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, gas: 6721975, data: data });
+                // txdata = await this.getTXData(txdata);
+                return await this.web3.eth.sendTransaction(txdata);
             } catch (e) {
                 console.log(e);
             }
@@ -391,8 +405,10 @@ export class BootService {
         if (this.poolContract) {
             lps = this.web3.utils.toWei(String(lps), 'ether');
             let data = this.poolContract.methods.remove_liquidity_one_coin(lps, coinIndex, minAmt).encodeABI();
+            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, gas: 6721975, data: data });
+                // txdata = await this.getTXData(txdata);
+                return await this.web3.eth.sendTransaction(txdata);
             } catch (e) {
                 console.log(e);
             }
