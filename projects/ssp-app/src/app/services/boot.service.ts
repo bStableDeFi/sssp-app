@@ -13,6 +13,9 @@ import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
+import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
+import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
+import { RedeemConfirmComponent } from '../redeem-confirm/redeem-confirm.component';
 
 const Web3_1_3 = require('web3_1_3');
 const Web3_1_2 = require('web3_1_2');
@@ -314,19 +317,26 @@ export class BootService {
     }
 
     public async addLiquidity(amts: string[]): Promise<any> {
-        amts.forEach((e, i, arr) => {
-            arr[i] = this.web3.utils.toWei(String(e), 'ether');
-        });
-        if (this.poolContract) {
-            let data = this.poolContract.methods.add_liquidity(amts, 0).encodeABI();
-            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-            try {
-                // txdata = await this.getTXData(txdata);
-                return await this.web3.eth.sendTransaction(txdata);
-            } catch (e) {
-                console.log(e);
+        let dialogRef = this.dialog.open(AddlpConfirmComponent);
+        return dialogRef.afterClosed().toPromise().then(async res => {
+            if (res === true) {
+                amts.forEach((e, i, arr) => {
+                    arr[i] = this.web3.utils.toWei(String(e), 'ether');
+                });
+                if (this.poolContract) {
+                    let data = this.poolContract.methods.add_liquidity(amts, 0).encodeABI();
+                    let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
+                    try {
+                        // txdata = await this.getTXData(txdata);
+                        return await this.web3.eth.sendTransaction(txdata);
+                    } catch (e) {
+                        console.log(e);
+                        return e;
+                    }
+                }
             }
-        }
+        });
+
     }
 
     public async approve(i: number, amt: string): Promise<any> {
@@ -341,17 +351,30 @@ export class BootService {
         }
     }
 
+    private async _exchange(i: number, j: number, amt: string, minAmt: string): Promise<any> {
+        amt = this.web3.utils.toWei(String(amt), 'ether');
+        minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
+        let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
+        let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, value: 0, data: data };
+        try {
+            // txdata = await this.getTXData(txdata);
+            return await this.web3.eth.sendTransaction(txdata);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     public async exchange(i: number, j: number, amt: string, minAmt: string): Promise<any> {
         if (this.poolContract) {
-            amt = this.web3.utils.toWei(String(amt), 'ether');
-            minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
-            let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
-            let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, value: 0, data: data };
-            try {
-                // txdata = await this.getTXData(txdata);
-                return await this.web3.eth.sendTransaction(txdata);
-            } catch (e) {
-                console.log(e);
+            let slippage = new BigNumber(minAmt).div(new BigNumber(amt)).minus(1).multipliedBy(100);
+            if (slippage.comparedTo(0) < 0) {
+                let dialogRef = this.dialog.open(SwapConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+                return dialogRef.afterClosed().toPromise().then(async res => {
+                    if (res === true) {
+                        return this._exchange(i, j, amt, minAmt);
+                    }
+                });
+            } else {
+                return this._exchange(i, j, amt, minAmt);
             }
         }
     }
@@ -371,12 +394,14 @@ export class BootService {
     }
 
     public async redeemImBalance(amts: string[]): Promise<any> {
+        let maxLp = new BigNumber(0);
         amts.forEach((e, i, arr) => {
             arr[i] = this.web3.utils.toWei(String(e), 'ether');
+            maxLp = maxLp.plus(e);
         });
+        maxLp = this.web3.utils.toWei(maxLp.toFixed(9, BigNumber.ROUND_UP), 'ether');
         if (this.poolContract) {
-            let lp = await this.poolContract.methods.balanceOf(this.accounts[0]).call();
-            let data = this.poolContract.methods.remove_liquidity_imbalance(amts, lp.toString()).encodeABI();
+            let data = this.poolContract.methods.remove_liquidity_imbalance(amts, maxLp).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
                 // txdata = await this.getTXData(txdata);
@@ -388,9 +413,31 @@ export class BootService {
     }
 
     public async redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
+        let lp = new BigNumber(lps);
+        let amt = new BigNumber(0);
+        minAmts.forEach(e => {
+            amt = amt.plus(e);
+        });
+        let slippage = amt.div(lp).minus(1).multipliedBy(100);
+        if (slippage.comparedTo(0) < 0) {
+            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+            return dialogRef.afterClosed().toPromise().then(res => {
+                if (res === true) {
+                    return this._redeemToAll(lps, minAmts);
+                }
+            });
+        } else {
+            return this._redeemToAll(lps, minAmts);
+        }
+    }
+    private async _redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
         if (this.poolContract) {
             lps = this.web3.utils.toWei(String(lps), 'ether');
-            let data = this.poolContract.methods.remove_liquidity(lps, minAmts).encodeABI();
+            let amts = new Array();
+            minAmts.forEach(e => {
+                amts.push(this.web3.utils.toWei(String(e), 'ether'));
+            });
+            let data = this.poolContract.methods.remove_liquidity(lps, amts).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {
                 // txdata = await this.getTXData(txdata);
@@ -402,8 +449,25 @@ export class BootService {
     }
 
     public async redeemToOneCoin(lps: string, coinIndex: string, minAmt: string): Promise<any> {
+        let lp = new BigNumber(lps);
+        let amt = new BigNumber(minAmt);
+        let slippage = amt.div(lp).minus(1).multipliedBy(100);
+        if (slippage.comparedTo(0) < 0) {
+            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+            return dialogRef.afterClosed().toPromise().then(res => {
+                if (res === true) {
+                    return this._redeemToOneCoin(lps, coinIndex, minAmt);
+                }
+            });
+        } else {
+            return this._redeemToOneCoin(lps, coinIndex, minAmt);
+        }
+    }
+
+    private async _redeemToOneCoin(lps: string, coinIndex: string, minAmt: string): Promise<any> {
         if (this.poolContract) {
             lps = this.web3.utils.toWei(String(lps), 'ether');
+            minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
             let data = this.poolContract.methods.remove_liquidity_one_coin(lps, coinIndex, minAmt).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
             try {

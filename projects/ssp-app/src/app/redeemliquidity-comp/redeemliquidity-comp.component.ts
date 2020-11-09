@@ -43,11 +43,11 @@ export class RedeemliquidityCompComponent implements OnInit {
 
     redeemCoin() {
         if (this.redeemPrecent && this.redeemPrecent !== 0) { // 输入要赎回流动性的数量（百分比）
-            let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_DOWN);
+            let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_UP);
             if (Number(this.redeemToIndex) >= 0 && Number(this.redeemToIndex) <= 2) { // 赎回成一种币
                 this.status = ActionStatus.Transfering;
                 this.loading.emit();
-                this.boot.redeemToOneCoin(lps, this.redeemToIndex, '0').then(res => {
+                this.boot.redeemToOneCoin(lps, this.redeemToIndex, this.amts[this.redeemToIndex]).then(res => {
                     this.status = ActionStatus.TrasactionEnd;
                     this.boot.loadData();
                     this.loaded.emit();
@@ -55,7 +55,11 @@ export class RedeemliquidityCompComponent implements OnInit {
             } else { // 赎回成3种币
                 this.status = ActionStatus.Transfering;
                 this.loading.emit();
-                this.boot.redeemToAll(lps, ['0', '0', '0']).then(res => {
+                let amts: Array<string> = new Array();
+                this.amts.forEach(e => {
+                    amts.push(String(e));
+                });
+                this.boot.redeemToAll(lps, amts).then(res => {
                     this.status = ActionStatus.TrasactionEnd;
                     this.boot.loadData();
                     this.loaded.emit();
@@ -86,7 +90,7 @@ export class RedeemliquidityCompComponent implements OnInit {
             if (this.redeemToThree.checked) {
                 let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100);
                 this.amts.forEach((e, i, arr) => {
-                    let amt = this.boot.poolInfo.coinsBalance[i].multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                    let amt = this.boot.poolInfo.coinsBalance[i].multipliedBy(0.995).multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
                     arr[i] = Number(amt.toFixed(9, BigNumber.ROUND_DOWN))
                 });
             } else {
