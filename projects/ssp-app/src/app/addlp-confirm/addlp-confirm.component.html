@@ -1,8 +1,15 @@
-<h1 mat-dialog-title>{{"Warning"|translate}}</h1>
-<div mat-dialog-content>
-    {{ "addLPWarning"|translate }}
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="yes()">{{"YES"|translate}}</button>
-  <button mat-button mat-dialog-close>{{"NO"|translate}}</button>
+<div class="matDiv">
+  <div class="buleDiv"></div>
+  <h1 mat-dialog-title>{{"Warning"|translate}}</h1>
+  <div class="tip" mat-dialog-content>
+      {{ "addLPWarning"|translate }}
+  </div>
+  <div mat-dialog-actions class="btnDiv">
+    <button class="yesBtn btnBase" mat-button (click)="yes()">{{"YES"|translate}}</button>
+    <button class="noBtn btnBase" mat-button mat-dialog-close>{{"NO"|translate}}</button>
+    <div>
+      <input class="checkInput" type="checkbox">
+      <p>同意风险，下次不在提示</p>
+    </div>
+  </div>
 </div>

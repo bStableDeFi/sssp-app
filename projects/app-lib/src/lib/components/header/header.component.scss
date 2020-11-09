@@ -6,7 +6,22 @@
         div {
             width: 30em;
             margin: 0 auto;
+            span{
+                font-size: 14px;
+            }
         }
+    }
+    .alert-warning {
+        color: #8a6d3b;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+    .alert {
+        padding: 15px 0px;
+        // margin-bottom: 20px;
+        border-top: 1px solid #faebcc;
+        border-bottom: 1px solid #faebcc;
+        border-radius: 4px;
     }
 
     .navigation {

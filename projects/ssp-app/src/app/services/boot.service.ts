@@ -88,7 +88,7 @@ export class BootService {
     }
 
     chooseWallet() {
-        this.dialog.open(ChooseWalletDlgComponent, { width: '40em' });
+        this.dialog.open(ChooseWalletDlgComponent, { width: '30em' });
     }
 
     private initContracts() {
@@ -142,7 +142,7 @@ export class BootService {
                         await this.loadData();
                     } else {
                         if (!this.web3.currentProvider.isMetaMask) {
-                            this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '40em' });
+                            this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: chainId }, height: '15em', width: '30em' });
                             this.balance.clear();
                             this.poolInfo.clear();
                             // this.accounts = [];
@@ -191,7 +191,7 @@ export class BootService {
                 this.initContracts();
                 await this.loadData();
             } else {
-                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: networkInfo.chainId }, height: '15em', width: '40em' });
+                this.dialog.open(UnsupportedNetworkComponent, { data: { chainId: networkInfo.chainId }, height: '15em', width: '30em' });
                 return;
             }
         }
@@ -284,7 +284,7 @@ export class BootService {
 
     public async connectWallet() {
         if (!this.isMetaMaskInstalled() && !this.isBinanceInstalled()) {
-            this.dialog.open(IntallWalletDlgComponent, { width: '40em' });
+            this.dialog.open(IntallWalletDlgComponent, { width: '30em' });
             return;
         } else {
             this.chooseWallet();
@@ -367,7 +367,7 @@ export class BootService {
         if (this.poolContract) {
             let slippage = new BigNumber(minAmt).div(new BigNumber(amt)).minus(1).multipliedBy(100);
             if (slippage.comparedTo(0) < 0) {
-                let dialogRef = this.dialog.open(SwapConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+                let dialogRef = this.dialog.open(SwapConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '30em' });
                 return dialogRef.afterClosed().toPromise().then(async res => {
                     if (res === true) {
                         return this._exchange(i, j, amt, minAmt);
@@ -420,7 +420,7 @@ export class BootService {
         });
         let slippage = amt.div(lp).minus(1).multipliedBy(100);
         if (slippage.comparedTo(0) < 0) {
-            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '30em' });
             return dialogRef.afterClosed().toPromise().then(res => {
                 if (res === true) {
                     return this._redeemToAll(lps, minAmts);
@@ -453,7 +453,7 @@ export class BootService {
         let amt = new BigNumber(minAmt);
         let slippage = amt.div(lp).minus(1).multipliedBy(100);
         if (slippage.comparedTo(0) < 0) {
-            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '40em' });
+            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '15em', width: '30em' });
             return dialogRef.afterClosed().toPromise().then(res => {
                 if (res === true) {
                     return this._redeemToOneCoin(lps, coinIndex, minAmt);
