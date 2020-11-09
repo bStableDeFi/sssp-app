@@ -435,7 +435,8 @@ export class BootService {
             lps = this.web3.utils.toWei(String(lps), 'ether');
             let amts = new Array();
             minAmts.forEach(e => {
-                amts.push(this.web3.utils.toWei(String(e), 'ether'));
+                // amts.push(this.web3.utils.toWei(String(e), 'ether'));
+                amts.push('0');
             });
             let data = this.poolContract.methods.remove_liquidity(lps, amts).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
