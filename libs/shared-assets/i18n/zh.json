@@ -33,5 +33,6 @@
     "swapWarning": "兑换的Slippage为{{slippage}}%，是否确定要兑换？",
     "addLPWarning": "增加流动性会产生无常损失，是否确定要增加流动性？",
     "redeemWarning": "赎回的Slippage为{{slippage}}%，是否确定要赎回？",
-    "Warning": "警告"
+    "Warning": "警告",
+    "Fee":"手续费"
 }
