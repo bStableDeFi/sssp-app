@@ -8,14 +8,14 @@ import { BigNumber } from 'bignumber.js';
 import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
+import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
-import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
-import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
-import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
 import { RedeemConfirmComponent } from '../redeem-confirm/redeem-confirm.component';
+import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
+import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 
 const Web3_1_3 = require('web3_1_3');
 const Web3_1_2 = require('web3_1_2');
@@ -55,6 +55,8 @@ export class BootService {
     chainId: string;
     wcProvider: WalletConnectProvider;
 
+    virtualPrice: BigNumber;
+
     constructor(private dialog: MatDialog, private applicationRef: ApplicationRef) {
 
         this.balance.coinsBalance = new Array();
@@ -87,9 +89,7 @@ export class BootService {
         return window.BinanceChain;
     }
 
-    chooseWallet() {
-        this.dialog.open(ChooseWalletDlgComponent, { width: '30em' });
-    }
+    
 
     private initContracts() {
         this.chainConfig.contracts.coins.forEach((e) => {
@@ -282,15 +282,6 @@ export class BootService {
         }
     }
 
-    public async connectWallet() {
-        if (!this.isMetaMaskInstalled() && !this.isBinanceInstalled()) {
-            this.dialog.open(IntallWalletDlgComponent, { width: '30em' });
-            return;
-        } else {
-            this.chooseWallet();
-        }
-    }
-
     public async loadData() {
         if (this.web3) {
             this.chainConfig.contracts.coins.forEach(async (e, index) => {
@@ -307,6 +298,8 @@ export class BootService {
             let totalSupplyStr = await this.poolContract.methods.totalSupply().call({ from: this.accounts[0] });
             this.poolInfo.totalSupply = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
             this.poolInfo.fee = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
+            let virtualPrice = await this.getVirtualPrice();
+            this.poolInfo.virtualPrice = virtualPrice;
         }
     }
 
@@ -505,5 +498,17 @@ export class BootService {
             });
         }
 
+    }
+
+    public async getVirtualPrice(): Promise<BigNumber> {
+        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
+            return this.poolContract.methods.get_virtual_price().call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
     }
 }

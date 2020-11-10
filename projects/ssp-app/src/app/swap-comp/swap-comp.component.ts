@@ -1,6 +1,9 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import BigNumber from 'bignumber.js';
+import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
+import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { BootService } from '../services/boot.service';
 
 export enum ApproveStatus {
@@ -34,7 +37,7 @@ export class SwapCompComponent implements OnInit {
     @Output() loading: EventEmitter<any> = new EventEmitter();
     @Output() loaded: EventEmitter<any> = new EventEmitter();
 
-    constructor(public boot: BootService) {
+    constructor(public boot: BootService, private dialog: MatDialog) {
         this.boot.walletReady.subscribe(res => {
             this.updateApproveStatus();
         });
@@ -111,11 +114,17 @@ export class SwapCompComponent implements OnInit {
     //     this.right = i;
     // }
 
-    connectWallet() {
-        this.loading.emit();
-        this.boot.connectWallet().then(() => this.loaded.emit());
+    public async connectWallet() {
+        if (!this.boot.isMetaMaskInstalled() && !this.boot.isBinanceInstalled()) {
+            this.dialog.open(IntallWalletDlgComponent, { width: '30em' });
+            return;
+        } else {
+            this.chooseWallet();
+        }
     }
-
+    chooseWallet() {
+        this.dialog.open(ChooseWalletDlgComponent, { width: '30em' });
+    }
     amtChanged(val) {
         this.amt = val;
         if (!new BigNumber(this.left).isNaN() && !new BigNumber(this.right).isNaN() && !new BigNumber(this.amt).isNaN()) {

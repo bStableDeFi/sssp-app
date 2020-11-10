@@ -1,5 +1,5 @@
 <div class="maxDiv" id="maxDiv">
-    <lib-header [bootSvr]="boot" [needWallet]="true" #header></lib-header>
+    <lib-header [needWallet]="true" [network]="boot.chainConfig?boot.chainConfig.name:'Unsupport Network'" [account]="boot.accounts.length>0?boot.accounts[0]:''" (chooseWallet)="chooseWallet()" (connectWallet)="connectWallet()" #header></lib-header>
     <div class="trade-pc">
         <div class="main">
             <div class="swapContent">

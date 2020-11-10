@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
@@ -8,20 +8,30 @@ import { LanguageService } from '../../services/language.service';
 })
 export class HeaderComponent implements OnInit {
 
-    @Input('bootSvr')
-    boot: any;
-
     @Input('needWallet')
     needWallet: boolean = false;
     loading: boolean = false;
+    @Input('network')
+    network: string;
+    @Input('account')
+    account: string;
+
+    @Output('chooseWallet')
+    chooseWallet: EventEmitter<any> = new EventEmitter();
+
+    @Output('connectWallet')
+    connectWallet: EventEmitter<any> = new EventEmitter();
 
     constructor(public lang: LanguageService) { }
 
     ngOnInit(): void {
     }
-    public connectWallet() {
+    public onConnectWallet() {
         this.loading = true;
-        this.boot.connectWallet().then(() => this.loading = false);
+        this.connectWallet.emit();
+    }
+    public onChooseWallet() {
+        this.chooseWallet.emit();
     }
     onLoading() {
         this.loading = true;

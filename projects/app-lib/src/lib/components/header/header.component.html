@@ -1,18 +1,18 @@
-<mat-progress-bar mode="indeterminate" color="warn" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar style="position: fixed;" mode="indeterminate" color="warn" *ngIf="loading"></mat-progress-bar>
 <div class="navigation">
     <div class="main">
         <div class="logo">
             <a href="https://bstable.finance"><img class="cursor" src="assets/static/img/logo.jpg" alt="logo"></a>
         </div>
         <div class="leftpart">
-            <div class="ConnectedButton" *ngIf="needWallet&&boot&&boot.accounts.length>0; else noConnect">
-                <span class="network">{{boot.chainConfig?boot.chainConfig.name:'Unsupport Network'}}</span>
-                <span class="address">{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
-                <img style="cursor: pointer;" src="assets/static/img/conncted.png" alt="" (click)="boot.chooseWallet()">
+            <div class="ConnectedButton" *ngIf="needWallet && account; else noConnect">
+                <span class="network">{{network}}</span>
+                <span class="address">{{account}}</span>
+                <img style="cursor: pointer;" src="assets/static/img/conncted.png" alt="" (click)="onChooseWallet()">
             </div>
             <ng-template #noConnect>
                 <!-- data-toggle="modal" data-target="#con-close-modal -->
-                <button *ngIf="needWallet" class="noConnectButton btn btn-primary" (click)="connectWallet()">
+                <button *ngIf="needWallet" class="noConnectButton btn btn-primary" (click)="onConnectWallet()">
                     <img src="assets/static/img/noConnct.png" alt="">
                     <span>{{"Connect to a Wallet"|translate}}</span>
                 </button>
