@@ -1,7 +1,9 @@
 {
     "riskWarning": "bStable is in beta. Proceed at your own risk!",
     "swapWarning": "This pair currently has a price slippage of approximately {{slippage}}%.Are you sure you want to continue？",
-    "addLPWarning": "Add liquidity may make some Impermanent Loss. Are you sure to do this?",
+    "addLPWarning": "Adding liquidity incurs the risk of impermanent loss. Press 'continue' if you understand the risks involved with becoming a liquidity provider for an automated market maker (AMM)?",
     "redeemWarning": "The Slippage is {{slippage}}%. Are you sure to do this？",
-    "Warning": "Heads up!"
+    "Warning": "Heads up!",
+    "YES":"Continue",
+    "NO":"Cancel"
 }

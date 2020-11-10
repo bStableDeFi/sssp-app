@@ -31,8 +31,10 @@
     "Pool 3": "币池 3",
     "riskWarning": "beta版本，请注意风险!",
     "swapWarning": "目前的兑换价格滑点约为{{slippage}}%，您确定要继续兑换吗？",
-    "addLPWarning": "增加流动性会产生无常损失，是否确定要增加流动性？",
+    "addLPWarning": "风险提示：作为流动性提供者， 有可能会承担无常损失。点击'继续'如果您了解并愿意承担此风险。(点击此处{{url}}可了解更多'无常损失'）",
     "redeemWarning": "赎回的Slippage为{{slippage}}%，是否确定要赎回？",
     "Warning": "警告",
-    "Fee":"手续费"
+    "Fee":"手续费",
+    "YES":"继续",
+    "NO":"取消"
 }
