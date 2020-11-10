@@ -30,7 +30,7 @@
     "Pool 2": "币池 2",
     "Pool 3": "币池 3",
     "riskWarning": "beta版本，请注意风险!",
-    "swapWarning": "兑换的Slippage为{{slippage}}%，是否确定要兑换？",
+    "swapWarning": "目前的兑换价格滑点约为{{slippage}}%，您确定要继续兑换吗？",
     "addLPWarning": "增加流动性会产生无常损失，是否确定要增加流动性？",
     "redeemWarning": "赎回的Slippage为{{slippage}}%，是否确定要赎回？",
     "Warning": "警告",

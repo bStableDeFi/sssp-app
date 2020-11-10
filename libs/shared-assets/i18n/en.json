@@ -1,6 +1,6 @@
 {
     "riskWarning": "bStable is in beta. Proceed at your own risk!",
-    "swapWarning": "The Slippage is {{slippage}}%. Are you sure to do this？",
+    "swapWarning": "This pair currently has a price slippage of approximately {{slippage}}%.Are you sure you want to continue？",
     "addLPWarning": "Add liquidity may make some Impermanent Loss. Are you sure to do this?",
     "redeemWarning": "The Slippage is {{slippage}}%. Are you sure to do this？"
 }
