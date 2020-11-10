@@ -2,25 +2,33 @@
     .riskWarning {
         margin: 0 auto;
         width: 100%;
-
         div {
             width: 30em;
             margin: 0 auto;
+            height: 18px;
+            display: block;
+            img{
+                float: left;
+                width: 16px;
+                margin-right: 10px;
+                margin-top: 2px;
+            }
             span{
-                font-size: 14px;
+                float: left;
+                font-size: 14px;             
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
             }
         }
     }
     .alert-warning {
-        color: #8a6d3b;
-        background-color: #fcf8e3;
-        border-color: #faebcc;
+        border-top: 1px solid  #FFF4E4;
+        border-bottom: 1px solid  #FFF4E4;
+        background-color:  #FFFCF8;
+        color:#E8A874;
     }
     .alert {
         padding: 15px 0px;
-        // margin-bottom: 20px;
-        border-top: 1px solid #faebcc;
-        border-bottom: 1px solid #faebcc;
         border-radius: 4px;
     }
 
@@ -128,6 +136,39 @@
 }
 
 @media screen and (max-width: 768px) {
+    .riskWarning {
+        margin: 0 auto;
+        width: 100%;
+        div {
+            width: 29.5em;
+            margin-left:7px ;
+            margin: 0 auto;
+            height: 18px;
+            display: block;
+            img{
+                float: left;
+                width: 16px;
+                margin-right: 10px;
+                margin-top: 2px;
+            }
+            span{
+                float: left;
+                font-size: 14px;             
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+            }
+        }
+    }
+    .alert-warning {
+        border-top: 1px solid  #FFF4E4;
+        border-bottom: 1px solid  #FFF4E4;
+        background-color:  #FFFCF8;
+        color:#E8A874;
+    }
+    .alert {
+        padding: 15px 0px;
+        border-radius: 4px;
+    }
     .navigation {
         width: 100%;
         height: 60px;
