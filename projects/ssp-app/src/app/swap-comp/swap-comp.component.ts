@@ -105,9 +105,9 @@ export class SwapCompComponent implements OnInit {
             amtsStr[Number(this.left)] = this.amt;
             amtsStr[Number(this.right)] = String(0 - Number(this.minAmt));
             let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, false);
-            console.log(nVirtualPrice.toFixed(18));
+            console.log("New Virtual Price: " + nVirtualPrice.toFixed(18));
             let diff = nVirtualPrice.div(this.boot.poolInfo.virtualPrice).minus(1).abs();
-            console.log(diff.toFixed(18));
+            console.log("Diff: " + diff.toFixed(18));
             if (diff.comparedTo(environment.virtualPriceDiff) > 0) {
                 this.dialog.open(PriceDiffComponent, { width: '30em' });
                 this.loadStatus = LoadStatus.Loaded;
@@ -122,7 +122,6 @@ export class SwapCompComponent implements OnInit {
                     this.updateApproveStatus();
                 });
             }
-
         }
     }
 

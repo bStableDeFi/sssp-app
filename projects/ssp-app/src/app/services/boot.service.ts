@@ -524,23 +524,37 @@ export class BootService {
         // scaled up by 1e18
         let balances: Array<BigNumber> = new Array();
         amts.forEach((e, index) => {
-            let b = this.poolInfo.coinsRealBalance[index].plus(e);
+            let b: BigNumber;
+            if (deposit) {
+                b = this.poolInfo.coinsRealBalance[index].plus(e);
+                console.log("Balances [" + index + "]: " + b.toFixed(18));
+            } else {
+                if (new BigNumber(e).comparedTo(0) < 0) {// 兑换时要减去管理员费
+                    b = this.poolInfo.coinsRealBalance[index].plus(e);
+                    let adminFee = new BigNumber(e).abs().div(new BigNumber(1).minus(0.003)).multipliedBy(0.002);
+                    b.minus(adminFee);
+                } else {
+                    b = this.poolInfo.coinsRealBalance[index];
+                }
+                console.log("Balances [" + index + "]: " + b.toFixed(18));
+            }
             balances.push(b);
         });
-        let D = this.get_D(this._xp(balances), new BigNumber(100));
-        for (let i = 0; i < amts.length; i++) {
-            if (Number(amts[i]) < 0) {
-                amts[i] = String(0 - Number(amts[i]));
-            }
-        }
+        let D = this.get_D(balances, new BigNumber(100));
+        console.log('D: ' + D.toFixed(18));
         if (deposit) {
+            for (let i = 0; i < amts.length; i++) {
+                amts[i] = String(amts[i]);
+            }
             let lp = await this.calcTokenAmount(amts, deposit);
             // console.log('lp: ' + lp.toFixed(18));
             let token_supply = this.poolInfo.totalSupply.plus(lp);
+            console.log('total supply: ' + token_supply.toFixed(18));
             // return D * PRECISION / token_supply
             return D.div(token_supply);
         } else {
             let token_supply = this.poolInfo.totalSupply;
+            console.log('total supply: ' + token_supply.toFixed(18));
             // return D * PRECISION / token_supply
             return D.div(token_supply);
         }
