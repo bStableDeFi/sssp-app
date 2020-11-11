@@ -43,6 +43,15 @@ export class AppComponent {
         }
     }
 
+    public getVpDiff() {
+        let r = this.boot.poolInfo.virtualPrice.minus(1).multipliedBy(100).abs();
+        if (r.comparedTo(100) === 0) {
+            return null;
+        } else {
+            return r;
+        }
+    }
+
 
 
 }

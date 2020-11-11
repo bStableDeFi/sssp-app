@@ -30,5 +30,7 @@
     <div>
         <img src="assets/static/img/note.png" alt="">
         <span>{{"riskWarning"|translate}}</span>
+        <br />
+        <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
     </div>
 </div>

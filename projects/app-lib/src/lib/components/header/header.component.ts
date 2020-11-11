@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
+import { BigNumber } from 'bignumber.js';
 
 @Component({
     selector: 'lib-header',
@@ -15,6 +16,8 @@ export class HeaderComponent implements OnInit {
     network: string;
     @Input('account')
     account: string;
+    @Input('vpDiff')
+    vpDiff: BigNumber;
 
     @Output('chooseWallet')
     chooseWallet: EventEmitter<any> = new EventEmitter();
@@ -42,5 +45,9 @@ export class HeaderComponent implements OnInit {
     }
     changeLang(lang: string) {
         this.lang.changeLanguage(lang);
+    }
+
+    showVpWarning() {
+        return this.vpDiff && this.vpDiff.comparedTo(0.6) >= 0;
     }
 }

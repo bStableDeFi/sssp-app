@@ -6,5 +6,6 @@
     "Warning": "Heads up!",
     "YES":"Continue",
     "NO":"Cancel",
-    "Warning_1":"Warning"
+    "Warning_1":"Warning",
+    "vpWarning":"Price of share over {{vpDiff}}%. High risk to add liquidity！"
 }
