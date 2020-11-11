@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import BigNumber from 'bignumber.js';
+import { environment } from '../../environments/environment';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
+import { PriceDiffComponent } from '../price-diff/price-diff.component';
 import { BootService } from '../services/boot.service';
 
 export enum ApproveStatus {
@@ -80,7 +82,8 @@ export class AddliquidityCompComponent implements OnInit {
         });
     }
 
-    addLiquidity() {
+    async addLiquidity() {
+        await this.boot.loadData();
         this.loadStatus = LoadStatus.Loading;
         this.loading.emit();
         let amtsStr = new Array<string>();
@@ -91,12 +94,23 @@ export class AddliquidityCompComponent implements OnInit {
                 amtsStr.push('0');
             }
         });
-        this.boot.addLiquidity(amtsStr).then(r => {
-            this.updateApproveStatus();
+        let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr,true);
+        console.log(nVirtualPrice.toFixed(18));
+        let diff = nVirtualPrice.div(this.boot.poolInfo.virtualPrice).minus(1).abs();
+        console.log(diff.toFixed(18));
+        if (diff.comparedTo(environment.virtualPriceDiff) > 0) {
+            this.dialog.open(PriceDiffComponent, { width: '30em' });
             this.loadStatus = LoadStatus.Loaded;
-            this.boot.loadData();
             this.loaded.emit();
-        });
+            return;
+        } else {
+            this.boot.addLiquidity(amtsStr).then(r => {
+                this.updateApproveStatus();
+                this.loadStatus = LoadStatus.Loaded;
+                this.boot.loadData();
+                this.loaded.emit();
+            });
+        }
     }
 
     isApproveEnabled(i: number) {

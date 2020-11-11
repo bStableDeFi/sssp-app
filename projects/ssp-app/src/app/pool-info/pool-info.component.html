@@ -7,7 +7,7 @@
         <div class="consinfo">
             <ul>
                 <li *ngFor="let coin of boot.coins;let i=index">
-                    <p><em class="coinName">{{coin.symbol}}:</em> <em class="coinVal">{{boot.poolInfo.coinsBalance[i].toFormat(4)}}</em></p>
+                    <p><em class="coinName">{{coin.symbol}}:</em> <em class="coinVal">{{boot.poolInfo.coinsRealBalance[i].toFormat(4)}}</em></p>
                     <span>{{percent(i).toFixed(2)}}%</span>
                 </li>
             </ul>

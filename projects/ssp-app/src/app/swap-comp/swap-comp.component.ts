@@ -2,8 +2,10 @@ import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import BigNumber from 'bignumber.js';
+import { environment } from '../../environments/environment';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
+import { PriceDiffComponent } from '../price-diff/price-diff.component';
 import { BootService } from '../services/boot.service';
 
 export enum ApproveStatus {
@@ -92,17 +94,35 @@ export class SwapCompComponent implements OnInit {
         }
     }
 
-    exchange() {
+    async exchange() {
         if (this.amt) {
             this.loading.emit();
             this.loadStatus = LoadStatus.Loading;
-            this.boot.exchange(Number(this.left), Number(this.right), this.amt, this.minAmt ? this.minAmt : '0').then(res => {
-                console.log(res);
-                this.boot.loadData();
-                this.loaded.emit();
+            let amtsStr = new Array();
+            for (let i = 0; i < this.boot.coins.length; i++) {
+                amtsStr[i] = '0';
+            }
+            amtsStr[Number(this.left)] = this.amt;
+            amtsStr[Number(this.right)] = String(0 - Number(this.minAmt));
+            let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, false);
+            console.log(nVirtualPrice.toFixed(18));
+            let diff = nVirtualPrice.div(this.boot.poolInfo.virtualPrice).minus(1).abs();
+            console.log(diff.toFixed(18));
+            if (diff.comparedTo(environment.virtualPriceDiff) > 0) {
+                this.dialog.open(PriceDiffComponent, { width: '30em' });
                 this.loadStatus = LoadStatus.Loaded;
-                this.updateApproveStatus();
-            });
+                this.loaded.emit();
+                return;
+            } else {
+                this.boot.exchange(Number(this.left), Number(this.right), this.amt, this.minAmt ? this.minAmt : '0').then(res => {
+                    console.log(res);
+                    this.boot.loadData();
+                    this.loaded.emit();
+                    this.loadStatus = LoadStatus.Loaded;
+                    this.updateApproveStatus();
+                });
+            }
+
         }
     }
 

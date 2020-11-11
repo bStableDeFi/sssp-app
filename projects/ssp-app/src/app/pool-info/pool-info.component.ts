@@ -15,7 +15,7 @@ export class PoolInfoComponent implements OnInit {
     }
     getTotal() {
         let result = new BigNumber(0);
-        this.boot.poolInfo.coinsBalance.forEach(e => {
+        this.boot.poolInfo.coinsRealBalance.forEach(e => {
             result = result.plus(e);
         })
         return result;
@@ -25,7 +25,7 @@ export class PoolInfoComponent implements OnInit {
         if (this.getTotal().comparedTo(0) === 0) {
             return new BigNumber(0);
         } else {
-            return this.boot.poolInfo.coinsBalance[i].div(this.getTotal()).multipliedBy(100);
+            return this.boot.poolInfo.coinsRealBalance[i].div(this.getTotal()).multipliedBy(100);
         }
     }
 

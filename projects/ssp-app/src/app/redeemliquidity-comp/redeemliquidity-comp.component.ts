@@ -41,7 +41,8 @@ export class RedeemliquidityCompComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    redeemCoin() {
+    async redeemCoin() {
+        await this.boot.loadData();
         if (this.redeemPrecent && this.redeemPrecent !== 0) { // 输入要赎回流动性的数量（百分比）
             let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_UP);
             if (Number(this.redeemToIndex) >= 0 && Number(this.redeemToIndex) <= 2) { // 赎回成一种币
@@ -90,7 +91,7 @@ export class RedeemliquidityCompComponent implements OnInit {
             if (this.redeemToThree.checked) {
                 let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100);
                 this.amts.forEach((e, i, arr) => {
-                    let amt = this.boot.poolInfo.coinsBalance[i].multipliedBy(0.995).multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
+                    let amt = this.boot.poolInfo.coinsRealBalance[i].multipliedBy(lps).div(this.boot.poolInfo.totalSupply);
                     arr[i] = Number(amt.toFixed(9, BigNumber.ROUND_DOWN))
                 });
             } else {

@@ -28,8 +28,9 @@
                         </div>
                     </div>
                     <div class="second">
+                        <!-- [disabled]="redeemPrecent&&redeemPrecent!==null&&redeemPrecent!==0" -->
                         <input type="text" name="{{coin.symbol}}Amt" [(ngModel)]="amts[i]"
-                            placeholder="{{'Enter an amount'|translate}}" [disabled]="redeemPrecent&&redeemPrecent!==null&&redeemPrecent!==0">
+                            placeholder="{{'Enter an amount'|translate}}" >
                     </div>
                 </div>
             </div>

@@ -20,6 +20,7 @@ import { RedeemliquidityCompComponent } from './redeemliquidity-comp/redeemliqui
 import { SwapCompComponent } from './swap-comp/swap-comp.component';
 import { SwapConfirmComponent } from './swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-network.component';
+import { PriceDiffComponent } from './price-diff/price-diff.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-n
         ChooseWalletDlgComponent,
         SwapConfirmComponent,
         RedeemConfirmComponent,
-        AddlpConfirmComponent
+        AddlpConfirmComponent,
+        PriceDiffComponent
     ],
     imports: [
         BrowserModule,

@@ -58,12 +58,13 @@ export class BootService {
     virtualPrice: BigNumber;
 
     constructor(private dialog: MatDialog, private applicationRef: ApplicationRef) {
-
         this.balance.coinsBalance = new Array();
         this.poolInfo.coinsBalance = new Array();
         this.coins.forEach(e => {
             this.balance.coinsBalance.push(new BigNumber(0));
+            this.poolInfo.coinsAdminFee.push(new BigNumber(0));
             this.poolInfo.coinsBalance.push(new BigNumber(0));
+            this.poolInfo.coinsRealBalance.push(new BigNumber(0));
         });
 
         interval(1000 * 60).subscribe(num => { // 轮训刷新数据
@@ -89,7 +90,7 @@ export class BootService {
         return window.BinanceChain;
     }
 
-    
+
 
     private initContracts() {
         this.chainConfig.contracts.coins.forEach((e) => {
@@ -287,17 +288,23 @@ export class BootService {
             this.chainConfig.contracts.coins.forEach(async (e, index) => {
                 let balanceStr = await this.contracts[index].methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
                 let decimals = await this.contracts[index].methods.decimals().call({ from: this.accounts[0] });
+                let adminBalanceStr = await this.poolContract.methods.admin_balances(index).call({ from: this.accounts[0] });
+
                 this.balance.coinsBalance[index] = new BigNumber(balanceStr).div(new BigNumber(10).exponentiatedBy(decimals));
                 let pBalanceStr = await this.contracts[index].methods.balanceOf(this.chainConfig.contracts.Pool.address).call({ from: this.accounts[0] });
                 this.poolInfo.coinsBalance[index] = new BigNumber(pBalanceStr).div(new BigNumber(10).exponentiatedBy(decimals));
+                this.poolInfo.coinsRealBalance[index] = this.poolInfo.coinsBalance[index].minus(new BigNumber(adminBalanceStr).div(new BigNumber(10).exponentiatedBy(decimals)));
             });
             let lpBalanceStr = await this.poolContract.methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
             let lpDecimals = await this.poolContract.methods.decimals().call({ from: this.accounts[0] });
             this.balance.lp = new BigNumber(lpBalanceStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
+            // let feeStr=await this.poolContract.methods.fee().call({from:this.accounts[0]});
+            // let adminFeeStr=await this.poolContract.methods.fee().call({from:this.accounts[0]});
 
             let totalSupplyStr = await this.poolContract.methods.totalSupply().call({ from: this.accounts[0] });
             this.poolInfo.totalSupply = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
-            this.poolInfo.fee = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
+            // this.poolInfo.fee = new BigNumber(feeStr).div(new BigNumber(10).exponentiatedBy(10));
+            // this.poolInfo.adminFee=new BigNumber(adminFeeStr).div(new BigNumber(10).exponentiatedBy(10));
             let virtualPrice = await this.getVirtualPrice();
             this.poolInfo.virtualPrice = virtualPrice;
         }
@@ -428,8 +435,8 @@ export class BootService {
             lps = this.web3.utils.toWei(String(lps), 'ether');
             let amts = new Array();
             minAmts.forEach(e => {
-                // amts.push(this.web3.utils.toWei(String(e), 'ether'));
-                amts.push('0');
+                amts.push(this.web3.utils.toWei(String(e), 'ether'));
+                // amts.push('0');
             });
             let data = this.poolContract.methods.remove_liquidity(lps, amts).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
@@ -503,6 +510,128 @@ export class BootService {
     public async getVirtualPrice(): Promise<BigNumber> {
         if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
             return this.poolContract.methods.get_virtual_price().call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
+    }
+
+    public async calculateVirtualPrice(amts: string[], deposit: boolean) {
+        // Returns portfolio virtual price (for calculating profit)
+        // scaled up by 1e18
+        let balances: Array<BigNumber> = new Array();
+        amts.forEach((e, index) => {
+            let b = this.poolInfo.coinsRealBalance[index].plus(e);
+            balances.push(b);
+        });
+        let D = this.get_D(this._xp(balances), new BigNumber(100));
+        for (let i = 0; i < amts.length; i++) {
+            if (Number(amts[i]) < 0) {
+                amts[i] = String(0 - Number(amts[i]));
+            }
+        }
+        if (deposit) {
+            let lp = await this.calcTokenAmount(amts, deposit);
+            // console.log('lp: ' + lp.toFixed(18));
+            let token_supply = this.poolInfo.totalSupply.plus(lp);
+            // return D * PRECISION / token_supply
+            return D.div(token_supply);
+        } else {
+            let token_supply = this.poolInfo.totalSupply;
+            // return D * PRECISION / token_supply
+            return D.div(token_supply);
+        }
+
+    }
+
+    private get_D(xp: BigNumber[], amp: BigNumber) {
+        let D: BigNumber;
+        let S: BigNumber = new BigNumber(0);
+        for (let i = 0; i < xp.length; i++) {
+            let _x = xp[i];
+            // S += _x
+            S = S.plus(_x);
+        }
+        if (S.comparedTo(0) === 0) {
+            D = new BigNumber(0);
+        }
+        let Dprev: BigNumber = new BigNumber(0);
+        D = S;
+        // Ann: uint256 = amp * coins.length
+        let Ann: BigNumber = amp.multipliedBy(this.coins.length);
+        for (let i = 0; i < 255; i++) {
+            let D_P = D;
+            for (let j = 0; j < xp.length; j++) {
+                let _x = xp[j];
+                // D_P = D_P * D / (_x * coins.length)
+                D_P = D_P.multipliedBy(D).div(_x.multipliedBy(this.coins.length)); // If division by 0, this will be borked: only withdrawal will work. And that is good
+            }
+            Dprev = D;
+            // D = (Ann * S + D_P * coins.length) * D / ((Ann - 1) * D + (coins.length + 1) * D_P)
+            let numerator: BigNumber = Ann
+                .multipliedBy(S)
+                .plus(D_P.multipliedBy(this.coins.length))
+                .multipliedBy(D);
+            let denominator = Ann.minus(1).multipliedBy(D).plus(
+                new BigNumber(this.coins.length).plus(1).multipliedBy(D_P)
+            );
+            D = numerator.div(denominator);
+            // Equality with the precision of 1
+            if (D > Dprev) {
+                if (D.minus(Dprev).comparedTo(1) <= 0) {
+                    break;
+                }
+            } else {
+                if (Dprev.minus(D).comparedTo(1) <= 0) {
+                    break;
+                }
+            }
+        }
+        return D;
+    }
+    private _xp(balances: BigNumber[]) {
+        let rates = [1, 1, 1];
+        let result: Array<BigNumber> = new Array();
+        for (let i = 0; i < this.coins.length; i++) {
+            result.push(new BigNumber(rates[i]).multipliedBy(balances[i]));
+        }
+        return result;
+    }
+
+    // private _A(): BigNumber {
+    //     // Handle ramping A up or down
+    //     let t1 = future_A_time;
+    //     A1 = future_A;
+    //     if (block.timestamp < t1) {
+    //         uint256 A0 = initial_A;
+    //         uint256 t0 = initial_A_time;
+    //         // Expressions in uint256 cannot have negative numbers, thus "if"
+    //         if (A1 > A0) {
+    //             // return A0 + (A1 - A0) * (block.timestamp - t0) / (t1 - t0)
+    //             A1 = A0.add(
+    //                 A1.sub(A0).mul(block.timestamp.sub(t0)).div(t1.sub(t0))
+    //             );
+    //         } else {
+    //             // return A0 - (A0 - A1) * (block.timestamp - t0) / (t1 - t0)
+    //             A1 = A0.sub(
+    //                 A0.sub(A1).mul(block.timestamp.sub(t0)).div(t1.sub(t0))
+    //             );
+    //         }
+    //     } else {
+    //         //if (t1 == 0 || block.timestamp >= t1)
+    //         // retrun A1
+    //     }
+    // }
+    public async calcTokenAmount(amts: string[], isDeposit: boolean): Promise<BigNumber> {
+        let amtsStr = new Array();
+        amts.forEach((e, index, arr) => {
+            amtsStr.push(this.web3.utils.toWei(String(e), 'ether'));
+        });
+        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
+            return this.poolContract.methods.calc_token_amount(amtsStr, isDeposit).call().then((res) => {
                 return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
             });
         } else {
