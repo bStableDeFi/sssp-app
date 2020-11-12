@@ -31,7 +31,7 @@
     "Pool 3": "币池 3",
     "riskWarning": "beta版本，请注意风险!",
     "swapWarning": "目前的兑换价格滑点约为{{slippage}}%，您确定要继续兑换吗？",
-    "addLPWarning": "作为流动性提供者， 有可能会承担无常损失。点击'继续'进行下一步。(点击此处<a href=\"https://zhuanlan.zhihu.com/p/141925803\" target=\"_blank\">https://zhuanlan.zhihu.com/p/141925803</a>可了解更多'无常损失'）",
+    "addLPWarning": "稳定币兑换相对来说无常损失会很小，但由于有些稳定币自身的风险，用户仍然可能会有损失。点击“继续”进行下一步。",
     "redeemWarning": "赎回的Slippage为{{slippage}}%，是否确定要赎回？",
     "Warning": "警告",
     "Fee":"手续费",
