@@ -510,7 +510,12 @@ export class BootService {
     public async getVirtualPrice(): Promise<BigNumber> {
         if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
             return this.poolContract.methods.get_virtual_price().call().then((res) => {
-                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+                let r = new BigNumber(res);
+                if (r.comparedTo(0) >= 0) {
+                    return new BigNumber(0);
+                } else {
+                    return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+                }
             });
         } else {
             return new Promise((resolve, reject) => {
