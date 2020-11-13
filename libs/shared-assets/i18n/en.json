@@ -7,5 +7,7 @@
     "YES":"Continue",
     "NO":"Cancel",
     "Warning_1":"Warning",
-    "vpWarning":"Price of share over {{vpDiff}}%. High risk to add liquidity！"
+    "vpWarning":"Price of share over {{vpDiff}}%. High risk to add liquidity！",
+    "approve_label":"Approve {{symbol}} Amount",
+    "infinite_approval":"Infinite Approval"
 }

@@ -1,0 +1,16 @@
+<div class="matDiv">
+    <div class="buleDiv"></div>
+    <h1 mat-dialog-title>{{"Confirm"|translate}}</h1>
+    <div class="tip" mat-dialog-content>
+        <mat-form-field class="example-full-width">
+            <mat-label>{{ "approve_label"|translate:{symbol:symbol} }}</mat-label>
+            <input matInput placeholder="{{symbol}} Amount" [(ngModel)]="amt">
+        </mat-form-field>
+        <mat-slide-toggle [color]="'accent'" (change)="infiniteChange($event)" [checked]="false">{{"infinite_approval"|translate}} {{symbol}}
+        </mat-slide-toggle>
+    </div>
+    <div mat-dialog-actions class="btnDiv">
+        <button class="yesBtn btnBase" mat-button (click)="continu()">{{"YES"|translate}}</button>
+        <button class="noBtn btnBase" mat-button mat-dialog-close>{{"NO"|translate}}</button>
+    </div>
+</div>

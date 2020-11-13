@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,6 +23,7 @@ import { SwapCompComponent } from './swap-comp/swap-comp.component';
 import { SwapConfirmComponent } from './swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-network.component';
 import { PriceDiffComponent } from './price-diff/price-diff.component';
+import { ApproveDlgComponent } from './approve-dlg/approve-dlg.component';
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import { PriceDiffComponent } from './price-diff/price-diff.component';
         SwapConfirmComponent,
         RedeemConfirmComponent,
         AddlpConfirmComponent,
-        PriceDiffComponent
+        PriceDiffComponent,
+        ApproveDlgComponent
     ],
     imports: [
         BrowserModule,
@@ -45,6 +49,8 @@ import { PriceDiffComponent } from './price-diff/price-diff.component';
         MatDialogModule,
         MatButtonModule,
         MatSlideToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
         FormsModule,
         TranslateModule.forRoot({
             loader: {

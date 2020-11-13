@@ -39,5 +39,8 @@
     "NO":"取消",
     "Price Exception!":"币池不平衡，请谨慎操作！",
     "Warning_1":"风险提示",
-    "vpWarning":"流动性均价偏离 {{vpDiff}}%, 流动性投资风险高！"
+    "vpWarning":"流动性均价偏离 {{vpDiff}}%, 流动性投资风险高！",
+    "Confirm":"请确认",
+    "approve_label":"同意划转 {{symbol}} 的数量",
+    "infinite_approval":"同意无限划转"
 }

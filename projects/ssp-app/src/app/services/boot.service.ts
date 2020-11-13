@@ -5,10 +5,12 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { BigNumber } from 'bignumber.js';
+import { resolve } from 'dns';
 import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
 import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
+import { ApproveDlgComponent } from '../approve-dlg/approve-dlg.component';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
@@ -341,13 +343,31 @@ export class BootService {
 
     public async approve(i: number, amt: string): Promise<any> {
         if (this.poolContract) {
-            amt = this.web3.utils.toWei(String(amt), 'ether');
-            let data = this.contracts[i].methods.approve(this.chainConfig.contracts.Pool.address, amt).encodeABI();
-            try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.coins[i].address, data: data });
-            } catch (e) {
-                console.log(e);
-            }
+            let dialogRef = this.dialog.open(ApproveDlgComponent, { data: { amt: amt, symbol: this.coins[i].symbol }, height: '20em', width: '32em' });
+            return dialogRef.afterClosed().toPromise().then(async res => {
+                let amt;
+                if (res && res.continu && res.infinite === true) {
+                    amt = new BigNumber(2).exponentiatedBy(256).minus(1).toFixed(0);
+                } else if (res && res.continu && res.infinite === false) {
+                    amt = res.amt;
+                    amt = this.web3.utils.toWei(String(amt), 'ether');
+                } else {
+                    return new Promise((resolve, reject) => {
+                        resolve();
+                    });
+                }
+                console.log(amt);
+                let data = this.contracts[i].methods.approve(this.chainConfig.contracts.Pool.address, amt).encodeABI();
+                try {
+                    return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.coins[i].address, data: data });
+                } catch (e) {
+                    console.log(e);
+                    return new Promise((resolve, reject) => {
+                        resolve();
+                    });
+                }
+            });
+
         }
     }
 
