@@ -19,6 +19,12 @@
     font-weight: 400;
     color: #6B6B6B;
     line-height: 28px;
+    height: 115px;
+    display: table;
+    p{
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
   .btnDiv{
     margin-top: 11px;
