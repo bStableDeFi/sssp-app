@@ -514,7 +514,7 @@ export class BootService {
                 if (r.comparedTo(999999) >= 0) {
                     return new BigNumber(0);
                 } else {
-                    return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+                    return r;
                 }
             });
         } else {
