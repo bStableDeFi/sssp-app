@@ -10,6 +10,7 @@ import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
 import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
+import { AddlpSlippageConfirmComponent } from '../addlp-slippage-confirm/addlp-slippage-confirm.component';
 import { ApproveDlgComponent } from '../approve-dlg/approve-dlg.component';
 import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
 import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
@@ -318,29 +319,44 @@ export class BootService {
         return data;
     }
 
-    public async addLiquidity(amts: string[]): Promise<any> {
-        let dialogRef = this.dialog.open(AddlpConfirmComponent);
-        return dialogRef.afterClosed().toPromise().then(async res => {
-            if (res === true) {
-                amts.forEach((e, i, arr) => {
-                    arr[i] = this.web3.utils.toWei(String(e), 'ether');
-                });
-                if (this.poolContract) {
-                    let data = this.poolContract.methods.add_liquidity(amts, 0).encodeABI();
-                    let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-                    try {
-                        // txdata = await this.getTXData(txdata);
-                        return await this.web3.eth.sendTransaction(txdata);
-                    } catch (e) {
-                        console.log(e);
-                        return e;
+    public async addLiquidity(amts: string[], lp: BigNumber): Promise<any> {
+        if (this.poolContract) {
+            let totalCoins = new BigNumber(0);
+            amts.forEach(e => {
+                totalCoins = totalCoins.plus(e);
+            });
+            let slippage = lp.div(totalCoins).minus(1).multipliedBy(100);
+            console.log("total amt: " + totalCoins.toFixed(18));
+            console.log("lp: " + lp.toFixed(18));
+            if (slippage.comparedTo(0) < 0) {
+                let dialogRef = this.dialog.open(AddlpSlippageConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '20em', width: '32em' });
+                return dialogRef.afterClosed().toPromise().then(async res => {
+                    if (res === true) {
+                        return this._addLiquidity(amts);
                     }
-                }
+                });
+            } else {
+                return this._addLiquidity(amts);
             }
-        });
-
+        }
     }
-
+    private async _addLiquidity(amts: string[]): Promise<any> {
+        let amtsStr = new Array();
+        amts.forEach((e, i, arr) => {
+            amtsStr.push(this.web3.utils.toWei(String(e), 'ether'));
+        });
+        let data = this.poolContract.methods.add_liquidity(amtsStr, 0).encodeABI();
+        let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
+        try {
+            // txdata = await this.getTXData(txdata);
+            return await this.web3.eth.sendTransaction(txdata);
+        } catch (e) {
+            console.log(e);
+            return new Promise((resolve, reject) => {
+                resolve(e);
+            });
+        }
+    }
     public async approve(i: number, amt: string): Promise<any> {
         if (this.poolContract) {
             let dialogRef = this.dialog.open(ApproveDlgComponent, { data: { amt: amt, symbol: this.coins[i].symbol }, height: '20em', width: '32em' });
@@ -544,7 +560,7 @@ export class BootService {
         }
     }
 
-    public async calculateVirtualPrice(amts: string[], deposit: boolean) {
+    public async calculateVirtualPrice(amts: string[], lp: BigNumber, deposit: boolean) {
         // Returns portfolio virtual price (for calculating profit)
         // scaled up by 1e18
         let balances: Array<BigNumber> = new Array();
@@ -571,7 +587,6 @@ export class BootService {
             for (let i = 0; i < amts.length; i++) {
                 amts[i] = String(amts[i]);
             }
-            let lp = await this.calcTokenAmount(amts, deposit);
             // console.log('lp: ' + lp.toFixed(18));
             let token_supply = this.poolInfo.totalSupply.plus(lp);
             console.log('total supply: ' + token_supply.toFixed(18));

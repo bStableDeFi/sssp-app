@@ -1,0 +1,11 @@
+<div class="matDiv">
+    <div class="buleDiv"></div>
+    <h1 mat-dialog-title>{{"Warning"|translate}}</h1>
+    <div class="tip" mat-dialog-content>
+        <p>{{ "addLPWarning_1"|translate:{slippage:dlgData.slippage} }}</p>
+    </div>
+    <div mat-dialog-actions class="btnDiv">
+      <button class="yesBtn btnBase" mat-button (click)="yes()">{{"YES"|translate}}</button>
+      <button class="noBtn btnBase" mat-button mat-dialog-close>{{"NO"|translate}}</button>
+    </div>
+  </div>

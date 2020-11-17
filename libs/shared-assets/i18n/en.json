@@ -1,6 +1,7 @@
 {
     "riskWarning": "bStable is in beta. Proceed at your own risk!",
     "swapWarning": "This pair currently has a price slippage of approximately {{slippage}}%.Are you sure you want to continue？",
+    "addLPWarning_1": "This pool's liquidity currently has a price slippage of approximately {{slippage}}%.Are you sure you want to continue？",
     "addLPWarning": "While this pool is made up of stablecoins, adding liquidity still incurs the risk of impermanent loss, should any of the pool's currencies' prices shift. Press 'continue' if you understand the risks involved with becoming a liquidity provider for an automated market maker (AMM)?",
     "redeemWarning": "The Slippage is {{slippage}}%. Are you sure to do this？",
     "Warning": "Heads up!",

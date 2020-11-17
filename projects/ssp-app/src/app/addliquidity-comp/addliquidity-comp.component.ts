@@ -94,10 +94,12 @@ export class AddliquidityCompComponent implements OnInit {
                 amtsStr.push('0');
             }
         });
-        let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, true);
+        let lp = await this.boot.calcTokenAmount(amtsStr, true);
+        let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, lp, true);
         console.log("New Virtual Price: " + nVirtualPrice.toFixed(18));
         let diff = nVirtualPrice.div(this.boot.poolInfo.virtualPrice).minus(1).abs();
         console.log("Diff: " + diff.toFixed(18));
+
         let totalBalance = new BigNumber(0);
         this.boot.poolInfo.coinsRealBalance.forEach(e => {
             totalBalance = totalBalance.plus(e);
@@ -108,7 +110,7 @@ export class AddliquidityCompComponent implements OnInit {
             this.loaded.emit();
             return;
         } else {
-            this.boot.addLiquidity(amtsStr).then(r => {
+            this.boot.addLiquidity(amtsStr, lp).then(r => {
                 this.updateApproveStatus();
                 this.loadStatus = LoadStatus.Loaded;
                 this.boot.loadData();

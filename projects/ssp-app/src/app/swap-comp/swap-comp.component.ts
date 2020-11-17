@@ -104,7 +104,7 @@ export class SwapCompComponent implements OnInit {
             }
             amtsStr[Number(this.left)] = this.amt;
             amtsStr[Number(this.right)] = String(0 - Number(this.minAmt));
-            let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, false);
+            let nVirtualPrice = await this.boot.calculateVirtualPrice(amtsStr, null, false);
             console.log("New Virtual Price: " + nVirtualPrice.toFixed(18));
             let diff = nVirtualPrice.div(this.boot.poolInfo.virtualPrice).minus(1).abs();
             console.log("Diff: " + diff.toFixed(18));

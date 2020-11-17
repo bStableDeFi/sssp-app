@@ -24,6 +24,7 @@ import { SwapConfirmComponent } from './swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-network.component';
 import { PriceDiffComponent } from './price-diff/price-diff.component';
 import { ApproveDlgComponent } from './approve-dlg/approve-dlg.component';
+import { AddlpSlippageConfirmComponent } from './addlp-slippage-confirm/addlp-slippage-confirm.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ApproveDlgComponent } from './approve-dlg/approve-dlg.component';
         RedeemConfirmComponent,
         AddlpConfirmComponent,
         PriceDiffComponent,
-        ApproveDlgComponent
+        ApproveDlgComponent,
+        AddlpSlippageConfirmComponent
     ],
     imports: [
         BrowserModule,
