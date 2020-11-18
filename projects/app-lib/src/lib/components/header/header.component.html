@@ -35,9 +35,11 @@
             <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
         </div>
         <div class="guideDiv">
-            <img src="assets/static/img/guide_en.png" alt="" *ngIf="lang.curLanguage==='en'">
-            <img src="assets/static/img/guide_zh.png" alt="" *ngIf="lang.curLanguage==='zh'" >
+            <a href="https://www.notion.so/Using-bStable-e85b7ddbc3d4450bbf7d6664bdc3908e" target="_blank">
+                <img src="assets/static/img/guide_en.png" alt="" *ngIf="lang.curLanguage==='en'">
+                <img src="assets/static/img/guide_zh.png" alt="" *ngIf="lang.curLanguage==='zh'">
+            </a>
         </div>
     </div>
-    
+
 </div>
