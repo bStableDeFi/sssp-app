@@ -27,10 +27,17 @@
     </div>
 </div>
 <div class="riskWarning alert alert-warning" role="alert">
-    <div>
-        <img src="assets/static/img/note.png" alt="">
-        <span>{{"riskWarning"|translate}}</span>
-        <br />
-        <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
+    <div class="topCenter">
+        <div class="noteDiv">
+            <img src="assets/static/img/note.png" alt="">
+            <span>{{"riskWarning"|translate}}</span>
+            <br />
+            <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
+        </div>
+        <div class="guideDiv">
+            <img style="display: none;" src="assets/static/img/guide_en.png" alt="">
+            <img src="assets/static/img/guide_zh.png" alt="">
+        </div>
     </div>
+    
 </div>
