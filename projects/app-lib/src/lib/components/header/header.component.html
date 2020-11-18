@@ -35,8 +35,8 @@
             <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
         </div>
         <div class="guideDiv">
-            <img style="display: none;" src="assets/static/img/guide_en.png" alt="">
-            <img src="assets/static/img/guide_zh.png" alt="">
+            <img src="assets/static/img/guide_en.png" alt="" *ngIf="lang.curLanguage==='en'">
+            <img src="assets/static/img/guide_zh.png" alt="" *ngIf="lang.curLanguage==='zh'" >
         </div>
     </div>
     
