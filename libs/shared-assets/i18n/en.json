@@ -5,10 +5,15 @@
     "addLPWarning": "While this pool is made up of stablecoins, adding liquidity still incurs the risk of impermanent loss, should any of the pool's currencies' prices shift. Press 'continue' if you understand the risks involved with becoming a liquidity provider for an automated market maker (AMM)?",
     "redeemWarning": "The Slippage is {{slippage}}%. Are you sure to do this？",
     "Warning": "Heads up!",
-    "YES":"Continue",
-    "NO":"Cancel",
-    "Warning_1":"Warning",
-    "vpWarning":"Price of share over {{vpDiff}}%. High risk to add liquidity！",
-    "approve_label":"Approve {{symbol}} Amount",
-    "infinite_approval":"Infinite Approval"
+    "YES": "Continue",
+    "NO": "Cancel",
+    "Warning_1": "Warning",
+    "vpWarning": "Price of share over {{vpDiff}}%. High risk to add liquidity！",
+    "approve_label": "Approve {{symbol}} Amount",
+    "infinite_approval": "Infinite Approval",
+    "exchange_exception": "Balance not enough, or didn't approved, or the min amount too big.",
+    "redeem_ImBalance_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
+    "redeem_allcoin_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
+    "redeem_onecoin_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
+    "addliquidity_exception": "Balance not enough, or didn't approved."
 }

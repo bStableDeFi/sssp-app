@@ -25,6 +25,7 @@ import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-n
 import { PriceDiffComponent } from './price-diff/price-diff.component';
 import { ApproveDlgComponent } from './approve-dlg/approve-dlg.component';
 import { AddlpSlippageConfirmComponent } from './addlp-slippage-confirm/addlp-slippage-confirm.component';
+import { WalletExceptionDlgComponent } from './wallet-exception-dlg/wallet-exception-dlg.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AddlpSlippageConfirmComponent } from './addlp-slippage-confirm/addlp-sl
         AddlpConfirmComponent,
         PriceDiffComponent,
         ApproveDlgComponent,
-        AddlpSlippageConfirmComponent
+        AddlpSlippageConfirmComponent,
+        WalletExceptionDlgComponent
     ],
     imports: [
         BrowserModule,

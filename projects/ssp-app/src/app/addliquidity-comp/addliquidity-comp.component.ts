@@ -104,19 +104,19 @@ export class AddliquidityCompComponent implements OnInit {
         this.boot.poolInfo.coinsRealBalance.forEach(e => {
             totalBalance = totalBalance.plus(e);
         });
-        if (totalBalance.comparedTo(0) > 0 && diff.comparedTo(environment.virtualPriceDiff) > 0) {
-            this.dialog.open(PriceDiffComponent, { width: '30em' });
-            this.loadStatus = LoadStatus.Loaded;
-            this.loaded.emit();
-            return;
-        } else {
+        // if (totalBalance.comparedTo(0) > 0 && diff.comparedTo(environment.virtualPriceDiff) > 0) {
+        //     this.dialog.open(PriceDiffComponent, { width: '30em' });
+        //     this.loadStatus = LoadStatus.Loaded;
+        //     this.loaded.emit();
+        //     return;
+        // } else {
             this.boot.addLiquidity(amtsStr, lp).then(r => {
                 this.updateApproveStatus();
                 this.loadStatus = LoadStatus.Loaded;
                 this.boot.loadData();
                 this.loaded.emit();
             });
-        }
+        // }
     }
 
     isApproveEnabled(i: number) {

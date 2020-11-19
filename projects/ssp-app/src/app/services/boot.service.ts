@@ -19,6 +19,7 @@ import { PoolInfo } from '../model/pool-info';
 import { RedeemConfirmComponent } from '../redeem-confirm/redeem-confirm.component';
 import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
+import { WalletExceptionDlgComponent } from '../wallet-exception-dlg/wallet-exception-dlg.component';
 
 const Web3_1_3 = require('web3_1_3');
 const Web3_1_2 = require('web3_1_2');
@@ -313,10 +314,11 @@ export class BootService {
         }
     }
 
-    private async getTXData(data) {
-        let gas = await this.web3.eth.estimateGas(data);
-        data.gas = gas;
-        return data;
+    private getTXData(data): Promise<any> {
+        return this.web3.eth.estimateGas(data).then(gas => {
+            data.gas = gas;
+            return data;
+        });
     }
 
     public async addLiquidity(amts: string[], lp: BigNumber): Promise<any> {
@@ -347,15 +349,14 @@ export class BootService {
         });
         let data = this.poolContract.methods.add_liquidity(amtsStr, 0).encodeABI();
         let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-        try {
-            // txdata = await this.getTXData(txdata);
-            return await this.web3.eth.sendTransaction(txdata);
-        } catch (e) {
-            console.log(e);
-            return new Promise((resolve, reject) => {
-                resolve(e);
+        return this.getTXData(txdata).then(data => {
+            return this.web3.eth.sendTransaction(data).catch(e => {
+                console.log(e);
             });
-        }
+        }).catch(e => {
+            console.log(e);
+            this.dialog.open(WalletExceptionDlgComponent, { data: { content: "addliquidity_exception" }, height: '20em', width: '32em' });
+        });
     }
     public async approve(i: number, amt: string): Promise<any> {
         if (this.poolContract) {
@@ -392,12 +393,14 @@ export class BootService {
         minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
         let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
         let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, value: 0, data: data };
-        try {
-            // txdata = await this.getTXData(txdata);
-            return await this.web3.eth.sendTransaction(txdata);
-        } catch (e) {
+        return this.getTXData(txdata).then(data => {
+            return this.web3.eth.sendTransaction(data).catch(e => {
+                console.log(e);
+            });
+        }).catch(e => {
+            this.dialog.open(WalletExceptionDlgComponent, { data: { content: "exchange_exception" }, height: '20em', width: '32em' });
             console.log(e);
-        }
+        });
     }
     public async exchange(i: number, j: number, amt: string, minAmt: string): Promise<any> {
         if (this.poolContract) {
@@ -439,12 +442,14 @@ export class BootService {
         if (this.poolContract) {
             let data = this.poolContract.methods.remove_liquidity_imbalance(amts, maxLp).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-            try {
-                // txdata = await this.getTXData(txdata);
-                return await this.web3.eth.sendTransaction(txdata);
-            } catch (e) {
+            this.getTXData(txdata).then(data => {
+                return this.web3.eth.sendTransaction(data).catch(e => {
+                    console.log(e);
+                });
+            }).catch(e => {
+                this.dialog.open(WalletExceptionDlgComponent, { data: { content: "redeem_ImBalance_exception" }, height: '20em', width: '32em' });
                 console.log(e);
-            }
+            });
         }
     }
 
@@ -455,16 +460,16 @@ export class BootService {
             amt = amt.plus(e);
         });
         let slippage = amt.div(lp).minus(1).multipliedBy(100);
-        if (slippage.comparedTo(0) < 0) {
-            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '20em', width: '32em' });
-            return dialogRef.afterClosed().toPromise().then(res => {
-                if (res === true) {
-                    return this._redeemToAll(lps, minAmts);
-                }
-            });
-        } else {
+        // if (slippage.comparedTo(0) < 0) {
+        //     let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '20em', width: '32em' });
+        //     return dialogRef.afterClosed().toPromise().then(res => {
+        //         if (res === true) {
+        //             return this._redeemToAll(lps, minAmts);
+        //         }
+        //     });
+        // } else {
             return this._redeemToAll(lps, minAmts);
-        }
+        // }
     }
     private async _redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
         if (this.poolContract) {
@@ -476,12 +481,14 @@ export class BootService {
             });
             let data = this.poolContract.methods.remove_liquidity(lps, amts).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-            try {
-                // txdata = await this.getTXData(txdata);
-                return await this.web3.eth.sendTransaction(txdata);
-            } catch (e) {
+            return this.getTXData(txdata).then(data => {
+                return this.web3.eth.sendTransaction(data).catch(e => {
+                    console.log(e);
+                });
+            }).catch(e => {
+                this.dialog.open(WalletExceptionDlgComponent, { data: { content: "redeem_allcoin_exception" }, height: '20em', width: '32em' });
                 console.log(e);
-            }
+            });
         }
     }
 
@@ -489,16 +496,16 @@ export class BootService {
         let lp = new BigNumber(lps);
         let amt = new BigNumber(minAmt);
         let slippage = amt.div(lp).minus(1).multipliedBy(100);
-        if (slippage.comparedTo(0) < 0) {
-            let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '20em', width: '32em' });
-            return dialogRef.afterClosed().toPromise().then(res => {
-                if (res === true) {
-                    return this._redeemToOneCoin(lps, coinIndex, minAmt);
-                }
-            });
-        } else {
+        // if (slippage.comparedTo(0) < 0) {
+        //     let dialogRef = this.dialog.open(RedeemConfirmComponent, { data: { slippage: slippage.toFixed(4, BigNumber.ROUND_UP) }, height: '20em', width: '32em' });
+        //     return dialogRef.afterClosed().toPromise().then(res => {
+        //         if (res === true) {
+        //             return this._redeemToOneCoin(lps, coinIndex, minAmt);
+        //         }
+        //     });
+        // } else {
             return this._redeemToOneCoin(lps, coinIndex, minAmt);
-        }
+        // }
     }
 
     private async _redeemToOneCoin(lps: string, coinIndex: string, minAmt: string): Promise<any> {
@@ -507,12 +514,14 @@ export class BootService {
             minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
             let data = this.poolContract.methods.remove_liquidity_one_coin(lps, coinIndex, minAmt).encodeABI();
             let txdata = { from: this.accounts[0], to: this.chainConfig.contracts.Pool.address, data: data };
-            try {
-                // txdata = await this.getTXData(txdata);
-                return await this.web3.eth.sendTransaction(txdata);
-            } catch (e) {
+            return this.getTXData(txdata).then(data => {
+                return this.web3.eth.sendTransaction(data).catch(e => {
+                    console.log(e);
+                });
+            }).catch(e => {
                 console.log(e);
-            }
+                this.dialog.open(WalletExceptionDlgComponent, { data: { content: "redeem_onecoin_exception" }, height: '20em', width: '32em' });
+            });
         }
     }
 
