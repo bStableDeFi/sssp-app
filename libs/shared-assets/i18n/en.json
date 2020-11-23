@@ -8,12 +8,13 @@
     "YES": "Continue",
     "NO": "Cancel",
     "Warning_1": "Warning",
+    "Warning_2": "Something went wrong. Please try again!",
     "vpWarning": "Price of share over {{vpDiff}}%. High risk to add liquidity！",
     "approve_label": "Approve {{symbol}} Amount",
     "infinite_approval": "Infinite Approval",
-    "exchange_exception": "Balance not enough, or didn't approved, or the min amount too big.",
-    "redeem_ImBalance_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
-    "redeem_allcoin_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
-    "redeem_onecoin_exception": "Liquidity balance not enough, or the amount you desired maybe too big.",
-    "addliquidity_exception": "Balance not enough, or didn't approved."
+    "exchange_exception": "Your balance may be too low or you may not have approved the exchange amount. The minimum amount may also be too big.",
+    "redeem_ImBalance_exception": "You may not have enough liquidity({{symbol}}) or redeem the desired amount.",
+    "redeem_allcoin_exception": "You may not have enough liquidity({{symbol}}) or redeem the desired amount.",
+    "redeem_onecoin_exception": "You may not have enough liquidity({{symbol}}) or redeem the desired amount.",
+    "addliquidity_exception": "Your balance may be too low or you may not have pre-approved the funds."
 }
