@@ -23,6 +23,9 @@ export const environment = {
                 ],
                 Pool: {
                     address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                },
+                Proxy: {
+                    address: '',
                 }
             }
         },
@@ -38,6 +41,9 @@ export const environment = {
                 ],
                 Pool: {
                     address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                },
+                Proxy: {
+                    address: '',
                 }
             }
         },
@@ -53,6 +59,9 @@ export const environment = {
                 ],
                 Pool: {
                     address: '0x936EaEB69174e9f67b07213890DF8E0c29A71c83',
+                },
+                Proxy: {
+                    address: '',
                 }
             }
         }

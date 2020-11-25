@@ -41,44 +41,70 @@ export class RedeemliquidityCompComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    private _redeemLp(lps: string) {
+        if (Number(this.redeemToIndex) >= 0 && Number(this.redeemToIndex) <= 2) { // 赎回成一种币
+            this.status = ActionStatus.Transfering;
+            this.loading.emit();
+            this.boot.redeemToOneCoin(lps, this.redeemToIndex, this.amts[this.redeemToIndex]).then(res => {
+                this.status = ActionStatus.TrasactionEnd;
+                this.boot.loadData();
+                this.loaded.emit();
+            });
+        } else { // 赎回成3种币
+            this.status = ActionStatus.Transfering;
+            this.loading.emit();
+            let amts: Array<string> = new Array();
+            this.amts.forEach(e => {
+                amts.push(String(e));
+            });
+            this.boot.redeemToAll(lps, amts).then(res => {
+                this.status = ActionStatus.TrasactionEnd;
+                this.boot.loadData();
+                this.loaded.emit();
+            });
+        }
+    }
     async redeemCoin() {
         await this.boot.loadData();
         if (this.redeemPrecent && this.redeemPrecent !== 0) { // 输入要赎回流动性的数量（百分比）
             let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_UP);
-            if (Number(this.redeemToIndex) >= 0 && Number(this.redeemToIndex) <= 2) { // 赎回成一种币
-                this.status = ActionStatus.Transfering;
-                this.loading.emit();
-                this.boot.redeemToOneCoin(lps, this.redeemToIndex, this.amts[this.redeemToIndex]).then(res => {
-                    this.status = ActionStatus.TrasactionEnd;
-                    this.boot.loadData();
-                    this.loaded.emit();
-                });
-            } else { // 赎回成3种币
-                this.status = ActionStatus.Transfering;
-                this.loading.emit();
-                let amts: Array<string> = new Array();
-                this.amts.forEach(e => {
-                    amts.push(String(e));
-                });
-                this.boot.redeemToAll(lps, amts).then(res => {
-                    this.status = ActionStatus.TrasactionEnd;
-                    this.boot.loadData();
-                    this.loaded.emit();
-                });
-            }
+            this.boot.allowanceLiquidityOfProxy().then(amt => {
+                if (amt.comparedTo(lps) < 0) {
+                    this.boot.approveProxy(lps).then(() => {
+                        this._redeemLp(lps);
+                    });
+                } else {
+                    this._redeemLp(lps);
+                }
+            });
         } else {
             // 根据输入的币的数量赎回
             this.status = ActionStatus.Transfering;
             this.loading.emit();
             let amtsStr = new Array();
+            let totalAmt = new BigNumber(0);
             this.amts.forEach((e, i, arr) => {
                 amtsStr.push(String(e));
-            })
-            this.boot.redeemImBalance(amtsStr).then(r => {
-                this.status = ActionStatus.TrasactionEnd;
-                this.boot.loadData();
-                this.loaded.emit();
+                totalAmt = totalAmt.plus(e);
             });
+            this.boot.allowanceLiquidityOfProxy().then(amt => {
+                if (amt.comparedTo(totalAmt) < 0) {
+                    this.boot.approveProxy(totalAmt.toFixed(18)).then(() => {
+                        this.boot.redeemImBalance(amtsStr).then(r => {
+                            this.status = ActionStatus.TrasactionEnd;
+                            this.boot.loadData();
+                            this.loaded.emit();
+                        });
+                    });
+                } else {
+                    this.boot.redeemImBalance(amtsStr).then(r => {
+                        this.status = ActionStatus.TrasactionEnd;
+                        this.boot.loadData();
+                        this.loaded.emit();
+                    });
+                }
+            });
+
         }
     }
 

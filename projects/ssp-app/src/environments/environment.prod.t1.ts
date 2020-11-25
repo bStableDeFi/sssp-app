@@ -33,7 +33,10 @@ export const environment = {
                     { symbol: 'USDT', address: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd' },
                 ],
                 Pool: {
-                    address: '0xFf9D74ce97ecC4Cf4d92c8335A1cdA6760C0e36F',
+                    address: '0x9486d275402604097A03ca0c6a787f0eB7f450cC',
+                },
+                Proxy: {
+                    address: '0x42e56d04a463E92f8FFfa277b2322795634113F3',
                 }
             }
         },

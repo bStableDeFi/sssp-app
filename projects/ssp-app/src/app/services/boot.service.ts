@@ -51,6 +51,7 @@ export class BootService {
     // busdContract: Contract;
     // usdtContract: Contract;
     poolContract: Contract;
+    proxyContract: Contract;
 
     contracts: Array<Contract> = new Array();
     // contractsAddress: Array<string> = new Array();
@@ -102,7 +103,8 @@ export class BootService {
         });
         // @ts-ignore
         this.poolContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.Pool.address);
-
+        // @ts-ignore
+        this.proxyContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.Proxy.address);
     }
 
     private async init() {
@@ -387,7 +389,35 @@ export class BootService {
 
         }
     }
+    public async approveProxy(amt: string): Promise<any> {
+        if (this.poolContract) {
+            let dialogRef = this.dialog.open(ApproveDlgComponent, { data: { amt: amt, symbol: environment.liquiditySymbol }, height: '20em', width: '32em' });
+            return dialogRef.afterClosed().toPromise().then(async res => {
+                let amt;
+                if (res && res.continu && res.infinite === true) {
+                    amt = new BigNumber(2).exponentiatedBy(256).minus(1).toFixed(0);
+                } else if (res && res.continu && res.infinite === false) {
+                    amt = res.amt;
+                    amt = this.web3.utils.toWei(String(amt), 'ether');
+                } else {
+                    return new Promise((resolve, reject) => {
+                        resolve();
+                    });
+                }
+                console.log(amt);
+                let data = this.poolContract.methods.approve(this.chainConfig.contracts.Proxy.address, amt).encodeABI();
+                try {
+                    return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.coins[i].address, data: data });
+                } catch (e) {
+                    console.log(e);
+                    return new Promise((resolve, reject) => {
+                        resolve();
+                    });
+                }
+            });
 
+        }
+    }
     private async _exchange(i: number, j: number, amt: string, minAmt: string): Promise<any> {
         amt = this.web3.utils.toWei(String(amt), 'ether');
         minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
@@ -468,7 +498,7 @@ export class BootService {
         //         }
         //     });
         // } else {
-            return this._redeemToAll(lps, minAmts);
+        return this._redeemToAll(lps, minAmts);
         // }
     }
     private async _redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
@@ -504,7 +534,7 @@ export class BootService {
         //         }
         //     });
         // } else {
-            return this._redeemToOneCoin(lps, coinIndex, minAmt);
+        return this._redeemToOneCoin(lps, coinIndex, minAmt);
         // }
     }
 
@@ -551,7 +581,31 @@ export class BootService {
         }
 
     }
+    public async allowanceOfProxy(i): Promise<BigNumber> {
+        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
+            let decimals = await this.contracts[i].methods.decimals().call({ from: this.accounts[0] });
+            return this.contracts[i].methods.allowance(this.accounts[0], this.chainConfig.contracts.Proxy.address).call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(decimals));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
 
+    }
+    public async allowanceLiquidityOfProxy(): Promise<BigNumber> {
+        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
+            return this.poolContract.methods.allowance(this.accounts[0], this.chainConfig.contracts.Proxy.address).call().then((res) => {
+                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve(new BigNumber(0));
+            });
+        }
+
+    }
     public async getVirtualPrice(): Promise<BigNumber> {
         if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
             return this.poolContract.methods.get_virtual_price().call().then((res) => {
