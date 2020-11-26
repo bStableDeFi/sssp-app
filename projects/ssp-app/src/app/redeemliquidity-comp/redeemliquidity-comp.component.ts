@@ -66,12 +66,16 @@ export class RedeemliquidityCompComponent implements OnInit {
     }
     async redeemCoin() {
         await this.boot.loadData();
+        this.status = ActionStatus.Transfering;
+        this.loading.emit();
         if (this.redeemPrecent && this.redeemPrecent !== 0) { // 输入要赎回流动性的数量（百分比）
             let lps = this.boot.balance.lp.multipliedBy(this.redeemPrecent).dividedBy(100).toFixed(18, BigNumber.ROUND_UP);
-            this.boot.allowanceLiquidityOfProxy().then(amt => {
+            this.boot.allowanceLiquidity().then(amt => {
                 if (amt.comparedTo(lps) < 0) {
-                    this.boot.approveProxy(lps).then(() => {
-                        this._redeemLp(lps);
+                    this.boot.approveLiquidity(lps).then((res) => {
+                        if (res) {
+                            this._redeemLp(lps);
+                        }
                     });
                 } else {
                     this._redeemLp(lps);
@@ -79,22 +83,22 @@ export class RedeemliquidityCompComponent implements OnInit {
             });
         } else {
             // 根据输入的币的数量赎回
-            this.status = ActionStatus.Transfering;
-            this.loading.emit();
             let amtsStr = new Array();
             let totalAmt = new BigNumber(0);
             this.amts.forEach((e, i, arr) => {
                 amtsStr.push(String(e));
                 totalAmt = totalAmt.plus(e);
             });
-            this.boot.allowanceLiquidityOfProxy().then(amt => {
+            this.boot.allowanceLiquidity().then(amt => {
                 if (amt.comparedTo(totalAmt) < 0) {
-                    this.boot.approveProxy(totalAmt.toFixed(18)).then(() => {
-                        this.boot.redeemImBalance(amtsStr).then(r => {
-                            this.status = ActionStatus.TrasactionEnd;
-                            this.boot.loadData();
-                            this.loaded.emit();
-                        });
+                    this.boot.approveLiquidity(totalAmt.toFixed(18)).then((res) => {
+                        if (res) {
+                            this.boot.redeemImBalance(amtsStr).then(r => {
+                                this.status = ActionStatus.TrasactionEnd;
+                                this.boot.loadData();
+                                this.loaded.emit();
+                            });
+                        }
                     });
                 } else {
                     this.boot.redeemImBalance(amtsStr).then(r => {

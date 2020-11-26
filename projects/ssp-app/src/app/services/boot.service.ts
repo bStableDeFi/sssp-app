@@ -5,18 +5,13 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { BigNumber } from 'bignumber.js';
-import { resolve } from 'dns';
 import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
-import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
 import { AddlpSlippageConfirmComponent } from '../addlp-slippage-confirm/addlp-slippage-confirm.component';
 import { ApproveDlgComponent } from '../approve-dlg/approve-dlg.component';
-import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
-import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
-import { RedeemConfirmComponent } from '../redeem-confirm/redeem-confirm.component';
 import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 import { WalletExceptionDlgComponent } from '../wallet-exception-dlg/wallet-exception-dlg.component';
@@ -51,7 +46,7 @@ export class BootService {
     // busdContract: Contract;
     // usdtContract: Contract;
     poolContract: Contract;
-    proxyContract: Contract;
+    LPContract: Contract;
 
     contracts: Array<Contract> = new Array();
     // contractsAddress: Array<string> = new Array();
@@ -104,7 +99,7 @@ export class BootService {
         // @ts-ignore
         this.poolContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.Pool.address);
         // @ts-ignore
-        this.proxyContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.Proxy.address);
+        this.LPContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.LPToken.address);
     }
 
     private async init() {
@@ -297,17 +292,17 @@ export class BootService {
                 let adminBalanceStr = await this.poolContract.methods.admin_balances(index).call({ from: this.accounts[0] });
 
                 this.balance.coinsBalance[index] = new BigNumber(balanceStr).div(new BigNumber(10).exponentiatedBy(decimals));
-                let pBalanceStr = await this.contracts[index].methods.balanceOf(this.chainConfig.contracts.Pool.address).call({ from: this.accounts[0] });
+                let pBalanceStr = await this.contracts[index].methods.balanceOf(this.chainConfig.contracts.LPToken.address).call({ from: this.accounts[0] });
                 this.poolInfo.coinsBalance[index] = new BigNumber(pBalanceStr).div(new BigNumber(10).exponentiatedBy(decimals));
                 this.poolInfo.coinsRealBalance[index] = this.poolInfo.coinsBalance[index].minus(new BigNumber(adminBalanceStr).div(new BigNumber(10).exponentiatedBy(decimals)));
             });
-            let lpBalanceStr = await this.poolContract.methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
-            let lpDecimals = await this.poolContract.methods.decimals().call({ from: this.accounts[0] });
+            let lpBalanceStr = await this.LPContract.methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
+            let lpDecimals = await this.LPContract.methods.decimals().call({ from: this.accounts[0] });
             this.balance.lp = new BigNumber(lpBalanceStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
             // let feeStr=await this.poolContract.methods.fee().call({from:this.accounts[0]});
             // let adminFeeStr=await this.poolContract.methods.fee().call({from:this.accounts[0]});
 
-            let totalSupplyStr = await this.poolContract.methods.totalSupply().call({ from: this.accounts[0] });
+            let totalSupplyStr = await this.LPContract.methods.totalSupply().call({ from: this.accounts[0] });
             this.poolInfo.totalSupply = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
             // this.poolInfo.fee = new BigNumber(feeStr).div(new BigNumber(10).exponentiatedBy(10));
             // this.poolInfo.adminFee=new BigNumber(adminFeeStr).div(new BigNumber(10).exponentiatedBy(10));
@@ -389,7 +384,8 @@ export class BootService {
 
         }
     }
-    public async approveProxy(amt: string): Promise<any> {
+
+    public async approveLiquidity(amt: string): Promise<any> {
         if (this.poolContract) {
             let dialogRef = this.dialog.open(ApproveDlgComponent, { data: { amt: amt, symbol: environment.liquiditySymbol }, height: '20em', width: '32em' });
             return dialogRef.afterClosed().toPromise().then(async res => {
@@ -401,17 +397,17 @@ export class BootService {
                     amt = this.web3.utils.toWei(String(amt), 'ether');
                 } else {
                     return new Promise((resolve, reject) => {
-                        resolve();
+                        resolve(false);
                     });
                 }
                 console.log(amt);
-                let data = this.poolContract.methods.approve(this.chainConfig.contracts.Proxy.address, amt).encodeABI();
+                let data = this.LPContract.methods.approve(this.chainConfig.contracts.Pool.address, amt).encodeABI();
                 try {
-                    return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.coins[i].address, data: data });
+                    return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.LPToken.address, data: data });
                 } catch (e) {
                     console.log(e);
                     return new Promise((resolve, reject) => {
-                        resolve();
+                        resolve(false);
                     });
                 }
             });
@@ -581,22 +577,10 @@ export class BootService {
         }
 
     }
-    public async allowanceOfProxy(i): Promise<BigNumber> {
-        if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
-            let decimals = await this.contracts[i].methods.decimals().call({ from: this.accounts[0] });
-            return this.contracts[i].methods.allowance(this.accounts[0], this.chainConfig.contracts.Proxy.address).call().then((res) => {
-                return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(decimals));
-            });
-        } else {
-            return new Promise((resolve, reject) => {
-                resolve(new BigNumber(0));
-            });
-        }
 
-    }
-    public async allowanceLiquidityOfProxy(): Promise<BigNumber> {
+    public async allowanceLiquidity(): Promise<BigNumber> {
         if (this.chainConfig && this.contracts && this.contracts.length > 0 && this.accounts && this.accounts.length > 0) {
-            return this.poolContract.methods.allowance(this.accounts[0], this.chainConfig.contracts.Proxy.address).call().then((res) => {
+            return this.LPContract.methods.allowance(this.accounts[0], this.chainConfig.contracts.Pool.address).call().then((res) => {
                 return new BigNumber(res).div(new BigNumber(10).exponentiatedBy(18));
             });
         } else {

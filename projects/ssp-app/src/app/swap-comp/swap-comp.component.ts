@@ -86,7 +86,7 @@ export class SwapCompComponent implements OnInit {
         if (this.amt) {
             this.loadStatus = LoadStatus.Loading;
             this.loading.emit();
-            this.boot.approveProxy(Number(this.left), this.amt).then(() => {
+            this.boot.approve(Number(this.left), this.amt).then(() => {
                 this.loaded.emit();
                 this.updateApproveStatus();
                 this.loadStatus = LoadStatus.Loaded;
@@ -156,7 +156,7 @@ export class SwapCompComponent implements OnInit {
 
     updateApproveStatus() {
         if (!new BigNumber(this.left).isNaN() && !new BigNumber(this.amt).isNaN() && this.boot.accounts && this.boot.accounts.length > 0) {
-            this.boot.allowanceOfProxy(this.left).then(amt => {
+            this.boot.allowance(this.left).then(amt => {
                 if (amt.comparedTo(new BigNumber(this.amt)) >= 0) {
                     this.approveStatus = ApproveStatus.Approved;
                 } else {

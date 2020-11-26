@@ -62,7 +62,7 @@ export class AddliquidityCompComponent implements OnInit {
     updateApproveStatus() {
         for (let i = 0; i < this.boot.coins.length; i++) {
             if (this.boot.accounts && this.boot.accounts.length > 0) {
-                this.boot.allowanceOfProxy(i).then(amt => {
+                this.boot.allowance(i).then(amt => {
                     if (amt.comparedTo(new BigNumber(this.amts[i])) >= 0) {
                         this.approveStatus[i] = ApproveStatus.Approved;
                     } else {
