@@ -33,7 +33,7 @@ export const environment = {
                     { symbol: 'USDT', address: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd' },
                 ],
                 Pool: {
-                    address: '0x42e56d04a463E92f8FFfa277b2322795634113F3',
+                    address: '0x791F0590eD1F0b6cdD9c1D52E399D527e476B94B',
                 },
                 LPToken: {
                     address: '0x9486d275402604097A03ca0c6a787f0eB7f450cC',
