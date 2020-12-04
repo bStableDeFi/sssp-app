@@ -39,6 +39,29 @@
                 <img src="assets/static/img/guide_en.png" alt="" *ngIf="lang.curLanguage==='en'">
                 <img src="assets/static/img/guide_zh.png" alt="" *ngIf="lang.curLanguage==='zh'">
             </a>
+            <div class="dropdown">
+                <p>{{"Pool 1"|translate}}</p>
+            </div>
+        </div>
+        <div class="downDiv">
+            <ul>
+                <li class="">
+                    <div>
+                        <span>{{"Pool 1"|translate}}</span>
+                        <input type="radio">
+                    </div>
+                    <p class="coinType">DAI / BUSD/ USDT</p>
+                </li>
+
+                <li class="active_li">
+                    <div>
+                        <span>{{"Pool 2"|translate}}</span>
+                        <input type="radio">
+                    </div>
+                    <p class="coinType">QUSD / BUSD/ USDT</p>
+                </li>
+
+            </ul> 
         </div>
     </div>
 

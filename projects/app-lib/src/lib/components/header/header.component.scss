@@ -3,10 +3,11 @@
         margin: 0 auto;
         width: 100%;
         .topCenter{
-            width: 460px;
+            width: 630px;
             margin: 0 auto;
             height: 44px;
             display: block;
+            position: relative;
             .noteDiv {
                float: left;
                padding: 13px 0;
@@ -18,7 +19,7 @@
                 }
                 span{
                     float: left;
-                    font-size: 14px;             
+                    font-size: 13px;             
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
                 }
@@ -26,11 +27,76 @@
             .guideDiv{
                 float: right;
                 a{
-                    display: block;
+                    margin-top: 3px;
+                    display: inline-block;
                     img{
-                        width: 110px;
+                        width: 47px;
                     }
-                } 
+                }
+                .dropdown{
+                    float: right;
+                    height: 46px;
+                    width: 85px;
+                    background: url(/assets/static/img/xiala.png) no-repeat;
+                    background-size: 100% 100%;
+                    p{
+                        line-height: 46px;
+                        color: #ffffff;
+                        padding: 0 10px;
+                        font-size: 12px;
+                    }
+                }
+            }
+            .downDiv{
+                height: 205px;
+                width: 225px;
+                background: url(/assets/static/img/dropdown.png) no-repeat;
+                background-size: 100% 100%;
+                position: absolute;
+                top: 20px;
+                right: -13px;
+                z-index: 999999;
+                ul{
+                    width: 78%;
+                    height: 80%;
+                    margin: 30px auto 0;
+                    padding: 10px;
+                    padding-bottom: 20px;
+                    .active_li{
+                        background: #F9FBFF;
+                        border: 1px solid #C6DEFF;
+                        border-radius: 12px;
+                    }
+                    li{
+                        width: 94%;
+                        // height: 40%;
+                        margin: 0 auto;
+                        margin-bottom: 10px;
+                        padding: 4px 0;
+                        div{
+                            padding: 0 11px;
+                            height: 26px;
+                            span{              
+                                font-weight: 500;
+                                font-size: 14px;
+                                color: #333333;
+                                float: left;
+                            }
+                            input{
+                                width: 13px;
+                                height: 13px;
+                                float: right;
+                            }
+                        }
+                        .coinType{
+                            padding: 0 11px;
+                            font-size: 12px;                           
+                            font-weight: 400;
+                            color: #6E7C90;
+                            line-height: 22px;
+                        }
+                    }
+                }
             }
         }       
     }
@@ -161,7 +227,7 @@
             .noteDiv {
                float: left;
             //    padding: 13px 0;
-            width: 70%;
+            width: 64%;
                 img{
                     float: left;
                     width: 16px;
@@ -173,14 +239,79 @@
                     font-size: 14px;             
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
+                    width: 88%;
                 }
             }
             .guideDiv{
                 float: right;
                 a{
-                    display: block;
+                    display: inline-block;
                     img{
-                        width: 100px;
+                        width: 0.45rem;
+                    }
+                }
+                .dropdown{
+                    float: right;
+                    height: 46px;
+                    width: 0.8rem;
+                    background: url(/assets/static/img/xiala.png) no-repeat;
+                    background-size: 100% 100%;
+                    p{
+                        line-height: 46px;
+                        color: #ffffff;
+                        padding: 0 10px;
+                        font-size: 12px;
+                    }
+                }
+            }
+            .downDiv{
+                height: 205px;
+                width: 225px;
+                background: url(/assets/static/img/dropdown.png) no-repeat;
+                background-size: 100% 100%;
+                position: absolute;
+                top: 88px;
+                right: -13px;
+                z-index: 999999;
+                ul{
+                    width: 78%;
+                    height: 80%;
+                    margin: 30px auto 0;
+                    padding: 10px;
+                    padding-bottom: 0.2rem;
+                    .active_li{
+                        background: #F9FBFF;
+                        border: 1px solid #C6DEFF;
+                        border-radius: 12px;
+                    }
+                    li{
+                        width: 94%;
+                        // height: 40%;
+                        margin: 0 auto;
+                        margin-bottom: 10px;
+                        padding: 4px 0;
+                        div{
+                            padding: 0 11px;
+                            height: 26px;
+                            span{              
+                                font-weight: 500;
+                                font-size: 14px;
+                                color: #333333;
+                                float: left;
+                            }
+                            input{
+                                width: 13px;
+                                height: 13px;
+                                float: right;
+                            }
+                        }
+                        .coinType{
+                            padding: 0 11px;
+                            font-size: 12px;                           
+                            font-weight: 400;
+                            color: #6E7C90;
+                            line-height: 22px;
+                        }
                     }
                 }
             }
