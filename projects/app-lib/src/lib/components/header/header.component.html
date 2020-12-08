@@ -18,10 +18,33 @@
                 </button>
             </ng-template>
             <div class="lang" style="cursor:pointer;">
-                <img *ngIf="lang.curLanguage.indexOf('en')!=0" src="assets/static/img/en.png" alt=""
+                <!-- <img *ngIf="lang.curLanguage.indexOf('en')!=0" src="assets/static/img/en.png" alt=""
                     (click)="changeLang('en')">
                 <img *ngIf="lang.curLanguage.indexOf('zh')!=0" src="assets/static/img/cn.png" alt=""
-                    (click)="changeLang('zh')">
+                    (click)="changeLang('zh')"> -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <a mat-button mat-menu-item href="/p1" >
+                        <mat-icon>attach_money</mat-icon>
+                        <span>{{"Pool 1"|translate}}</span>
+                    </a>
+                    <a mat-button mat-menu-item href="/p2" >
+                        <mat-icon>attach_money</mat-icon>
+                        <span>{{"Pool 2"|translate}}</span>
+                    </a>
+                    <a mat-button mat-menu-item href="https://www.notion.so/Using-bStable-e85b7ddbc3d4450bbf7d6664bdc3908e"
+                        target="_blank">
+                        <mat-icon>library_books</mat-icon>
+                        <span>{{"Tutorial"|translate}}</span>
+                    </a>
+                    <button mat-menu-item (click)="changeLang(lang.curLanguage.indexOf('zh')===0?'en':'zh')">
+                        <mat-icon>language</mat-icon>
+                        <span *ngIf="lang.curLanguage.indexOf('zh')===0">English</span>
+                        <span *ngIf="lang.curLanguage.indexOf('en')===0">中文简体</span>
+                    </button>
+                </mat-menu>
             </div>
         </div>
     </div>
@@ -34,35 +57,5 @@
             <br />
             <span *ngIf="showVpWarning()">{{ "vpWarning"|translate:{vpDiff:vpDiff.toFixed(4)} }}</span>
         </div>
-        <div class="guideDiv">
-            <a href="https://www.notion.so/Using-bStable-e85b7ddbc3d4450bbf7d6664bdc3908e" target="_blank">
-                <img src="assets/static/img/guide_en.png" alt="" *ngIf="lang.curLanguage==='en'">
-                <img src="assets/static/img/guide_zh.png" alt="" *ngIf="lang.curLanguage==='zh'">
-            </a>
-            <div class="dropdown">
-                <p>{{"Pool 1"|translate}}</p>
-            </div>
-        </div>
-        <div class="downDiv">
-            <ul>
-                <li class="">
-                    <div>
-                        <span>{{"Pool 1"|translate}}</span>
-                        <input type="radio">
-                    </div>
-                    <p class="coinType">DAI / BUSD/ USDT</p>
-                </li>
-
-                <li class="active_li">
-                    <div>
-                        <span>{{"Pool 2"|translate}}</span>
-                        <input type="radio">
-                    </div>
-                    <p class="coinType">QUSD / BUSD/ USDT</p>
-                </li>
-
-            </ul> 
-        </div>
     </div>
-
 </div>

@@ -31,7 +31,10 @@ export class AppComponent {
     }
 
     chooseWallet() {
-        this.dialog.open(ChooseWalletDlgComponent, { width: '30em' });
+        let dlgRef = this.dialog.open(ChooseWalletDlgComponent, { width: '30em' });
+        dlgRef.afterClosed().toPromise().then(res => {
+            this.header.onLoaded();
+        });
     }
 
     public async connectWallet() {

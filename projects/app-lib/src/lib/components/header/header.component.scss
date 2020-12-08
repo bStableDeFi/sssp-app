@@ -1,53 +1,43 @@
+a:focus {
+    outline: none;
+    text-decoration: none;
+    color: rgba(0, 0, 0, .87);
+}
+
 @media screen and (min-width: 768px) {
     .riskWarning {
         margin: 0 auto;
         width: 100%;
-        .topCenter{
-            width: 630px;
+
+        .topCenter {
+            width: 480px;
             margin: 0 auto;
             height: 44px;
             display: block;
             position: relative;
+
             .noteDiv {
-               float: left;
-               padding: 13px 0;
-                img{
+                float: left;
+                width: 100%;
+
+                img {
                     float: left;
                     width: 16px;
                     margin-right: 10px;
                     margin-top: 2px;
                 }
-                span{
+
+                span {
                     float: left;
-                    font-size: 13px;             
+                    font-size: 13px;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
                 }
             }
-            .guideDiv{
-                float: right;
-                a{
-                    margin-top: 3px;
-                    display: inline-block;
-                    img{
-                        width: 47px;
-                    }
-                }
-                .dropdown{
-                    float: right;
-                    height: 46px;
-                    width: 85px;
-                    background: url(/assets/static/img/xiala.png) no-repeat;
-                    background-size: 100% 100%;
-                    p{
-                        line-height: 46px;
-                        color: #ffffff;
-                        padding: 0 10px;
-                        font-size: 12px;
-                    }
-                }
-            }
-            .downDiv{
+
+
+
+            .downDiv {
                 height: 205px;
                 width: 225px;
                 background: url(/assets/static/img/dropdown.png) no-repeat;
@@ -56,41 +46,48 @@
                 top: 20px;
                 right: -13px;
                 z-index: 999999;
-                ul{
+
+                ul {
                     width: 78%;
                     height: 80%;
                     margin: 30px auto 0;
                     padding: 10px;
                     padding-bottom: 20px;
-                    .active_li{
+
+                    .active_li {
                         background: #F9FBFF;
                         border: 1px solid #C6DEFF;
                         border-radius: 12px;
                     }
-                    li{
+
+                    li {
                         width: 94%;
                         // height: 40%;
                         margin: 0 auto;
                         margin-bottom: 10px;
                         padding: 4px 0;
-                        div{
+
+                        div {
                             padding: 0 11px;
                             height: 26px;
-                            span{              
+
+                            span {
                                 font-weight: 500;
                                 font-size: 14px;
                                 color: #333333;
                                 float: left;
                             }
-                            input{
+
+                            input {
                                 width: 13px;
                                 height: 13px;
                                 float: right;
                             }
                         }
-                        .coinType{
+
+                        .coinType {
                             padding: 0 11px;
-                            font-size: 12px;                           
+                            font-size: 12px;
                             font-weight: 400;
                             color: #6E7C90;
                             line-height: 22px;
@@ -98,14 +95,16 @@
                     }
                 }
             }
-        }       
+        }
     }
+
     .alert-warning {
-        border-top: 1px solid  #FFF4E4;
-        border-bottom: 1px solid  #FFF4E4;
-        background-color:  #FFFCF8;
-        color:#E8A874;
+        border-top: 1px solid #FFF4E4;
+        border-bottom: 1px solid #FFF4E4;
+        background-color: #FFFCF8;
+        color: #E8A874;
     }
+
     .alert {
         padding: 10px 0px;
         border-radius: 4px;
@@ -147,20 +146,25 @@
     .navigation .main .leftpart .noConnectButton {
         padding: 0px;
         width: 190px;
-        height: 32px;
         background: #FAFAFA;
         color: #0E0E0E;
         border: #BEBEBE 0.5px solid;
         border-radius: 12px;
         font-weight: 400;
-        line-height: 32px;
         letter-spacing: 1px;
         outline: none;
+        height: 2em;
+        line-height: 1.8em;
     }
 
     .navigation .main .leftpart .noConnectButton img {
         float: left;
         width: 19%;
+        height: 1.8em;
+    }
+
+    .navigation .main .leftpart .noConnectButton {
+        float: left;
     }
 
     .navigation .main .leftpart .ConnectedButton {
@@ -217,46 +221,55 @@
 @media screen and (max-width: 768px) {
     .riskWarning {
         margin: 0 auto;
-        .topCenter{
+
+        .topCenter {
             // width:100%;
             // margin-left:7px ;
             margin: 0 auto;
             height: 48px;
             display: block;
             padding: 0 10px;
+
             .noteDiv {
-               float: left;
-            //    padding: 13px 0;
-            width: 64%;
-                img{
+                float: left;
+                //    padding: 13px 0;
+                width: 100%;
+
+                img {
                     float: left;
                     width: 16px;
                     margin-right: 10px;
                     margin-top: 2px;
                 }
-                span{
+
+                span {
                     float: left;
-                    font-size: 14px;             
+                    font-size: 14px;
                     font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
                     width: 88%;
                 }
             }
-            .guideDiv{
+
+            .guideDiv {
                 float: right;
-                a{
+
+                a {
                     display: inline-block;
-                    img{
+
+                    img {
                         width: 0.45rem;
                     }
                 }
-                .dropdown{
+
+                .dropdown {
                     float: right;
                     height: 46px;
                     width: 0.8rem;
                     background: url(/assets/static/img/xiala.png) no-repeat;
                     background-size: 100% 100%;
-                    p{
+
+                    p {
                         line-height: 46px;
                         color: #ffffff;
                         padding: 0 10px;
@@ -264,7 +277,8 @@
                     }
                 }
             }
-            .downDiv{
+
+            .downDiv {
                 height: 205px;
                 width: 225px;
                 background: url(/assets/static/img/dropdown.png) no-repeat;
@@ -273,41 +287,48 @@
                 top: 88px;
                 right: -13px;
                 z-index: 999999;
-                ul{
+
+                ul {
                     width: 78%;
                     height: 80%;
                     margin: 30px auto 0;
                     padding: 10px;
                     padding-bottom: 0.2rem;
-                    .active_li{
+
+                    .active_li {
                         background: #F9FBFF;
                         border: 1px solid #C6DEFF;
                         border-radius: 12px;
                     }
-                    li{
+
+                    li {
                         width: 94%;
                         // height: 40%;
                         margin: 0 auto;
                         margin-bottom: 10px;
                         padding: 4px 0;
-                        div{
+
+                        div {
                             padding: 0 11px;
                             height: 26px;
-                            span{              
+
+                            span {
                                 font-weight: 500;
                                 font-size: 14px;
                                 color: #333333;
                                 float: left;
                             }
-                            input{
+
+                            input {
                                 width: 13px;
                                 height: 13px;
                                 float: right;
                             }
                         }
-                        .coinType{
+
+                        .coinType {
                             padding: 0 11px;
-                            font-size: 12px;                           
+                            font-size: 12px;
                             font-weight: 400;
                             color: #6E7C90;
                             line-height: 22px;
@@ -315,18 +336,21 @@
                     }
                 }
             }
-        }    
+        }
     }
+
     .alert-warning {
-        border-top: 1px solid  #FFF4E4;
-        border-bottom: 1px solid  #FFF4E4;
-        background-color:  #FFFCF8;
-        color:#E8A874;
+        border-top: 1px solid #FFF4E4;
+        border-bottom: 1px solid #FFF4E4;
+        background-color: #FFFCF8;
+        color: #E8A874;
     }
+
     .alert {
         padding: 10px 0px;
         border-radius: 4px;
     }
+
     .navigation {
         width: 100%;
         height: 60px;

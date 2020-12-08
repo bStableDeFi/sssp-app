@@ -26,7 +26,7 @@ import { PriceDiffComponent } from './price-diff/price-diff.component';
 import { ApproveDlgComponent } from './approve-dlg/approve-dlg.component';
 import { AddlpSlippageConfirmComponent } from './addlp-slippage-confirm/addlp-slippage-confirm.component';
 import { WalletExceptionDlgComponent } from './wallet-exception-dlg/wallet-exception-dlg.component';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -55,6 +55,7 @@ import { WalletExceptionDlgComponent } from './wallet-exception-dlg/wallet-excep
         MatSlideToggleModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         FormsModule,
         TranslateModule.forRoot({
             loader: {

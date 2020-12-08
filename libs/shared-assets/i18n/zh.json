@@ -50,5 +50,6 @@
     "redeem_ImBalance_exception": "您的流动性（{{symbol}}）余额不足以赎回期望的数量。",
     "redeem_allcoin_exception": "您的流动性（{{symbol}}）余额不足以赎回期望的数量。",
     "redeem_onecoin_exception": "您的流动性（{{symbol}}）余额不足以赎回期望的数量。",
-    "addliquidity_exception": "您的余额不足，或者没有预先授权转账的数量。"
+    "addliquidity_exception": "您的余额不足，或者没有预先授权转账的数量。",
+    "Tutorial": "指南"
 }

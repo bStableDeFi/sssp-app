@@ -7,6 +7,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         }),
         HttpClientModule,
         MatProgressBarModule,
+        MatMenuModule,
+        MatIconModule,
     ],
     exports: [
         AppLibComponent,

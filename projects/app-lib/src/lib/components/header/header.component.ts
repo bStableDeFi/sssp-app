@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
     account: string;
     @Input('vpDiff')
     vpDiff: BigNumber;
+    @Input('showPoolsMenu')
+    showPoolsMenu: boolean;
 
     @Output('chooseWallet')
     chooseWallet: EventEmitter<any> = new EventEmitter();
