@@ -1,5 +1,6 @@
 .chrismas{
     div{
+        margin: 0 auto;
         width: 400px;
         height: 257px;
     }
@@ -58,8 +59,8 @@
     #maxDiv .trade-pc {
         background: url(/assets/static/img/bigBG.jpg) no-repeat;
         background-size: cover;
-        height: calc(100vh - 270px);
-        // min-height: 470px;
+        // height: calc(100vh - 270px);
+        min-height: 680px;
         width: 100%;
         position: relative;
         z-index: 1000;
