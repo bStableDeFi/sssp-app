@@ -1,6 +1,22 @@
 <div class="maxDiv" id="maxDiv">
-    <lib-header [showPoolsMenu]="true" [needWallet]="true" [vpDiff]="getVpDiff()" [network]="boot.chainConfig?boot.chainConfig.name:'Unsupport Network'" [account]="boot.accounts.length>0?boot.accounts[0]:''" (chooseWallet)="chooseWallet()" (connectWallet)="connectWallet()" #header></lib-header>
+    <lib-header [showPoolsMenu]="true" [needWallet]="true" [vpDiff]="getVpDiff()"
+        [network]="boot.chainConfig?boot.chainConfig.name:'Unsupport Network'"
+        [account]="boot.accounts.length>0?boot.accounts[0]:''" (chooseWallet)="chooseWallet()"
+        (connectWallet)="connectWallet()" #header></lib-header>
     <div class="trade-pc">
+        <div class="chrismas">
+            <div>
+                <a *ngIf="lang.curLanguage.indexOf('en')===0"
+                    href="https://bstable.medium.com/christmas-event-swap-or-become-a-lp-on-bstable-to-get-free-bnb-71b59e57240a"
+                    target="_blank">
+                    <img src="assets/static/img/chrismas_en.svg">
+                </a>
+                <a *ngIf="lang.curLanguage.indexOf('zh')===0" href="https://shimo.im/docs/9XkHRPvYP8PPRKjW/"
+                    target="_blank">
+                    <img src="assets/static/img/chrismas_zh.svg">
+                </a>
+            </div>
+        </div>
         <div class="main">
             <div class="swapContent">
                 <ul class="tabDiv">

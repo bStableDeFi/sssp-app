@@ -3,6 +3,20 @@
     <div class="trade-pc">
         <div class="main">
             <div class="center">
+                <div class="chrismas">
+                    <div>
+                        <a *ngIf="lang.curLanguage.indexOf('en')===0"
+                            href="https://bstable.medium.com/christmas-event-swap-or-become-a-lp-on-bstable-to-get-free-bnb-71b59e57240a"
+                            target="_blank">
+                            <img src="assets/static/img/chrismas_en.svg">
+                        </a>
+                        <a *ngIf="lang.curLanguage.indexOf('zh')===0"
+                            href="https://shimo.im/docs/9XkHRPvYP8PPRKjW/"
+                            target="_blank">
+                            <img src="assets/static/img/chrismas_zh.svg">
+                        </a>
+                    </div>
+                </div>
                 <div class="tittleDiv">
                     <p>{{"Choose a Pool"|translate}}</p>
                 </div>
@@ -19,7 +33,7 @@
                         </div>
                         <div class="rightPart">
                             <div class="btn">
-                                <a href="/p1" >{{"Enter"|translate}}</a>
+                                <a href="/p1">{{"Enter"|translate}}</a>
                             </div>
                         </div>
                     </div>
@@ -38,7 +52,7 @@
                         </div>
                         <div class="rightPart">
                             <div class="btn">
-                                <a href="/p2" >{{"Enter"|translate}}</a>
+                                <a href="/p2">{{"Enter"|translate}}</a>
                             </div>
                         </div>
                     </div>
