@@ -5,18 +5,13 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { BigNumber } from 'bignumber.js';
-import { resolve } from 'dns';
 import { interval, Observable, Subject } from 'rxjs';
 import { Contract } from 'web3-eth-contract';
 import { environment } from '../../environments/environment';
-import { AddlpConfirmComponent } from '../addlp-confirm/addlp-confirm.component';
 import { AddlpSlippageConfirmComponent } from '../addlp-slippage-confirm/addlp-slippage-confirm.component';
 import { ApproveDlgComponent } from '../approve-dlg/approve-dlg.component';
-import { ChooseWalletDlgComponent } from '../choose-wallet-dlg/choose-wallet-dlg.component';
-import { IntallWalletDlgComponent } from '../intall-wallet-dlg/intall-wallet-dlg.component';
 import { Balance } from '../model/balance';
 import { PoolInfo } from '../model/pool-info';
-import { RedeemConfirmComponent } from '../redeem-confirm/redeem-confirm.component';
 import { SwapConfirmComponent } from '../swap-confirm/swap-confirm.component';
 import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 import { WalletExceptionDlgComponent } from '../wallet-exception-dlg/wallet-exception-dlg.component';
@@ -254,6 +249,7 @@ export class BootService {
                 // @ts-ignore
                 this.wcWeb3 = new Web3_1_2(this.wcProvider);
                 this.web3 = this.wcWeb3;
+                localStorage.setItem("web3Type", "walletconnect");
                 this.init();
             }
         }).catch(e => {
@@ -272,6 +268,7 @@ export class BootService {
             // @ts-ignore
             this.metamaskWeb3 = new Web3_1_3(window.ethereum);
             this.web3 = this.metamaskWeb3;
+            localStorage.setItem("web3Type", "metamask");
             this.init();
         }
     }
@@ -283,6 +280,7 @@ export class BootService {
             // @ts-ignore
             this.binanceWeb3 = new Web3_1_3(window.BinanceChain);
             this.web3 = this.binanceWeb3;
+            localStorage.setItem("web3Type", "binance");
             this.init();
         }
     }
@@ -370,7 +368,7 @@ export class BootService {
                     amt = this.web3.utils.toWei(String(amt), 'ether');
                 } else {
                     return new Promise((resolve, reject) => {
-                        resolve();
+                        resolve(true);
                     });
                 }
                 console.log(amt);
@@ -380,7 +378,7 @@ export class BootService {
                 } catch (e) {
                     console.log(e);
                     return new Promise((resolve, reject) => {
-                        resolve();
+                        resolve(true);
                     });
                 }
             });
@@ -468,7 +466,7 @@ export class BootService {
         //         }
         //     });
         // } else {
-            return this._redeemToAll(lps, minAmts);
+        return this._redeemToAll(lps, minAmts);
         // }
     }
     private async _redeemToAll(lps: string, minAmts: Array<string>): Promise<any> {
@@ -504,7 +502,7 @@ export class BootService {
         //         }
         //     });
         // } else {
-            return this._redeemToOneCoin(lps, coinIndex, minAmt);
+        return this._redeemToOneCoin(lps, coinIndex, minAmt);
         // }
     }
 
