@@ -1,12 +1,32 @@
 <div class="maxDiv" id="maxDiv">
-    <lib-header [showPoolsMenu]="true" [needWallet]="true" [vpDiff]="getVpDiff()" [network]="boot.chainConfig?boot.chainConfig.name:'Unsupport Network'" [account]="boot.accounts.length>0?boot.accounts[0]:''" (chooseWallet)="chooseWallet()" (connectWallet)="connectWallet()" #header></lib-header>
+    <lib-header [showPoolsMenu]="true" [needWallet]="true" [vpDiff]="getVpDiff()"
+        [network]="boot.chainConfig?boot.chainConfig.name:'Unsupport Network'"
+        [account]="boot.accounts.length>0?boot.accounts[0]:''" (chooseWallet)="chooseWallet()"
+        (connectWallet)="connectWallet()" #header></lib-header>
     <div class="trade-pc">
+        <!-- <div class="chrismas">
+            <div>
+                <a *ngIf="lang.curLanguage.indexOf('en')===0"
+                    href="https://bstable.medium.com/christmas-event-swap-or-become-a-lp-on-bstable-to-get-free-bnb-71b59e57240a"
+                    target="_blank">
+                    <img src="assets/static/img/chrismas_en.svg">
+                </a>
+                <a *ngIf="lang.curLanguage.indexOf('zh')===0" href="https://shimo.im/docs/9XkHRPvYP8PPRKjW/"
+                    target="_blank">
+                    <img src="assets/static/img/chrismas_zh.svg">
+                </a>
+            </div>
+        </div> -->
         <div class="main">
             <div class="swapContent">
                 <ul class="tabDiv">
-                    <li [ngClass]="{active: curTab==0}" (click)="changeTab(0)">{{'Swap'|translate}}</li>
+                    <li class="swap_li" [ngClass]="{active: curTab==0}" (click)="changeTab(0)">{{'Swap'|translate}}</li>
                     <li [ngClass]="{active: curTab==1}" (click)="changeTab(1)">{{'Add Liquidity'|translate}}</li>
                     <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">{{'Manage Liquidity'|translate}}</li>
+                    <li class="bridge_li">
+                        <a href="https://www.binance.org/en/bridge" target="_blank"
+                        > <img src="assets/static/img/bridge.png" alt=""></a>
+                    </li>
                 </ul>
                 <div class="SwapDiv">
                     <app-swap-comp [hidden]="curTab!=0" (loading)="header.onLoading()" (loaded)="header.onLoaded()">

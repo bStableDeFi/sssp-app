@@ -1,5 +1,11 @@
 @import './global.scss';
-
+.chrismas{
+    div{
+        margin: 0 auto;
+        width: 400px;
+        height: 257px;
+    }
+}
 @media screen and (min-width: 768px) {
     #maxDiv {
         background-color: #ffff;
@@ -10,7 +16,7 @@
         background-size: 100% 100%;
         width: 100%;
         // height: 100%;
-        height: 880px;
+        min-height: 880px;
         // position: relative;
         // z-index: 1000;
         padding-top: 1em;
@@ -22,7 +28,7 @@
         margin: 0 auto;
         // width: 35%;
         width: 480px;
-        height: 80%;
+        // height: 80%;
     }
 
     #maxDiv .trade-pc .main .swapContent {
@@ -46,13 +52,23 @@
 
     #maxDiv .trade-pc .main .swapContent .tabDiv li {
         flex: 1;
-        font-size: 13px;
+        font-size: 12px;
         text-align: center;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: #646464;
         line-height: 40px;
         cursor: pointer;
+    }
+
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_li {
+        flex: 0.72;
+    }
+
+    #maxDiv .trade-pc .main .swapContent .tabDiv li img{
+        width: 100%; 
+        height: 124%;
+        margin-top: -3px;
     }
 
     #maxDiv .trade-pc .main .swapContent .tabDiv .active {
@@ -189,6 +205,20 @@
         color: #646464;
         line-height: 40px;
         cursor: pointer;
+    }
+
+      #maxDiv .trade-pc .main .swapContent .tabDiv .swap_li {
+        flex: 0.6;
+    }
+
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_li {
+        flex: 0.72;
+    }
+
+    #maxDiv .trade-pc .main .swapContent .tabDiv li img{
+        width: 100%; 
+        height: 134%;
+        margin-top: -0.05rem;
     }
 
     #maxDiv .trade-pc .main .swapContent .tabDiv .active {

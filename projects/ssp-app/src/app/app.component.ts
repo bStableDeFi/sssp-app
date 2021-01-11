@@ -20,7 +20,16 @@ export class AppComponent {
 
     constructor(public boot: BootService, public lang: LanguageService, private dialog: MatDialog) {
         if (this.boot.isMetaMaskInstalled() || this.boot.isBinanceInstalled()) {
-            this.chooseWallet();
+            let web3Type = localStorage.getItem('web3Type');
+            if (web3Type && web3Type === 'walletconnect') {
+                this.boot.connectWC();
+            } else if (web3Type && web3Type === 'metamask') {
+                this.boot.connentMetaMask();
+            } else if (web3Type === 'binance') {
+                this.boot.connectBinance();
+            } else {
+                this.chooseWallet();
+            }
         }
     }
 
