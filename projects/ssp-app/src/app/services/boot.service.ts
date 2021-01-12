@@ -71,6 +71,7 @@ export class BootService {
                 this.loadData().then();
             }
         });
+        //检查是否钱包安装
         if (this.isMetaMaskInstalled()) {
             // @ts-ignore
             this.metamaskWeb3 = new Web3_1_3(window.ethereum);
@@ -269,6 +270,18 @@ export class BootService {
             this.metamaskWeb3 = new Web3_1_3(window.ethereum);
             this.web3 = this.metamaskWeb3;
             localStorage.setItem("web3Type", "metamask");
+            this.init();
+        }
+    }
+
+    public async connectTokenPocket() {
+        if (this.isMetaMaskInstalled()) {
+            //@ts-ignore
+            await window.ethereum.enable();
+            // @ts-ignore
+            this.metamaskWeb3 = new Web3_1_3(window.ethereum);
+            this.web3 = this.metamaskWeb3;
+            localStorage.setItem("web3Type", "tokenPocket");
             this.init();
         }
     }

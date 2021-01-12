@@ -27,6 +27,8 @@ export class AppComponent {
                 this.boot.connentMetaMask();
             } else if (web3Type === 'binance') {
                 this.boot.connectBinance();
+            } else if (web3Type === 'tokenPocket') {
+                this.boot.connectTokenPocket();
             } else {
                 this.chooseWallet();
             }
