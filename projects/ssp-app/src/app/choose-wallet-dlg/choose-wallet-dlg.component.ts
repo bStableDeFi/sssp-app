@@ -29,4 +29,9 @@ export class ChooseWalletDlgComponent implements OnInit {
         this.boot.connentMetaMask();
     }
 
+    connectTokenPocket() {
+        this.dialogRef.close();
+        this.boot.connectTokenPocket();
+    }
+
 }
