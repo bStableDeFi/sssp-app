@@ -45,12 +45,19 @@
         width: 80%;
         height: 40px;
         margin: 0px auto;
+    }
+
+   
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul{
+        width: 83%;
+        float: left;
         display: flex;
         background: #FAFAFA;
         border-radius: 12px;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv li {
+
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul li {
         flex: 1;
         font-size: 12px;
         text-align: center;
@@ -61,23 +68,25 @@
         cursor: pointer;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_li {
-        flex: 0.72;
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_div {
+        float: right;
+        width: 16%;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv li img{
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_div img{
         width: 100%; 
-        height: 124%;
+        height: 114%;
         margin-top: -3px;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv .active {
-        width: 100%;
-        border-radius: 12px;
-        border: 1px solid #006BFF;
-        font-weight: 500;
-        color: #2480FF;
-        background: #ffffff;
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul .active {
+        width: 100%;      
+        background: #2480FF;
+        border-radius: 14px;
+        border: 1px solid #BDD9FF;
+        font-weight: 500;   
+        font-family: "PingFangSC-Medium, PingFang SC";
+        color: #FFFFFF;
     }
 
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
@@ -191,12 +200,18 @@
         width: 95%;
         height: 40px;
         margin: 0px auto;
+    }
+
+    
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul {
+        width: 83%;
+        float: left;
         display: flex;
         background: #FAFAFA;
         border-radius: 12px;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv li {
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul li {
         flex: 1;
         font-size: 0.12rem;
         text-align: center;
@@ -207,27 +222,29 @@
         cursor: pointer;
     }
 
-      #maxDiv .trade-pc .main .swapContent .tabDiv .swap_li {
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul .swap_li {
         flex: 0.6;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_li {
-        flex: 0.72;
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_div {
+        width: 16.5%;
+        float: right;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv li img{
+    #maxDiv .trade-pc .main .swapContent .tabDiv .bridge_div img{
         width: 100%; 
-        height: 134%;
+        height: 118%;
         margin-top: -0.05rem;
     }
 
-    #maxDiv .trade-pc .main .swapContent .tabDiv .active {
-        width: 100%;
-        border-radius: 12px;
-        border: 1px solid #006BFF;
-        font-weight: 500;
-        color: #2480FF;
-        background: #ffffff;
+    #maxDiv .trade-pc .main .swapContent .tabDiv .tab_ul .active {
+        width: 100%;      
+        background: #2480FF;
+        border-radius: 14px;
+        border: 1px solid #BDD9FF;
+        font-weight: 500;   
+        font-family: "PingFangSC-Medium, PingFang SC";
+        color: #FFFFFF;
     }
 
     #maxDiv .trade-pc .main .swapContent .SwapDiv {
@@ -299,6 +316,4 @@
         font-weight: 700;
         line-height: 40px;
     }
-
-
 }

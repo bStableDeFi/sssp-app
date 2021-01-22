@@ -110,6 +110,11 @@ a:focus {
         border-radius: 4px;
     }
 
+    .menu_img{
+        width: 30px !important;
+        margin-right: 20px !important;
+    }
+
     .navigation {
         width: 100%;
         height: 60px;
@@ -159,7 +164,7 @@ a:focus {
 
     .navigation .main .leftpart .noConnectButton img {
         float: left;
-        width: 19%;
+        width: 14%;
         height: 1.8em;
     }
 
@@ -215,6 +220,10 @@ a:focus {
 
     .navigation .el-dialog .el-dialog__body {
         padding: 0px 20px !important;
+    }
+
+    .mat-iconBtn{
+        background: #ffffff;
     }
 }
 
@@ -351,6 +360,11 @@ a:focus {
         border-radius: 4px;
     }
 
+    .menu_img{
+        width: 30px !important;
+        margin-right: 20px !important;
+    }
+
     .navigation {
         width: 100%;
         height: 60px;
@@ -454,5 +468,9 @@ a:focus {
 
     .navigation .el-dialog .el-dialog__body {
         padding: 0px 20px !important;
+    }
+
+    .mat-iconBtn{
+        background: #ffffff;
     }
 }

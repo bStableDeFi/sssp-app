@@ -23,24 +23,29 @@
                 <img *ngIf="lang.curLanguage.indexOf('zh')!=0" src="assets/static/img/cn.png" alt=""
                     (click)="changeLang('zh')"> -->
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>more_vert</mat-icon>
+                    <mat-icon style="background: #ffffff;">more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
                     <a mat-button mat-menu-item href="/p1" >
-                        <mat-icon>attach_money</mat-icon>
+                        <!-- <mat-icon>attach_money</mat-icon> -->
+                        <img class="menu_img" src="assets/static/img/pool.png" alt="">
                         <span>{{"Pool 1"|translate}}</span>
                     </a>
                     <a mat-button mat-menu-item href="/p2" >
-                        <mat-icon>attach_money</mat-icon>
+                        <!-- <mat-icon>attach_money</mat-icon> -->
+                        <img class="menu_img" src="assets/static/img/pool.png" alt="">
                         <span>{{"Pool 2"|translate}}</span>
                     </a>
                     <a mat-button mat-menu-item href="https://www.notion.so/Using-bStable-e85b7ddbc3d4450bbf7d6664bdc3908e"
                         target="_blank">
-                        <mat-icon>library_books</mat-icon>
+                        <!-- <mat-icon>library_books</mat-icon> -->
+                        <img class="menu_img" src="assets/static/img/zhinan.png" alt="">
                         <span>{{"Tutorial"|translate}}</span>
                     </a>
                     <button mat-menu-item (click)="changeLang(lang.curLanguage.indexOf('zh')===0?'en':'zh')">
-                        <mat-icon>language</mat-icon>
+                        <!-- <mat-icon>language</mat-icon> -->
+                        <img class="menu_img" src="assets/static/img/en.png" *ngIf="lang.curLanguage.indexOf('zh')===0" alt="">
+                        <img class="menu_img" src="assets/static/img/cn.png" *ngIf="lang.curLanguage.indexOf('en')===0" alt="">
                         <span *ngIf="lang.curLanguage.indexOf('zh')===0">English</span>
                         <span *ngIf="lang.curLanguage.indexOf('en')===0">中文简体</span>
                     </button>
