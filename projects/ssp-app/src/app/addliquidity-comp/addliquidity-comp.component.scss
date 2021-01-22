@@ -17,8 +17,8 @@
 }
 
 .addLiqui-pc .main .coinDiv {
-    border: 1px solid #E1E5EA;
-    border-radius: 16px;
+    border: 1px solid #EFF2F5;
+    border-radius: 18px;
     margin-bottom: 15px;
     height: 100px;
 }
@@ -55,8 +55,8 @@
 .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) span:nth-child(1) {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: #000000;
+    font-weight: 400;  
+    color: #999999;
 }
 
 .addLiqui-pc .main .coinDiv .firstPart div:nth-child(2) span:nth-child(2),
@@ -77,15 +77,15 @@
     background: #FAFAFA;
     padding: 0px 13px;
     height: 40px;
-    border: 1px solid #E1E5EA;
-    border-radius: 10px;
+    border: 1px solid #EFF2F5;
+    border-radius: 15px;
     margin-right: 12px;
 }
 
 .addLiqui-pc .main .coinDiv .second .approve {
     //  display: none;  /*隐藏按钮*/
     background: #2480FF;
-    border-radius: 12px;
+    border-radius: 14px;
     width: 64px;
     font-size: 12px;
     line-height: 40px;
@@ -98,7 +98,7 @@
     display: none;
     /*隐藏按钮*/
     background: #D4DDE9;
-    border-radius: 12px;
+    border-radius: 14px;
     width: 64px;
     font-size: 12px;
     line-height: 40px;
@@ -133,7 +133,7 @@
     margin: 0px auto;
     height: 50px;
     // background: #2480FF;
-    border-radius: 16px;
+    border-radius: 20px;
     color: #fff;
     font-size: 16px;
     display: block;

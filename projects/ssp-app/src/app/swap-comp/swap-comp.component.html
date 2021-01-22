@@ -26,12 +26,12 @@
                 </div>
             </div>
             <div class="inputDiv">
-                <div>
+                <div class="leftDiv">
                     <input type="number" name="amt" [ngModel]="amt" (ngModelChange)="amtChanged($event)"
                         placeholder="{{'Enter an amount'|translate}}">
                     <span (click)="maxAmt()">{{'MAX'|translate}}</span>
                 </div>
-                <div>
+                <div class="rightDiv">
                     <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt"
                         placeholder="{{'Min Amount'|translate}}">
                     <button (click)="approve()" [disabled]="!isApproveEnabled()"

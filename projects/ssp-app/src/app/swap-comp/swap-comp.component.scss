@@ -12,7 +12,7 @@
         width: 100%;
         height: 290px;
         border-radius: 12px;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
         padding-top: 5px;
     }
     
@@ -31,7 +31,7 @@
         width: 16px;
         height: 16px;
         border-radius: 10px;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
     }
     
      .swap-pc .main .el-checkbox-group .el-checkbox img {
@@ -41,14 +41,14 @@
     }
     
      .swap-pc .main .el-checkbox-group .border_let {
-        border-left: #E1E5EA 1px solid;
+        border-left: #EFF2F5 1px solid;
     }
     
      .swap-pc .main .enterDiv {
         width: 95%;
         height: 32%;
         margin: 10px auto 0px;
-        border-top: 1px solid #E1E5EA;
+        border-top: 1px solid #EFF2F5;
         position: relative;
     }
     
@@ -88,44 +88,57 @@
         height: 50px;
     }
     
-     .swap-pc .main .enterDiv .inputDiv div {
+     .swap-pc .main .enterDiv .inputDiv .leftDiv {
         float: left;
         width: 50%;
-        height: 50px;
-        position: relative;
-    }
-    
-     .swap-pc .main .enterDiv .inputDiv div input {
-        background: #FAFAFA;
-        padding: 0px 13px;
         height: 40px;
-        width: 98%;
-        margin: 0 auto;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
         border-radius: 12px;
         font-size: 12px;
+        background: #FAFAFA;
     }
     
-     .swap-pc .main .enterDiv .inputDiv div span {
-        position: absolute;
-        top: 12px;
-        right: 10px;
+     .swap-pc .main .enterDiv .inputDiv .leftDiv input {
+        padding: 0px 13px;
+        height: 38px;
+        width:73%;
+        margin: 0 auto;
+        float: left;   
+        background: #FAFAFA;
+        border-radius: 12px;
+    }
+    
+     .swap-pc .main .enterDiv .inputDiv .leftDiv span {
         color: #2480FF;
+        float: right;
+        line-height: 38px;
+        margin-right: 15px;
+    }
+
+    .swap-pc .main .enterDiv .inputDiv .rightDiv {
+        width: 47%;
+        float: right;
     }
     
-    .swap-pc .main .enterDiv .inputDiv div .minInput {
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .minInput {
         background: #FAFAFA;
         padding: 0px 13px;
         height: 40px;
         width: 58%;
         margin: 0 auto;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
         border-radius: 12px;
         font-size: 12px;
         margin-right: 3px;
+        // float: right;
+    }
+
+    .swap-pc .main .enterDiv .inputDiv .rightDiv button{
+      display: inline-block;
+      width: 38%;
     }
     
-    .swap-pc .main .enterDiv .inputDiv div .approve { 
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .approve { 
         // display: none;  /*隐藏按钮*/
         background: #2480FF;
         border-radius: 12px;
@@ -134,9 +147,10 @@
         line-height: 40px;
         height: 40px;
         color: #ffffff;
+        float: right;
     }
     
-    .swap-pc .main .enterDiv .inputDiv div .noApprove { 
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .noApprove { 
         // display: none;  /*隐藏按钮*/
         background: #D4DDE9;
         border-radius: 12px;
@@ -145,6 +159,7 @@
         line-height: 40px;
         height: 40px;
         color: #ffffff;
+        float: right;
     }
     
     
@@ -195,7 +210,7 @@
         width: 100%;
         height: 290px;
         border-radius: 12px;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
         padding-top: 5px;
     }
     
@@ -214,7 +229,7 @@
         width: 16px;
         height: 16px;
         border-radius: 10px;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
     }
     
      .swap-pc .main .el-checkbox-group .el-checkbox img {
@@ -224,14 +239,14 @@
     }
     
      .swap-pc .main .el-checkbox-group .border_let {
-        border-left: #E1E5EA 1px solid;
+        border-left: #EFF2F5 1px solid;
     }
     
      .swap-pc .main .enterDiv {
         width: 95%;
         height: 32%;
         margin: 10px auto 0px;
-        border-top: 1px solid #E1E5EA;
+        border-top: 1px solid #EFF2F5;
         position: relative;
     }
     
@@ -271,44 +286,60 @@
         height: 50px;
     }
     
-     .swap-pc .main .enterDiv .inputDiv div {
+     .swap-pc .main .enterDiv .inputDiv .leftDiv {
         float: left;
         width: 50%;
-        height: 50px;
+        height: 40px;
         position: relative;
+        background: #FAFAFA;
+        border: 1px solid #EFF2F5;
+        border-radius: 12px;
     }
     
-     .swap-pc .main .enterDiv .inputDiv div input {
+     .swap-pc .main .enterDiv .inputDiv .leftDiv input {
         background: #FAFAFA;
         padding: 0px 13px;
-        height: 40px;
-        width: 98%;
-        margin: 0 auto;
-        border: 1px solid #E1E5EA;
+        height: 38px;
+        width: 70%;
         border-radius: 12px;
         font-size: 12px;
+        float: left;
     }
     
-     .swap-pc .main .enterDiv .inputDiv div span {
-        position: absolute;
-        top: 12px;
-        right: 10px;
+     .swap-pc .main .enterDiv .inputDiv .leftDiv span {
+        // position: absolute;
+        // top: 12px;
+        // right: 21px;
         color: #2480FF;
+        line-height: 38px;
+        margin-right: 8px;
+        float: right;
+    }
+
+        
+    .swap-pc .main .enterDiv .inputDiv .rightDiv {
+        width: 47%;
+        float: right;
     }
     
-    .swap-pc .main .enterDiv .inputDiv div .minInput {
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .minInput {
         background: #FAFAFA;
         padding: 0px 13px;
         height: 40px;
         width: 57%;
         margin: 0 auto;
-        border: 1px solid #E1E5EA;
+        border: 1px solid #EFF2F5;
         border-radius: 12px;
         font-size: 12px;
         margin-right: 3px;
     }
+
+    .swap-pc .main .enterDiv .inputDiv .rightDiv button { 
+       display: inline-block;
+       width: 38%;
+    }
     
-    .swap-pc .main .enterDiv .inputDiv div .approve { 
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .approve { 
         // display: none;  /*隐藏按钮*/
         background: #2480FF;
         border-radius: 12px;
@@ -319,7 +350,7 @@
         color: #ffffff;
     }
     
-    .swap-pc .main .enterDiv .inputDiv div .noApprove { 
+    .swap-pc .main .enterDiv .inputDiv .rightDiv .noApprove { 
         // display: none;  /*隐藏按钮*/
         background: #D4DDE9;
         border-radius: 12px;
