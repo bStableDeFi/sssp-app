@@ -2,7 +2,7 @@
 <div class="withdrawLiqui-pc">
     <div class="main">
         <div class="LiquidityRatio">
-            <p>{{boot.liquiditySymbol}} {{boot.balance.lp.toFixed(9,1)}}</p>
+            <p>{{boot.balance.lp.toFixed(9,1)}} <span>{{boot.liquiditySymbol}}</span>  </p>
             <div class="enterDiv">
                 <div class="inputDiv">
                     <input type="number" name="redeemPrecent" [ngModel]="redeemPrecent"
@@ -21,10 +21,10 @@
                             <span>{{coin.symbol}}</span>
                         </div>
                         <div>
+                            <label for="daiEabled">{{"Redeem All to"|translate}} {{coin.symbol}}</label>
                             <input type="radio" name="redeemToIndex" [ngModel]="redeemToIndex"
                                 (ngModelChange)="redeemToIndexChange($event)" value="{{i}}"
-                                [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0">
-                            <label for="daiEabled">{{"Redeem All to"|translate}} {{coin.symbol}}</label>
+                                [disabled]="!redeemPrecent||redeemPrecent===null||redeemPrecent===0"> 
                         </div>
                     </div>
                     <div class="second">

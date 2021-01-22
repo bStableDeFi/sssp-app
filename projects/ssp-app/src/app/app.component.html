@@ -19,15 +19,17 @@
         </div> -->
         <div class="main">
             <div class="swapContent">
-                <ul class="tabDiv">
-                    <li class="swap_li" [ngClass]="{active: curTab==0}" (click)="changeTab(0)">{{'Swap'|translate}}</li>
-                    <li [ngClass]="{active: curTab==1}" (click)="changeTab(1)">{{'Add Liquidity'|translate}}</li>
-                    <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">{{'Manage Liquidity'|translate}}</li>
-                    <li class="bridge_li">
-                        <a href="https://www.binance.org/en/bridge" target="_blank"
-                        > <img src="assets/static/img/bridge.png" alt=""></a>
-                    </li>
-                </ul>
+                <div class="tabDiv">
+                    <ul class="tab_ul">
+                        <li class="swap_li" [ngClass]="{active: curTab==0}" (click)="changeTab(0)">{{'Swap'|translate}}</li>
+                        <li [ngClass]="{active: curTab==1}" (click)="changeTab(1)">{{'Add Liquidity'|translate}}</li>
+                        <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">{{'Manage Liquidity'|translate}}</li>
+                    </ul>
+                    <div class="bridge_div">
+                        <a href="https://www.binance.org/en/bridge"> <img src="assets/static/img/bridge.png" alt=""></a>
+                    </div>
+                </div>
+              
                 <div class="SwapDiv">
                     <app-swap-comp [hidden]="curTab!=0" (loading)="header.onLoading()" (loaded)="header.onLoaded()">
                     </app-swap-comp>
