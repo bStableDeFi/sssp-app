@@ -1,7 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
 @charset "utf-8";
-
+@font-face {
+    font-family: "Poppins-Regular";
+    src: url("./fonts/Poppins-Regular.ttf");
+}
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url("./fonts/Poppins-Medium.ttf");
+}
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url("./fonts/Poppins-Bold.ttf");
+}
 html,
 body {
     height: 100%;
@@ -9,7 +20,8 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Poppins-Regular, "Helvetica Neue", sans-serif;
+    // -webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -133,8 +145,6 @@ html body {
 
 html {
     width: 100%;
-    /* font-family:Montserrat Abadi Condensed Light  ;  */
-    font-family: Montserrat;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     height: 100%;
@@ -148,7 +158,6 @@ body {
     background: #999;
     margin: 0 auto;
     padding: 0;
-
 }
 
 .red {
@@ -306,7 +315,6 @@ em {
     text-decoration: none;
 }
 
-
 .l {
     float: left;
 }
@@ -327,7 +335,7 @@ input[type="number"] {
 
 // @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -346,18 +354,28 @@ $candy-app-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as `color` or `typography`.
-$candy-app-theme: mat-light-theme((color: (primary: $candy-app-primary,
+$candy-app-theme: mat-light-theme(
+    (
+        color: (
+            primary: $candy-app-primary,
             accent: $candy-app-accent,
             warn: $candy-app-warn,
-        )));
+        ),
+    )
+);
 $my-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
 $my-theme-accent: mat-palette($mat-blue);
 $my-theme-warn: mat-palette($mat-deep-orange, A200);
 
 // create theme (use mat-dark-theme for themes with dark backgrounds)
-$my-theme: mat-light-theme($my-theme-primary,
-    $my-theme-accent,
-    $my-theme-warn);
+$my-theme: mat-light-theme($my-theme-primary, $my-theme-accent, $my-theme-warn);
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$my-theme-typography: mat-typography-config(
+    $font-family: "Poppins-Regular",
+);
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($my-theme-typography);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.

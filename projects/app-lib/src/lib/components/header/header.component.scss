@@ -1,9 +1,11 @@
 a:focus {
     outline: none;
     text-decoration: none;
-    color: rgba(0, 0, 0, .87);
+    color: rgba(0, 0, 0, 0.87);
 }
-
+.mat-menu-item {
+    font-family: Poppins-Medium, "Helvetica Neue", sans-serif;
+}
 @media screen and (min-width: 768px) {
     .riskWarning {
         margin: 0 auto;
@@ -30,12 +32,9 @@ a:focus {
                 span {
                     float: left;
                     font-size: 13px;
-                    font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
                 }
             }
-
-
 
             .downDiv {
                 height: 205px;
@@ -55,8 +54,8 @@ a:focus {
                     padding-bottom: 20px;
 
                     .active_li {
-                        background: #F9FBFF;
-                        border: 1px solid #C6DEFF;
+                        background: #f9fbff;
+                        border: 1px solid #c6deff;
                         border-radius: 12px;
                     }
 
@@ -89,7 +88,7 @@ a:focus {
                             padding: 0 11px;
                             font-size: 12px;
                             font-weight: 400;
-                            color: #6E7C90;
+                            color: #6e7c90;
                             line-height: 22px;
                         }
                     }
@@ -99,10 +98,10 @@ a:focus {
     }
 
     .alert-warning {
-        border-top: 1px solid #FFF4E4;
-        border-bottom: 1px solid #FFF4E4;
-        background-color: #FFFCF8;
-        color: #E8A874;
+        border-top: 1px solid #fff4e4;
+        border-bottom: 1px solid #fff4e4;
+        background-color: #fffcf8;
+        color: #e8a874;
     }
 
     .alert {
@@ -110,7 +109,7 @@ a:focus {
         border-radius: 4px;
     }
 
-    .menu_img{
+    .menu_img {
         width: 30px !important;
         margin-right: 20px !important;
     }
@@ -151,9 +150,9 @@ a:focus {
     .navigation .main .leftpart .noConnectButton {
         padding: 0px;
         width: 190px;
-        background: #FAFAFA;
-        color: #0E0E0E;
-        border: #BEBEBE 0.5px solid;
+        background: #fafafa;
+        color: #0e0e0e;
+        border: #bebebe 0.5px solid;
         border-radius: 12px;
         font-weight: 400;
         letter-spacing: 1px;
@@ -193,7 +192,7 @@ a:focus {
     .navigation .main .leftpart .ConnectedButton .network {
         padding: 0px 10px;
         margin-right: 10px;
-        background: #2480FF;
+        background: #2480ff;
         border-radius: 12px;
         height: 25px;
         line-height: 25px;
@@ -201,7 +200,6 @@ a:focus {
         color: #ffff;
         text-align: center;
         float: left;
-
     }
 
     .navigation .main .leftpart .lang {
@@ -222,7 +220,7 @@ a:focus {
         padding: 0px 20px !important;
     }
 
-    .mat-iconBtn{
+    .mat-iconBtn {
         background: #ffffff;
     }
 }
@@ -254,7 +252,6 @@ a:focus {
                 span {
                     float: left;
                     font-size: 14px;
-                    font-family: PingFangSC-Medium, PingFang SC;
                     font-weight: 600;
                     width: 88%;
                 }
@@ -305,8 +302,8 @@ a:focus {
                     padding-bottom: 0.2rem;
 
                     .active_li {
-                        background: #F9FBFF;
-                        border: 1px solid #C6DEFF;
+                        background: #f9fbff;
+                        border: 1px solid #c6deff;
                         border-radius: 12px;
                     }
 
@@ -339,7 +336,7 @@ a:focus {
                             padding: 0 11px;
                             font-size: 12px;
                             font-weight: 400;
-                            color: #6E7C90;
+                            color: #6e7c90;
                             line-height: 22px;
                         }
                     }
@@ -349,10 +346,10 @@ a:focus {
     }
 
     .alert-warning {
-        border-top: 1px solid #FFF4E4;
-        border-bottom: 1px solid #FFF4E4;
-        background-color: #FFFCF8;
-        color: #E8A874;
+        border-top: 1px solid #fff4e4;
+        border-bottom: 1px solid #fff4e4;
+        background-color: #fffcf8;
+        color: #e8a874;
     }
 
     .alert {
@@ -360,7 +357,7 @@ a:focus {
         border-radius: 4px;
     }
 
-    .menu_img{
+    .menu_img {
         width: 30px !important;
         margin-right: 20px !important;
     }
@@ -401,9 +398,9 @@ a:focus {
         padding: 0px;
         width: 168px;
         height: 32px;
-        background: #FAFAFA;
-        color: #0E0E0E;
-        border: #BEBEBE 0.5px solid;
+        background: #fafafa;
+        color: #0e0e0e;
+        border: #bebebe 0.5px solid;
         border-radius: 12px;
         font-weight: 400;
         line-height: 32px;
@@ -439,7 +436,7 @@ a:focus {
     .navigation .main .leftpart .ConnectedButton .network {
         padding: 0px 10px;
         margin-right: 10px;
-        background: #2480FF;
+        background: #2480ff;
         border-radius: 12px;
         height: 25px;
         line-height: 25px;
@@ -447,7 +444,6 @@ a:focus {
         color: #ffff;
         text-align: center;
         float: left;
-
     }
 
     .navigation .main .leftpart .lang {
@@ -470,7 +466,7 @@ a:focus {
         padding: 0px 20px !important;
     }
 
-    .mat-iconBtn{
+    .mat-iconBtn {
         background: #ffffff;
     }
 }

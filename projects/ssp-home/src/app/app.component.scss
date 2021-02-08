@@ -1,5 +1,5 @@
-.chrismas{
-    div{
+.chrismas {
+    div {
         margin: 0 auto;
         width: 400px;
         height: 257px;
@@ -83,15 +83,15 @@
     #maxDiv .trade-pc .main .center .tittleDiv {
         width: 100%;
         height: 43px;
-        background: #FFFFFF;
-        box-shadow: 0px 11px 35px 0px #EAF2FF;
+        background: #ffffff;
+        box-shadow: 0px 11px 35px 0px #eaf2ff;
         border-radius: 14px;
     }
 
     #maxDiv .trade-pc .main .center .tittleDiv p {
+        font-family: Poppins-Bold, "Helvetica Neue", sans-serif;
         font-size: 17px;
         padding-left: 30px;
-        font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
         color: #000000;
         line-height: 43px;
@@ -100,8 +100,8 @@
     #maxDiv .trade-pc .main .center .pool {
         width: 100%;
         height: 105px;
-        background: #FFFFFF;
-        box-shadow: 0px 11px 35px 0px #EAF2FF;
+        background: #ffffff;
+        box-shadow: 0px 11px 35px 0px #eaf2ff;
         border-radius: 17px;
         margin-top: 20px;
         padding-top: 15px;
@@ -112,7 +112,7 @@
         height: 88px;
         margin: 0 auto;
         border-radius: 13px;
-        border: 1px solid #E3F1FF;
+        border: 1px solid #e3f1ff;
     }
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart {
@@ -130,14 +130,14 @@
         float: left;
         width: 7px;
         height: 23px;
-        background: #2480FF;
+        background: #2480ff;
         border-radius: 38px;
     }
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart .top p {
         float: left;
+        font-family: Poppins-Medium, "Helvetica Neue", sans-serif;
         font-size: 16px;
-        font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
         color: #000000;
         line-height: 24px;
@@ -150,7 +150,6 @@
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart .coinDiv p {
         font-size: 16px;
-        font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: #989898;
         line-height: 30px;
@@ -173,9 +172,9 @@
     #maxDiv .trade-pc .main .center .pool .centerDiv .rightPart .btn a {
         display: block;
         height: 45px;
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-family: Poppins-Medium, "Helvetica Neue", sans-serif;
         font-weight: 500;
-        color: #2480FF;
+        color: #2480ff;
         line-height: 29px;
         line-height: 45px;
         font-size: 16px;
@@ -219,7 +218,7 @@
     #maxDiv .footer .centerPart ul li a span {
         float: left;
         font-size: 12px;
-        color: #8B8B8B;
+        color: #8b8b8b;
         display: block;
         width: 100%;
         text-align: center;
@@ -227,7 +226,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
     .hide {
         display: none;
     }
@@ -277,7 +275,7 @@
     }
 
     #maxDiv .trade-pc {
-        background: #FAFCFF;
+        background: #fafcff;
         background-size: 100% 100%;
         height: calc(100vh - 280px);
         width: 100%;
@@ -302,15 +300,15 @@
     #maxDiv .trade-pc .main .center .tittleDiv {
         width: 100%;
         height: 43px;
-        background: #FFFFFF;
-        box-shadow: 0px 11px 35px 0px #EAF2FF;
+        background: #ffffff;
+        box-shadow: 0px 11px 35px 0px #eaf2ff;
         border-radius: 14px;
     }
 
     #maxDiv .trade-pc .main .center .tittleDiv p {
+        font-family: Poppins-Bold, "Helvetica Neue", sans-serif;
         font-size: 15px;
         padding-left: 30px;
-        font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
         color: #000000;
         line-height: 43px;
@@ -319,8 +317,8 @@
     #maxDiv .trade-pc .main .center .pool {
         width: 100%;
         height: 125px;
-        background: #FFFFFF;
-        box-shadow: 0px 11px 35px 0px #EAF2FF;
+        background: #ffffff;
+        box-shadow: 0px 11px 35px 0px #eaf2ff;
         border-radius: 17px;
         margin-top: 20px;
         padding-top: 15px;
@@ -331,7 +329,7 @@
         height: 108px;
         margin: 0 auto;
         border-radius: 13px;
-        border: 1px solid #E3F1FF;
+        border: 1px solid #e3f1ff;
     }
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart {
@@ -349,14 +347,14 @@
         float: left;
         width: 7px;
         height: 23px;
-        background: #2480FF;
+        background: #2480ff;
         border-radius: 38px;
     }
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart .top p {
         float: left;
+        font-family: Poppins-Medium, "Helvetica Neue", sans-serif;
         font-size: 14px;
-        font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
         color: #000000;
         line-height: 24px;
@@ -369,7 +367,6 @@
 
     #maxDiv .trade-pc .main .center .pool .centerDiv .leftPart .coinDiv p {
         font-size: 14px;
-        font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: #989898;
         line-height: 30px;
@@ -392,9 +389,9 @@
     #maxDiv .trade-pc .main .center .pool .centerDiv .rightPart .btn a {
         display: block;
         height: 45px;
-        font-family: PingFangSC-Medium, PingFang SC;
+        font-family: Poppins-Medium, "Helvetica Neue", sans-serif;
         font-weight: 500;
-        color: #2480FF;
+        color: #2480ff;
         line-height: 29px;
         line-height: 45px;
         font-size: 14px;
@@ -441,6 +438,6 @@
         display: block;
         text-align: center;
         font-size: 12px;
-        color: #8B8B8B;
+        color: #8b8b8b;
     }
 }
