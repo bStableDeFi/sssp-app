@@ -32,8 +32,8 @@
                     <span (click)="maxAmt()">{{'MAX'|translate}}</span>
                 </div>
                 <div class="rightDiv">
-                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt"
-                        placeholder="{{'Min Amount'|translate}}">
+                    <!-- <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt"
+                        placeholder="{{'Min Amount'|translate}}"> -->
                     <button (click)="approve()" [disabled]="!isApproveEnabled()"
                         [ngClass]="{myBtn: isApproveEnabled(),'myBtn-disabled':boot.accounts.length===0||!isApproveEnabled()}">{{'Approve'|translate}}</button>
                 </div>

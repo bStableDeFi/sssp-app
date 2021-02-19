@@ -1,13 +1,21 @@
 .chrismas {
     div {
         margin: 0 auto;
-        width: 400px;
         height: 257px;
+        img{
+            width: 100%;
+        }
     }
 }
 @media screen and (min-width: 768px) {
     .hide {
         display: none;
+    }
+
+    .chrismas {
+        div {
+            width: 400px;
+        }
     }
 
     #maxDiv {
@@ -228,6 +236,12 @@
 @media screen and (max-width: 768px) {
     .hide {
         display: none;
+    }
+
+    .chrismas {
+        div {
+            width: 100%;
+        }
     }
 
     #maxDiv {
