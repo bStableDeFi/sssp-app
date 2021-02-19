@@ -16,12 +16,12 @@
                     <img src="assets/static/img/chrismas_zh.svg">
                 </a>
             </div> -->
-            <div *ngIf="lang.curLanguage.indexOf('zh')===0">
+            <!-- <div *ngIf="lang.curLanguage.indexOf('zh')===0">
                 <a  href="#"
                     target="_blank">
                     <img src="assets/static/img/newyear.jpg">
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="main">
             <div class="swapContent">
@@ -32,7 +32,7 @@
                         <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">{{'Manage Liquidity'|translate}}</li>
                     </ul>
                     <div class="bridge_div">
-                        <a href="https://www.binance.org/en/bridge"> <img src="assets/static/img/bridge.png" alt=""></a>
+                        <a href="https://www.binance.org/en/bridge" target="_blank"> <img src="assets/static/img/bridge.png" alt=""></a>
                     </div>
                 </div>
               
